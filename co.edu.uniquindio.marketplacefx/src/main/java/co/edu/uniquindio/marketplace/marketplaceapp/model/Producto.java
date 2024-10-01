@@ -1,6 +1,7 @@
 package co.edu.uniquindio.marketplace.marketplaceapp.model;
 
 import co.edu.uniquindio.marketplace.marketplaceapp.constants.EstadoProducto;
+import co.edu.uniquindio.marketplace.marketplaceapp.model.builder.ProductoBuilder;
 import javafx.scene.image.Image;
 
 public class Producto {
@@ -23,6 +24,7 @@ public class Producto {
         this.estado = estado;
     }
     public Producto(){}
+    public static ProductoBuilder builder(){return new ProductoBuilder();}
     public Publicacion getPublicacion(){return publicacion;}
     public String getNombre(){return nombre;}
     public Image getImagen(){return imagen;}

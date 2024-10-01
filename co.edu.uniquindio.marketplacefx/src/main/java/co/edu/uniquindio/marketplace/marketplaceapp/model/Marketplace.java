@@ -5,15 +5,20 @@ import java.util.ArrayList;
 
 
 public class Marketplace {
+    private static Marketplace instancia;
     private Vendedor vendedor;
     private Administrador administrador;
     private Usuario usuario;
     private List<Vendedor> listaVendedor;
     private List<Usuario> listaUsuario;
-    public Marketplace(){
+    private Marketplace(){
         this.administrador = new Administrador();
         this.listaVendedor = new ArrayList<>();
         this.listaUsuario = new ArrayList<>();
+    }
+    public static Marketplace getInstancia() {
+        if (instancia == null) {instancia = new Marketplace();}
+        return instancia;
     }
     public Administrador getAdministrador(){return administrador;}
     public List<Vendedor> getListaVendedor(){return listaVendedor;}

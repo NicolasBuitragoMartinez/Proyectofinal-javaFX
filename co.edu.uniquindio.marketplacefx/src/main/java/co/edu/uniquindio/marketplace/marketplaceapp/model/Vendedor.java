@@ -1,5 +1,7 @@
 package co.edu.uniquindio.marketplace.marketplaceapp.model;
 
+import co.edu.uniquindio.marketplace.marketplaceapp.model.builder.VendedorBuilder;
+
 import java.util.List;
 import java.util.ArrayList;
 
@@ -22,6 +24,7 @@ public class Vendedor extends Persona{
         this.vendedoresAliados = new ArrayList<>();
         this.productosAgregados = new ArrayList<>();
     }
+    public static VendedorBuilder builder(){return new VendedorBuilder();}
     public Muro getMuro(){return muro;}
     public List<Vendedor> getVendedoresAliados(){return vendedoresAliados;}
     public List<Producto> getProductosAgregados(){return productosAgregados;}

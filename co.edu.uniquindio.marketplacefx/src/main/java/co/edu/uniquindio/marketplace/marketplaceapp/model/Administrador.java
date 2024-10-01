@@ -1,5 +1,7 @@
 package co.edu.uniquindio.marketplace.marketplaceapp.model;
 
+import co.edu.uniquindio.marketplace.marketplaceapp.model.builder.AdministradorBuilder;
+
 public class Administrador extends Persona{
     public Administrador(String nombre,
                          String apellido,
@@ -9,4 +11,5 @@ public class Administrador extends Persona{
         super(nombre, apellido, cedula, direccion, usuario);
     }
     public Administrador(){}
+    public static AdministradorBuilder builder(){return new AdministradorBuilder();}
 }
