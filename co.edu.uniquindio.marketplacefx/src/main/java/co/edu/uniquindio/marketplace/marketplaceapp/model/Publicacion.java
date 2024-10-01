@@ -5,8 +5,8 @@ import java.util.List;
 
 public class Publicacion {
     private int like;
-    private List<Comentario> comentarios;
-    public Publicacion(int like){
+    public List<Comentario> comentarios;
+    private Publicacion(int like){
         this.like = like;
         this.comentarios = new ArrayList<>();
     }
