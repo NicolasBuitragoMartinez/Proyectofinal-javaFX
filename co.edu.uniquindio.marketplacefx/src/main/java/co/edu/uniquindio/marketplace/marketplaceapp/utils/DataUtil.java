@@ -3,7 +3,6 @@ package co.edu.uniquindio.marketplace.marketplaceapp.utils;
 import co.edu.uniquindio.marketplace.marketplaceapp.model.MarketplaceObjeto;
 import co.edu.uniquindio.marketplace.marketplaceapp.model.Usuario;
 import co.edu.uniquindio.marketplace.marketplaceapp.model.Vendedor;
-import co.edu.uniquindio.marketplace.marketplaceapp.model.builder.UsuarioBuilder;
 
 public class DataUtil {
     public static MarketplaceObjeto inicializarDatos() {

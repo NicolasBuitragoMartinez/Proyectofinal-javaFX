@@ -6,4 +6,7 @@ import java.util.List;
 
 public interface IModelFactoryService {
     List<VendedorDto> obtenerVendedores();
+    boolean agregarVendedor(VendedorDto vendedorDto);
+    boolean eliminarVendedor(VendedorDto vendedorDto);
+    boolean actualizarVendedor(VendedorDto vendedorDto);
 }

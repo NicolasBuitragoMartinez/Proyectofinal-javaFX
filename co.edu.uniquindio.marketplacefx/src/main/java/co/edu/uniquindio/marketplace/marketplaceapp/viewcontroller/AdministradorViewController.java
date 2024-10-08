@@ -1,7 +1,6 @@
 package co.edu.uniquindio.marketplace.marketplaceapp.viewcontroller;
 
 import java.net.URL;
-import java.sql.SQLOutput;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -14,6 +13,8 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+
+import static co.edu.uniquindio.marketplace.marketplaceapp.utils.MarketplaceConstantes.*;
 
 public class AdministradorViewController {
 
@@ -80,7 +81,7 @@ public class AdministradorViewController {
 
     @FXML
     void onActualizarVendedor(ActionEvent event) {
-
+        actualizarVendedor();
     }
 
     @FXML
@@ -90,12 +91,12 @@ public class AdministradorViewController {
 
     @FXML
     void onEliminarVendedor(ActionEvent event) {
-
+        eliminarVendedor();
     }
 
     @FXML
     void onNuevoVendedor(ActionEvent event) {
-
+        limpiarCampos();
     }
 
     private void initView() {
@@ -105,6 +106,7 @@ public class AdministradorViewController {
         tableVendedor.setItems(listaVendedores);
         listenerSelection();
     }
+
     private void obtenerVendedor() {
         listaVendedores.addAll(vendedorController.obtenerVendedores());
     }
@@ -122,13 +124,70 @@ public class AdministradorViewController {
             mostrarInformacionVendedor(vendedorSeleccionado);
         });
     }
+    private void actualizarVendedor(){
+        VendedorDto vendedorDto = actualizarVendedorDto();
+        if(datosValidos(vendedorDto)){
+            if(vendedorController.actualizarVendedor(vendedorDto)){
+                int index = listaVendedores.indexOf(vendedorSeleccionado);
+                listaVendedores.set(index, vendedorDto);
+                mostrarMensaje(TITULO_VENDEDOR_ACTUALIZADO, HEADER, BODI_VENDEDOR_ACTUALIZADO, Alert.AlertType.INFORMATION);
+            } else {
+                mostrarMensaje(TITULO_VENDEDOR_NO_ACTUALIZADO, HEADER, BODI_VENDEDOR_NO_ACTUALIZADO, Alert.AlertType.ERROR);
+            }
+        } else {
+            mostrarMensaje(TITULO_INCOMPLETO, HEADER, BODY_INCOMPLETO, Alert.AlertType.WARNING);
+        }
+    }
     private void agregarVendedor() {
         VendedorDto vendedorDto = crearVendedorDto();
         if(datosValidos(vendedorDto)){
-
+            if (vendedorController.agregarVendedor(vendedorDto)){
+                listaVendedores.addAll(vendedorDto);
+                limpiarCampos();
+                mostrarMensaje(TITULO_VENDEDOR_AGREGADO, HEADER, BODI_VENDEDOR_AGREGADO, Alert.AlertType.INFORMATION);
+            } else {
+                mostrarMensaje(TITULO_VENDEDOR_NO_AGREGADO, HEADER, BODI_VENDEDOR_NO_AGREGADO, Alert.AlertType.ERROR);
+            }
         } else {
-            mostrarMensaje("Campos incompletos", "Notificación", "Los datos del formulario estan incompletos", Alert.AlertType.ERROR);
+            mostrarMensaje(TITULO_INCOMPLETO, HEADER, BODY_INCOMPLETO, Alert.AlertType.WARNING);
         }
+    }
+
+    private void eliminarVendedor() {
+        VendedorDto vendedorDto = eliminarVendedorDto();
+        if (vendedorDto == null || !datosValidos(vendedorDto)) {
+            mostrarMensaje(TITULO_INCOMPLETO, HEADER, BODY_INCOMPLETO, Alert.AlertType.WARNING);
+            return;
+        }
+        if (vendedorController.eliminarVendedor(vendedorDto)) {
+            listaVendedores.remove(vendedorSeleccionado);
+            limpiarCampos();
+            mostrarMensaje(TITULO_VENDEDOR_ELIMINADO, HEADER, BODI_VENDEDOR_ELIMINADO, Alert.AlertType.INFORMATION);
+        } else {
+            mostrarMensaje(TITULO_VENDEDOR_NO_ELIMINADO, HEADER, BODI_VENDEDOR_NO_ELIMINADO, Alert.AlertType.ERROR);
+        }
+    }
+
+    private void limpiarCampos() {
+        txtNombre.setText("");
+        txtApellido.setText("");
+        txtCedula.setText("");
+        txtDireccion.setText("");
+        txtUsuario.setText("");
+        txtContraseña.setText("");
+    }
+
+    private VendedorDto actualizarVendedorDto(){
+        return new VendedorDto(
+                txtNombre.getText(),
+                txtApellido.getText(),
+                txtCedula.getText(),
+                txtDireccion.getText(),
+                new UsuarioDto(
+                        txtUsuario.getText(),
+                        txtContraseña.getText()
+                )
+        );
     }
 
     private VendedorDto crearVendedorDto() {
@@ -143,6 +202,19 @@ public class AdministradorViewController {
                 txtDireccion.getText(),
                 usuarioDto
                 );
+    }
+
+    private VendedorDto eliminarVendedorDto() {
+        if (vendedorSeleccionado == null) {
+            return null;
+        }
+        return new VendedorDto(
+                vendedorSeleccionado.nombre(),
+                vendedorSeleccionado.apellido(),
+                vendedorSeleccionado.cedula(),
+                vendedorSeleccionado.direccion(),
+                vendedorSeleccionado.usuario()
+        );
     }
 
     private boolean datosValidos(VendedorDto vendedorDto) {
@@ -165,6 +237,8 @@ public class AdministradorViewController {
             txtApellido.setText(vendedorSeleccionado.apellido());
             txtCedula.setText(vendedorSeleccionado.cedula());
             txtDireccion.setText(vendedorSeleccionado.direccion());
+            txtUsuario.setText(vendedorSeleccionado.usuario().userName());
+            txtContraseña.setText(vendedorSeleccionado.usuario().password());
         }
     }
 
@@ -188,5 +262,4 @@ public class AdministradorViewController {
             return false;
         }
     }
-
 }

@@ -13,4 +13,7 @@ public class VendedorController {
     public List<VendedorDto> obtenerVendedores(){
         return modelFactory.obtenerVendedores();
     }
+    public boolean agregarVendedor(VendedorDto vendedorDto) {return modelFactory.agregarVendedor(vendedorDto);}
+    public boolean eliminarVendedor(VendedorDto vendedorDto) {return modelFactory.eliminarVendedor(vendedorDto);}
+    public boolean actualizarVendedor(VendedorDto vendedorDto) {return modelFactory.actualizarVendedor(vendedorDto);}
 }

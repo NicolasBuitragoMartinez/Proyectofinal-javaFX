@@ -34,6 +34,42 @@ public class MarketplaceObjeto {
             return  false;
         }
     }
+    public boolean eliminarVendedor(String nombre,
+                                 String apellido,
+                                 String cedula,
+                                 String direccion,
+                                 Usuario usuario){
+        Vendedor vendedorEncontrado = obtenerVendedor(cedula);
+        if(vendedorEncontrado != null){
+            Vendedor vendedor = getBuildVendedor(nombre, apellido, cedula, direccion, usuario);
+            getListaVendedores().remove(vendedor);
+            return true;
+        } else {
+            return false;
+        }
+    }
+    public boolean eliminarVendedor(Vendedor vendedor) {
+        Vendedor vendedorEncontrado = obtenerVendedor(vendedor.getCedula());
+        if (vendedorEncontrado != null) {
+            getListaVendedores().remove(vendedorEncontrado);
+            return true;
+        } else {
+            return false;
+        }
+    }
+    public boolean actualizarVendedor(Vendedor vendedor){
+        Vendedor vendedorEncontrado = obtenerVendedor(vendedor.getCedula());
+        if (vendedorEncontrado != null) {
+            vendedorEncontrado.setNombre(vendedor.getNombre());
+            vendedorEncontrado.setApellido(vendedor.getApellido());
+            vendedorEncontrado.setDireccion(vendedor.getDireccion());
+            vendedorEncontrado.getUsuario().setUserName(vendedor.getUsuario().getUserName());
+            vendedorEncontrado.getUsuario().setPassword(vendedor.getUsuario().getPassword());
+            return true;
+        } else {
+            return false;
+        }
+    }
     private Vendedor getBuildVendedor(String nombre,
                                       String apellido,
                                       String cedula,
