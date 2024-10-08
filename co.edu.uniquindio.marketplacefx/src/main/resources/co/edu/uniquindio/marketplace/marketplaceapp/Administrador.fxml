@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.marketplace.marketplaceapp.viewcontroller.AdministradorViewController">
+   <children>
+      <SplitPane dividerPositions="0.5322812051649928" orientation="VERTICAL" prefHeight="467.0" prefWidth="889.0">
+         <items>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="275.0" prefWidth="929.0">
+               <children>
+                  <Button fx:id="btnAgregarVendedor" layoutX="386.0" layoutY="199.0" mnemonicParsing="false" onAction="#onAgregarVendedor" text="Agregar Vendedor" />
+                  <Label layoutX="40.0" layoutY="57.0" prefHeight="17.0" prefWidth="52.0" text="Nombre:" />
+                  <TextField fx:id="txtNombre" layoutX="116.0" layoutY="53.0" />
+                  <Label layoutX="27.0" layoutY="14.0" prefHeight="17.0" prefWidth="157.0" text="Informacion del vendedor" />
+                  <Separator layoutX="17.0" layoutY="32.0" prefHeight="0.0" prefWidth="581.0" />
+                  <Label layoutX="40.0" layoutY="107.0" prefHeight="17.0" prefWidth="44.0" text="Cédula:" />
+                  <Label layoutX="355.0" layoutY="57.0" prefHeight="17.0" prefWidth="52.0" text="Apellido:" />
+                  <Label layoutX="351.0" layoutY="107.0" prefHeight="17.0" prefWidth="60.0" text="Dirección:" />
+                  <TextField fx:id="txtApellido" layoutX="429.0" layoutY="53.0" />
+                  <TextField fx:id="txtCedula" layoutX="116.0" layoutY="103.0" />
+                  <TextField fx:id="txtDireccion" layoutX="429.0" layoutY="103.0" />
+                  <Separator layoutX="17.0" layoutY="174.0" prefHeight="3.0" prefWidth="584.0" />
+                  <TitledPane animated="false" layoutX="619.0" layoutY="41.0" prefHeight="123.0" prefWidth="245.0" text="Datos de usuario">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="121.0" prefWidth="229.0">
+                           <children>
+                              <TextField fx:id="txtContraseña" layoutX="79.0" layoutY="49.0" />
+                              <Label layoutX="7.0" layoutY="53.0" prefHeight="17.0" prefWidth="66.0" text="Contraseña:" />
+                              <TextField fx:id="txtUsuario" layoutX="79.0" layoutY="7.0" />
+                              <Label layoutX="7.0" layoutY="11.0" prefHeight="17.0" prefWidth="66.0" text="Usuario: " />
+                           </children>
+                        </AnchorPane>
+                     </content>
+                  </TitledPane>
+                  <Button fx:id="btnNuevoVendedor" layoutX="127.0" layoutY="199.0" mnemonicParsing="false" onAction="#onNuevoVendedor" prefHeight="25.0" prefWidth="114.0" text="Nuevo" />
+                  <Button fx:id="btnActualizarVendedor" layoutX="685.0" layoutY="199.0" mnemonicParsing="false" onAction="#onActualizarVendedor" prefHeight="25.0" prefWidth="114.0" text="Actualizar " />
+               </children>
+            </AnchorPane>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="183.0" prefWidth="921.0">
+               <children>
+                  <TableView fx:id="tableVendedor" layoutX="7.0" layoutY="8.0" prefHeight="153.0" prefWidth="871.0">
+                     <columns>
+                        <TableColumn fx:id="tcNombre" prefWidth="219.0" text="Nombre" />
+                        <TableColumn fx:id="tcApellido" prefWidth="219.0" text="Apellido" />
+                        <TableColumn fx:id="tcCedula" prefWidth="219.0" text="Cédula" />
+                        <TableColumn fx:id="tcDireccion" prefWidth="219.0" text="Dirección" />
+                     </columns>
+                  </TableView>
+                  <Button fx:id="btnEliminarVendedor" layoutX="386.0" layoutY="174.0" mnemonicParsing="false" onAction="#onEliminarVendedor" text="Eliminar Vendedor" />
+               </children>
+            </AnchorPane>
+         </items>
+      </SplitPane>
+   </children>
+</AnchorPane>

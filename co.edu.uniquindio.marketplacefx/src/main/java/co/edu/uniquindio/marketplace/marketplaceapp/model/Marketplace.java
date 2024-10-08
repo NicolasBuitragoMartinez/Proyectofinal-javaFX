@@ -5,29 +5,24 @@ import java.util.ArrayList;
 
 
 public class Marketplace {
-    private static Marketplace instancia;
     private Vendedor vendedor;
     private Administrador administrador;
     private Usuario usuario;
-    private List<Vendedor> listaVendedor;
-    private List<Usuario> listaUsuario;
-    private Marketplace(){
+    private List<Vendedor> listaVendedores;
+    private List<Usuario> listaUsuarios;
+    public Marketplace(){
         this.administrador = new Administrador();
-        this.listaVendedor = new ArrayList<>();
-        this.listaUsuario = new ArrayList<>();
-    }
-    public static Marketplace getInstancia() {
-        if (instancia == null) {instancia = new Marketplace();}
-        return instancia;
+        this.listaVendedores = new ArrayList<>();
+        this.listaUsuarios = new ArrayList<>();
     }
     public Administrador getAdministrador(){return administrador;}
-    public List<Vendedor> getListaVendedor(){return listaVendedor;}
-    public List<Usuario> getListaUsuario(){return listaUsuario;}
-    public void setListaVendedor(List<Vendedor> listaVendedor){
-        this.listaVendedor = listaVendedor;
+    public List<Vendedor> getListaVendedores(){return listaVendedores;}
+    public List<Usuario> getListaUsuarios(){return listaUsuarios;}
+    public void setListaVendedores(List<Vendedor> listaVendedores){
+        this.listaVendedores = listaVendedores;
     }
-    public void setListaUsuario(List<Usuario> listaUsuario){
-        this.listaUsuario = listaUsuario;
+    public void setListaUsuarios(List<Usuario> listaUsuarios){
+        this.listaUsuarios = listaUsuarios;
     }
     public void agregarVendedor(Vendedor vendedor){this.vendedor = vendedor;}
     public void agregarAdministrador(Administrador administrador){this.administrador = administrador;}
