@@ -130,6 +130,7 @@ public class AdministradorViewController {
             if(vendedorController.actualizarVendedor(vendedorDto)){
                 int index = listaVendedores.indexOf(vendedorSeleccionado);
                 listaVendedores.set(index, vendedorDto);
+                limpiarCampos();
                 mostrarMensaje(TITULO_VENDEDOR_ACTUALIZADO, HEADER, BODI_VENDEDOR_ACTUALIZADO, Alert.AlertType.INFORMATION);
             } else {
                 mostrarMensaje(TITULO_VENDEDOR_NO_ACTUALIZADO, HEADER, BODI_VENDEDOR_NO_ACTUALIZADO, Alert.AlertType.ERROR);

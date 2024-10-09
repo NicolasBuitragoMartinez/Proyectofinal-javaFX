@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="479.0" prefWidth="726.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.marketplace.marketplaceapp.viewcontroller.VendedorViewController">
+   <children>
+      <TabPane prefHeight="479.0" prefWidth="726.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab text="Muro">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="450.0" prefWidth="701.0">
+                     <children>
+                        <TableView layoutX="550.0" layoutY="30.0" prefHeight="390.0" prefWidth="161.0">
+                          <columns>
+                            <TableColumn prefWidth="159.99995930989584" text="Contactos" />
+                          </columns>
+                        </TableView>
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#bababa64" height="391.0" layoutX="14.0" layoutY="29.0" stroke="BLACK" strokeType="INSIDE" width="320.0" />
+                        <Label layoutX="14.0" layoutY="5.0" text="Productos publicados" />
+                        <Label layoutX="230.0" layoutY="43.0" text="Comentarios" />
+                        <Label layoutX="234.0" layoutY="216.0" text="Reacciones" />
+                        <Button layoutX="43.0" layoutY="60.0" mnemonicParsing="false" text="Producto 1">
+                           <font>
+                              <Font name="System Bold" size="20.0" />
+                           </font>
+                        </Button>
+                        <Button layoutX="43.0" layoutY="130.0" mnemonicParsing="false" text="Producto 2">
+                           <font>
+                              <Font name="System Bold" size="20.0" />
+                           </font>
+                        </Button>
+                        <Button layoutX="43.0" layoutY="194.0" mnemonicParsing="false" text="Producto 3">
+                           <font>
+                              <Font name="System Bold" size="20.0" />
+                           </font>
+                        </Button>
+                        <TableView layoutX="363.0" layoutY="29.0" prefHeight="390.0" prefWidth="161.0">
+                           <columns>
+                              <TableColumn prefWidth="159.99995930989584" text="Mensajes" />
+                           </columns>
+                        </TableView>
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+          <Tab text="Productos">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="171.0" prefWidth="317.0">
+                     <children>
+                        <SplitPane dividerPositions="0.5267857142857143" orientation="VERTICAL" prefHeight="413.0" prefWidth="726.0">
+                          <items>
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="213.0" prefWidth="640.0">
+                                 <children>
+                                    <Separator layoutX="14.0" layoutY="20.0" prefHeight="3.0" prefWidth="691.0" />
+                                    <Label layoutX="14.0" layoutY="5.0" text="Informacion del producto" />
+                                    <Label layoutX="30.0" layoutY="92.0" text="Categoría:" />
+                                    <Label layoutX="33.0" layoutY="136.0" text="Precio:" />
+                                    <Label layoutX="34.0" layoutY="48.0" text="Nombre:" />
+                                    <TextField layoutX="112.0" layoutY="44.0" />
+                                    <TextField layoutX="112.0" layoutY="88.0" />
+                                    <TextField layoutX="112.0" layoutY="132.0" />
+                                    <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="389.0" layoutY="38.0" pickOnBounds="true" preserveRatio="true" />
+                                    <Button layoutX="266.0" layoutY="175.0" mnemonicParsing="false" text="Agregar producto" />
+                                    <Button layoutX="86.0" layoutY="175.0" mnemonicParsing="false" text="Nuevo" />
+                                    <Button layoutX="521.0" layoutY="175.0" mnemonicParsing="false" text="Actualizar" />
+                                 </children>
+                              </AnchorPane>
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                                 <children>
+                                    <TableView layoutX="-1.0" layoutY="1.0" prefHeight="191.0" prefWidth="726.0">
+                                      <columns>
+                                        <TableColumn prefWidth="250.0" text="Nombre" />
+                                        <TableColumn prefWidth="250.0" text="Categoria" />
+                                          <TableColumn prefWidth="250.0" text="Precio" />
+                                      </columns>
+                                    </TableView>
+                                 </children>
+                              </AnchorPane>
+                          </items>
+                        </SplitPane>
+                        <Button layoutX="307.0" layoutY="423.0" mnemonicParsing="false" text="Eliminar producto" />
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+        </tabs>
+      </TabPane>
+   </children>
+</AnchorPane>

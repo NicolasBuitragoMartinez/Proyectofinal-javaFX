@@ -95,12 +95,12 @@ public class MarketplaceObjeto {
 
         return vendedor;
     }
-    public List<Vendedor> getListaVendedores() {
-        return listaVendedores;
-    }
-
+    public List<Vendedor> getListaVendedores() {return listaVendedores;}
+    public List<Usuario> getListaUsuarios(){return listaUsuarios;}
     public void setListaVendedores(List<Vendedor> listaVendedores) {
         this.listaVendedores = listaVendedores;
     }
-
+    public void setListaUsuarios(List<Usuario> listaUsuarios) {
+        this.listaUsuarios = listaUsuarios;
+    }
 }

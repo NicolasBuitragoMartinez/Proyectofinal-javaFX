@@ -44,13 +44,26 @@ public class MarketplaceMappingImpl implements IMarketplaceMapping {
                 .usuario(usuario)
                 .build();
     }
-    private UsuarioDto usuarioToUsuarioDto(Usuario usuario) {
+    @Override
+    public List<UsuarioDto> getUsuariosDto(List<Usuario> listaUsuarios) {
+        if(listaUsuarios == null){
+            return null;
+        }
+        List<UsuarioDto> listaUsuariosDto = new ArrayList<UsuarioDto>(listaUsuarios.size());
+        for (Usuario usuario : listaUsuarios) {
+            listaUsuariosDto.add(usuarioToUsuarioDto(usuario));
+        }
+        return listaUsuariosDto;
+    }
+    @Override
+    public UsuarioDto usuarioToUsuarioDto(Usuario usuario) {
         if (usuario == null) {
             return null;
         }
         return new UsuarioDto(usuario.getUserName(), usuario.getPassword());
     }
-    private Usuario usuarioDtoToUsuario(UsuarioDto usuarioDto) {
+    @Override
+    public Usuario usuarioDtoToUsuario(UsuarioDto usuarioDto) {
         if (usuarioDto == null) {
             return null;
         }
