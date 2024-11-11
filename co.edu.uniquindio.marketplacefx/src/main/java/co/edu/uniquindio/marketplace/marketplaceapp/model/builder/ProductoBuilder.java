@@ -8,6 +8,7 @@ import javafx.scene.image.Image;
 public class ProductoBuilder {
     protected Publicacion publicacion;
     protected String nombre;
+    protected String identificador;
     protected Image imagen;
     protected String categoria;
     protected int precio;
@@ -18,6 +19,10 @@ public class ProductoBuilder {
     }
     public ProductoBuilder nombre(String nombre){
         this.nombre = nombre;
+        return this;
+    }
+    public ProductoBuilder identificador(String identificador){
+        this.identificador = identificador;
         return this;
     }
     public ProductoBuilder imagen(Image imagen){
@@ -38,6 +43,7 @@ public class ProductoBuilder {
     }
     public Producto build(){
         return new Producto(nombre,
+                identificador,
                 imagen,
                 categoria,
                 precio,

@@ -4,80 +4,88 @@
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
 <AnchorPane xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.marketplace.marketplaceapp.viewcontroller.MarketplaceAppController">
-   <children>
-      <TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="527.0" prefWidth="890.0" tabClosingPolicy="UNAVAILABLE">
-        <tabs>
-          <Tab text="Administrador">
-               <content>
-                  <AnchorPane prefHeight="200.0" prefWidth="200.0">
-                      <fx:include source="Administrador.fxml" />
-                  </AnchorPane>
-               </content>
-          </Tab>
-          <Tab text="Vendedor 1">
-            <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                    <fx:include source="Vendedor.fxml" />
-                </AnchorPane>
-            </content>
-          </Tab>
-            <Tab text="Vendedor 2">
-              <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                      <fx:include source="Vendedor.fxml" />
-                  </AnchorPane>              </content>
-            </Tab>
-            <Tab text="Vendedor 3">
-               <content>
-                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                       <fx:include source="Vendedor.fxml" />
-                   </AnchorPane>               </content>
-            </Tab>
-            <Tab text="Vendedor 4">
-               <content>
-                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                       <fx:include source="Vendedor.fxml" />
-                   </AnchorPane>               </content>
-            </Tab>
-            <Tab text="Vendedor 5">
-               <content>
-                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                       <fx:include source="Vendedor.fxml" />
-                   </AnchorPane>               </content>
-            </Tab>
-            <Tab text="Vendedor 6">
-               <content>
-                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                       <fx:include source="Vendedor.fxml" />
-                   </AnchorPane>               </content>
-            </Tab>
-            <Tab text="Vendedor 7">
-               <content>
-                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                       <fx:include source="Vendedor.fxml" />
-                   </AnchorPane>               </content>
-            </Tab>
-            <Tab text="Vendedor 8">
-               <content>
-                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                       <fx:include source="Vendedor.fxml" />
-                   </AnchorPane>               </content>
-            </Tab>
-            <Tab text="Vendedor 9">
-               <content>
-                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                       <fx:include source="Vendedor.fxml" />
-                   </AnchorPane>               </content>
-            </Tab>
-            <Tab text="Vendedor 10">
-               <content>
-                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                       <fx:include source="Vendedor.fxml" />
-                   </AnchorPane>               </content>
-            </Tab>
-        </tabs>
-      </TabPane>
-   </children>
+    <children>
+        <TabPane fx:id="tabPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="527.0" prefWidth="890.0" tabClosingPolicy="UNAVAILABLE">
+            <tabs>
+                <Tab fx:id="adminTab" text="Administrador">
+                    <content>
+                        <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                            <fx:include source="Administrador.fxml" />
+                        </AnchorPane>
+                    </content>
+                </Tab>
+                <Tab text="Vendedor 1">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                            <fx:include source="Vendedor.fxml" />
+                        </AnchorPane>
+                    </content>
+                </Tab>
+                <Tab text="Vendedor 2">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                            <fx:include source="Vendedor.fxml" />
+                        </AnchorPane>
+                    </content>
+                </Tab>
+                <Tab text="Vendedor 3">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                            <fx:include source="Vendedor.fxml" />
+                        </AnchorPane>
+                    </content>
+                </Tab>
+                <Tab text="Vendedor 4">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                            <fx:include source="Vendedor.fxml" />
+                        </AnchorPane>
+                    </content>
+                </Tab>
+                <Tab text="Vendedor 5">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                            <fx:include source="Vendedor.fxml" />
+                        </AnchorPane>
+                    </content>
+                </Tab>
+                <Tab text="Vendedor 6">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                            <fx:include source="Vendedor.fxml" />
+                        </AnchorPane>
+                    </content>
+                </Tab>
+                <Tab text="Vendedor 7">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                            <fx:include source="Vendedor.fxml" />
+                        </AnchorPane>
+                    </content>
+                </Tab>
+                <Tab text="Vendedor 8">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="498.0" prefWidth="844.0">
+                            <fx:include source="Vendedor.fxml" />
+                        </AnchorPane>
+                    </content>
+                </Tab>
+                <Tab text="Vendedor 9">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                            <fx:include source="Vendedor.fxml" />
+                        </AnchorPane>
+                    </content>
+                </Tab>
+                <Tab text="Vendedor 10">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                            <fx:include source="Vendedor.fxml" />
+                        </AnchorPane>
+                    </content>
+                </Tab>
+            </tabs>
+        </TabPane>
+    </children>
 </AnchorPane>

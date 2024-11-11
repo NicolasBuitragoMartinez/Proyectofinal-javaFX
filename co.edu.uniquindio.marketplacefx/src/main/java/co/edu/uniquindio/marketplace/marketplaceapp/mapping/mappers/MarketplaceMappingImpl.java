@@ -1,7 +1,11 @@
 package co.edu.uniquindio.marketplace.marketplaceapp.mapping.mappers;
 
+import co.edu.uniquindio.marketplace.marketplaceapp.mapping.dto.ProductoDto;
+import co.edu.uniquindio.marketplace.marketplaceapp.mapping.dto.PublicacionDto;
 import co.edu.uniquindio.marketplace.marketplaceapp.mapping.dto.UsuarioDto;
 import co.edu.uniquindio.marketplace.marketplaceapp.mapping.dto.VendedorDto;
+import co.edu.uniquindio.marketplace.marketplaceapp.model.Producto;
+import co.edu.uniquindio.marketplace.marketplaceapp.model.Publicacion;
 import co.edu.uniquindio.marketplace.marketplaceapp.model.Usuario;
 import co.edu.uniquindio.marketplace.marketplaceapp.model.Vendedor;
 import co.edu.uniquindio.marketplace.marketplaceapp.service.IMarketplaceMapping;
@@ -70,6 +74,66 @@ public class MarketplaceMappingImpl implements IMarketplaceMapping {
         return Usuario.builder()
                 .userName(usuarioDto.userName())
                 .password(usuarioDto.password())
+                .build();
+    }
+    @Override
+    public List<ProductoDto> getProductosDto(List<Producto> listaProductos) {
+        if(listaProductos == null){
+            return null;
+        }
+        List<ProductoDto> listaProductosDto = new ArrayList<ProductoDto>(listaProductos.size());
+        for(Producto producto : listaProductos){
+            listaProductosDto.add(productoToProductoDto(producto));
+        }
+        return listaProductosDto;
+    }
+    @Override
+    public ProductoDto productoToProductoDto(Producto producto) {
+        return new ProductoDto(
+                producto.getNombre(),
+                producto.getIdentificador(),
+                producto.getImagen(),
+                producto.getCategoria(),
+                producto.getPrecio(),
+                producto.getEstado()
+        );
+    }
+    @Override
+    public Producto productoDtoToProducto(ProductoDto productoDto) {
+        return Producto.builder()
+                .nombre(productoDto.nombre())
+                .identificador(productoDto.identificador())
+                .imagen(productoDto.imagen())
+                .categoria(productoDto.categoria())
+                .precio(productoDto.precio())
+                .estado(productoDto.estado())
+                .build();
+    }
+    @Override
+    public List<PublicacionDto> getPublicacionesDto(List<Publicacion> listaPublicaciones) {
+        if(listaPublicaciones == null){
+            return null;
+        }
+        List<PublicacionDto> listaPublicacionesDto = new ArrayList<PublicacionDto>(listaPublicaciones.size());
+        for(Publicacion publicacion : listaPublicaciones){
+            listaPublicacionesDto.add(publicacionToPublicacionDto(publicacion));
+        }
+        return listaPublicacionesDto;
+    }
+    @Override
+    public PublicacionDto publicacionToPublicacionDto(Publicacion publicacion) {
+        ProductoDto productoDto = productoToProductoDto(publicacion.getProducto());
+        return new PublicacionDto(
+                publicacion.getLike(),
+                productoDto
+        );
+    }
+    @Override
+    public Publicacion publicacionDtoToPublicacion(PublicacionDto publicacionDto) {
+        Producto producto = productoDtoToProducto(publicacionDto.producto());
+        return Publicacion.builder()
+                .like(publicacionDto.like())
+                .producto(producto)
                 .build();
     }
 }

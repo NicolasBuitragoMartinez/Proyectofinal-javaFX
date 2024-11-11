@@ -21,6 +21,11 @@ public class AdministradorViewController {
     VendedorController vendedorController;
     ObservableList<VendedorDto> listaVendedores = FXCollections.observableArrayList();
     VendedorDto vendedorSeleccionado;
+    private MarketplaceAppController marketplaceAppController;
+
+    public void setMarketplaceAppController(MarketplaceAppController marketplaceAppController){
+        this.marketplaceAppController = marketplaceAppController;
+    }
 
     @FXML
     private ResourceBundle resources;
@@ -39,6 +44,29 @@ public class AdministradorViewController {
 
     @FXML
     private Button btnNuevoVendedor;
+
+    @FXML
+    private Button btnBuscarCliente;
+
+    @FXML
+    private Button btnExportarEstadisticas;
+
+    @FXML
+    private RadioButton rbCantidadProductosVendedor;
+
+    @FXML
+    private RadioButton rbContactosXVendedor;
+
+    @FXML
+    private RadioButton rbMensajes2Vendedores;
+
+    @FXML
+    private RadioButton rbProductosXFecha;
+
+    @FXML
+    private RadioButton rbTopProductosLike;
+
+    private ToggleGroup toggleGroup;
 
     @FXML
     private TableView<VendedorDto> tableVendedor;
@@ -80,6 +108,11 @@ public class AdministradorViewController {
     }
 
     @FXML
+    void onActionExportarDatosAdministrador(ActionEvent event) {
+
+    }
+
+    @FXML
     void onActualizarVendedor(ActionEvent event) {
         actualizarVendedor();
     }
@@ -105,6 +138,13 @@ public class AdministradorViewController {
         tableVendedor.getItems().clear();
         tableVendedor.setItems(listaVendedores);
         listenerSelection();
+        toggleGroup = new ToggleGroup();
+        rbCantidadProductosVendedor.setToggleGroup(toggleGroup);
+        rbContactosXVendedor.setToggleGroup(toggleGroup);
+        rbMensajes2Vendedores.setToggleGroup(toggleGroup);
+        rbProductosXFecha.setToggleGroup(toggleGroup);
+        rbTopProductosLike.setToggleGroup(toggleGroup);
+        limpiarCampos();
     }
 
     private void obtenerVendedor() {
@@ -171,11 +211,17 @@ public class AdministradorViewController {
 
     private void limpiarCampos() {
         txtNombre.setText("");
+        txtNombre.setPromptText("Ingrese el nombre...");
         txtApellido.setText("");
+        txtApellido.setPromptText("Ingrese el apellido...");
         txtCedula.setText("");
+        txtCedula.setPromptText("Ingrese la cédula...");
         txtDireccion.setText("");
+        txtDireccion.setPromptText("Ingrese la dirección...");
         txtUsuario.setText("");
+        txtUsuario.setPromptText("Ingrese el usuario...");
         txtContraseña.setText("");
+        txtContraseña.setPromptText("Ingrese la contraseña...");
     }
 
     private VendedorDto actualizarVendedorDto(){

@@ -20,27 +20,27 @@
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
-                  <RadioButton layoutX="220.0" layoutY="64.0" mnemonicParsing="false" text="Cantidad de mensajes enviados entre 2 vendedores">
+                  <RadioButton fx:id="rbMensajes2Vendedores" layoutX="220.0" layoutY="64.0" mnemonicParsing="false" text="Cantidad de mensajes enviados entre 2 vendedores">
                      <font>
                         <Font size="17.0" />
                      </font>
                   </RadioButton>
-                  <RadioButton layoutX="220.0" layoutY="137.0" mnemonicParsing="false" text="Cantidad de productos publicados entre determinada fecha">
+                  <RadioButton fx:id="rbProductosXFecha" layoutX="220.0" layoutY="137.0" mnemonicParsing="false" text="Cantidad de productos publicados entre determinada fecha">
                      <font>
                         <Font size="17.0" />
                      </font>
                   </RadioButton>
-                  <RadioButton layoutX="220.0" layoutY="354.0" mnemonicParsing="false" text="Top 10 de los productos con más reacciones (me gusta)">
+                  <RadioButton fx:id="rbTopProductosLike" layoutX="220.0" layoutY="354.0" mnemonicParsing="false" text="Top 10 de los productos con más reacciones (me gusta)">
                      <font>
                         <Font size="17.0" />
                      </font>
                   </RadioButton>
-                  <RadioButton layoutX="220.0" layoutY="208.0" mnemonicParsing="false" text="Cantidad de productos publicados por cierto vendedor">
+                  <RadioButton fx:id="rbCantidadProductosVendedor" layoutX="220.0" layoutY="208.0" mnemonicParsing="false" text="Cantidad de productos publicados por cierto vendedor">
                      <font>
                         <Font size="17.0" />
                      </font>
                   </RadioButton>
-                  <RadioButton layoutX="220.0" layoutY="283.0" mnemonicParsing="false" text="Cantidad de contactos por cada vendedor">
+                  <RadioButton fx:id="rbContactosXVendedor" layoutX="220.0" layoutY="283.0" mnemonicParsing="false" text="Cantidad de contactos por cada vendedor">
                      <font>
                         <Font size="17.0" />
                      </font>
@@ -51,7 +51,7 @@
                         <Font size="15.0" />
                      </font>
                   </Label>
-                  <Button layoutX="414.0" layoutY="407.0" mnemonicParsing="false" text="Exportar" />
+                  <Button fx:id="btnExportarEstadisticas" layoutX="414.0" layoutY="407.0" mnemonicParsing="false" onAction="#onActionExportarDatosAdministrador" text="Exportar" />
                </children></AnchorPane>
         </content>
       </Tab>

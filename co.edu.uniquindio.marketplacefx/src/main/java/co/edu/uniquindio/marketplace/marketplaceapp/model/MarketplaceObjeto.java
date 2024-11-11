@@ -1,5 +1,8 @@
 package co.edu.uniquindio.marketplace.marketplaceapp.model;
 
+import co.edu.uniquindio.marketplace.marketplaceapp.constants.EstadoProducto;
+import javafx.scene.image.Image;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -83,10 +86,9 @@ public class MarketplaceObjeto {
                 .usuario(usuario)
                 .build();
     }
-
     private Vendedor obtenerVendedor(String cedula) {
         Vendedor vendedor = null;
-        for (Vendedor vendedor1: getListaVendedores()) {
+        for (Vendedor vendedor1 : getListaVendedores()) {
             if(vendedor1.getCedula().equalsIgnoreCase(cedula)){
                 vendedor = vendedor1;
                 break;
@@ -95,12 +97,113 @@ public class MarketplaceObjeto {
 
         return vendedor;
     }
+    public boolean crearProducto(Publicacion publicacion,
+                                 String nombre,
+                                 String identificador,
+                                 Image imagen,
+                                 String categoria,
+                                 int precio,
+                                 EstadoProducto estado){
+        Producto productoEncontrado = obtenerProducto(identificador);
+        if(productoEncontrado == null){
+            Producto producto = getBuildProducto(publicacion, nombre, identificador, imagen, categoria, precio, estado);
+            obtenerListaProducto().add(producto);
+            return true;
+        } else {
+            return false;
+        }
+    }
+    public boolean crearProducto(Producto nuevoProducto){
+        Producto productoEncontrado = obtenerProducto(nuevoProducto.getIdentificador());
+        if(productoEncontrado == null){
+            obtenerListaProducto().add(nuevoProducto);
+            return true;
+        } else {
+            return false;
+        }
+    }
+    public boolean eliminarProducto(Publicacion publicacion,
+                                    String nombre,
+                                    String identificador,
+                                    Image imagen,
+                                    String categoria,
+                                    int precio,
+                                    EstadoProducto estado){
+        Producto productoEncontrado = obtenerProducto(identificador);
+        if(productoEncontrado != null){
+            Producto producto = getBuildProducto(publicacion, nombre, identificador, imagen, categoria, precio, estado);
+            obtenerListaProducto().remove(producto);
+            return true;
+        } else {
+            return false;
+        }
+    }
+    public boolean eliminarProducto(Producto producto){
+        Producto productoEncontrado = obtenerProducto(producto.getIdentificador());
+        if(productoEncontrado != null){
+            obtenerListaProducto().remove(productoEncontrado);
+            return true;
+        } else {
+            return false;
+        }
+    }
+    public boolean actualizarProducto(Producto producto){
+        Producto productoEncontrado = obtenerProducto(producto.getIdentificador());
+        if(productoEncontrado != null){
+            productoEncontrado.setNombre(producto.getNombre());
+            productoEncontrado.setIdentificador(producto.getIdentificador());
+            productoEncontrado.setImagen(producto.getImagen());
+            productoEncontrado.setCategoria(producto.getCategoria());
+            productoEncontrado.setEstado(producto.getEstado());
+            return true;
+        } else {
+            return false;
+        }
+    }
+    private Producto getBuildProducto(Publicacion publicacion,
+                                      String nombre,
+                                      String identificador,
+                                      Image imagen,
+                                      String categoria,
+                                      int precio,
+                                      EstadoProducto estado){
+        return Producto.builder()
+                .publicacion(publicacion)
+                .nombre(nombre)
+                .identificador(identificador)
+                .imagen(imagen)
+                .categoria(categoria)
+                .precio(precio)
+                .build();
+    }
+    private Producto obtenerProducto(String identificador){
+        Producto producto = null;
+        for(Producto producto1 : obtenerListaProducto()){
+            if(producto1.getIdentificador().equalsIgnoreCase(identificador)){
+                producto = producto1;
+                break;
+            }
+        }
+
+        return producto;
+    }
+    public List<Producto> obtenerListaProducto(){
+        List<Producto> productos = new ArrayList<>();
+        for(Vendedor vendedor : listaVendedores){
+            productos.addAll(vendedor.getProductosAgregados());
+        }
+        return productos;
+    }
     public List<Vendedor> getListaVendedores() {return listaVendedores;}
     public List<Usuario> getListaUsuarios(){return listaUsuarios;}
+    public Administrador getAdministrador(){return administrador;}
     public void setListaVendedores(List<Vendedor> listaVendedores) {
         this.listaVendedores = listaVendedores;
     }
     public void setListaUsuarios(List<Usuario> listaUsuarios) {
         this.listaUsuarios = listaUsuarios;
+    }
+    public void setAdministrador(Administrador administrador){
+        this.administrador = administrador;
     }
 }

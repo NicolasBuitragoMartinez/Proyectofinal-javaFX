@@ -1,5 +1,6 @@
 package co.edu.uniquindio.marketplace.marketplaceapp.factory;
 
+import co.edu.uniquindio.marketplace.marketplaceapp.mapping.dto.ProductoDto;
 import co.edu.uniquindio.marketplace.marketplaceapp.mapping.dto.UsuarioDto;
 import co.edu.uniquindio.marketplace.marketplaceapp.mapping.dto.VendedorDto;
 import co.edu.uniquindio.marketplace.marketplaceapp.mapping.mappers.MarketplaceMappingImpl;
@@ -47,6 +48,26 @@ public class ModelFactory implements IModelFactoryService {
     @Override
     public List<UsuarioDto> obtenerUsuarios() {
         return mapper.getUsuariosDto(marketplaceObjeto.getListaUsuarios());
+    }
+
+    @Override
+    public List<ProductoDto> obtenerProductos() {
+        return mapper.getProductosDto(marketplaceObjeto.obtenerListaProducto());
+    }
+
+    @Override
+    public boolean agregarProducto(ProductoDto productoDto) {
+        return marketplaceObjeto.crearProducto(mapper.productoDtoToProducto(productoDto));
+    }
+
+    @Override
+    public boolean eliminarProducto(ProductoDto productoDto) {
+        return marketplaceObjeto.eliminarProducto(mapper.productoDtoToProducto(productoDto));
+    }
+
+    @Override
+    public boolean actualizarProducto(ProductoDto productoDto) {
+        return marketplaceObjeto.actualizarProducto(mapper.productoDtoToProducto(productoDto));
     }
 
 

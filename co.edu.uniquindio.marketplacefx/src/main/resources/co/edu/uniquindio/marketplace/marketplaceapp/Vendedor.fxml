@@ -2,6 +2,7 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.Tab?>
@@ -14,23 +15,26 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="479.0" prefWidth="726.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.marketplace.marketplaceapp.viewcontroller.VendedorViewController">
+<AnchorPane prefHeight="504.0" prefWidth="907.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.marketplace.marketplaceapp.viewcontroller.VendedorViewController">
    <children>
-      <TabPane prefHeight="479.0" prefWidth="726.0" tabClosingPolicy="UNAVAILABLE">
+      <TabPane prefHeight="504.0" prefWidth="909.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
           <Tab text="Muro">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="450.0" prefWidth="701.0">
                      <children>
-                        <TableView layoutX="550.0" layoutY="30.0" prefHeight="390.0" prefWidth="161.0">
+                        <TableView layoutX="673.0" layoutY="43.0" prefHeight="411.0" prefWidth="203.0">
                           <columns>
-                            <TableColumn prefWidth="159.99995930989584" text="Contactos" />
+                            <TableColumn prefWidth="202.0000203450521" text="Contactos" />
                           </columns>
                         </TableView>
-                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#bababa64" height="391.0" layoutX="14.0" layoutY="29.0" stroke="BLACK" strokeType="INSIDE" width="320.0" />
-                        <Label layoutX="14.0" layoutY="5.0" text="Productos publicados" />
-                        <Label layoutX="230.0" layoutY="43.0" text="Comentarios" />
-                        <Label layoutX="234.0" layoutY="216.0" text="Reacciones" />
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#bababa64" height="409.0" layoutX="14.0" layoutY="43.0" stroke="BLACK" strokeType="INSIDE" width="410.0" />
+                        <Label layoutX="14.0" layoutY="-3.0" text="Productos publicados">
+                           <font>
+                              <Font size="22.0" />
+                           </font></Label>
+                        <Label layoutX="281.0" layoutY="73.0" text="Comentarios" />
+                        <Label layoutX="280.0" layoutY="207.0" text="Reacciones" />
                         <Button layoutX="43.0" layoutY="60.0" mnemonicParsing="false" text="Producto 1">
                            <font>
                               <Font name="System Bold" size="20.0" />
@@ -46,11 +50,12 @@
                               <Font name="System Bold" size="20.0" />
                            </font>
                         </Button>
-                        <TableView layoutX="363.0" layoutY="29.0" prefHeight="390.0" prefWidth="161.0">
+                        <TableView layoutX="452.0" layoutY="42.0" prefHeight="411.0" prefWidth="203.0">
                            <columns>
-                              <TableColumn prefWidth="159.99995930989584" text="Mensajes" />
+                              <TableColumn prefWidth="201.99998982747397" text="Mensajes" />
                            </columns>
                         </TableView>
+                        <Separator layoutX="15.0" layoutY="31.0" prefHeight="6.0" prefWidth="861.0" />
                      </children>
                   </AnchorPane>
             </content>
@@ -59,38 +64,61 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="171.0" prefWidth="317.0">
                      <children>
-                        <SplitPane dividerPositions="0.5267857142857143" orientation="VERTICAL" prefHeight="413.0" prefWidth="726.0">
+                        <SplitPane dividerPositions="0.5521669341894061" orientation="VERTICAL" prefHeight="418.0" prefWidth="912.0">
                           <items>
                             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="213.0" prefWidth="640.0">
                                  <children>
-                                    <Separator layoutX="14.0" layoutY="20.0" prefHeight="3.0" prefWidth="691.0" />
+                                    <Separator layoutX="14.0" layoutY="20.0" prefHeight="2.0" prefWidth="549.0" />
                                     <Label layoutX="14.0" layoutY="5.0" text="Informacion del producto" />
-                                    <Label layoutX="30.0" layoutY="92.0" text="Categoría:" />
-                                    <Label layoutX="33.0" layoutY="136.0" text="Precio:" />
-                                    <Label layoutX="34.0" layoutY="48.0" text="Nombre:" />
-                                    <TextField layoutX="112.0" layoutY="44.0" />
-                                    <TextField layoutX="112.0" layoutY="88.0" />
-                                    <TextField layoutX="112.0" layoutY="132.0" />
-                                    <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="389.0" layoutY="38.0" pickOnBounds="true" preserveRatio="true" />
-                                    <Button layoutX="266.0" layoutY="175.0" mnemonicParsing="false" text="Agregar producto" />
-                                    <Button layoutX="86.0" layoutY="175.0" mnemonicParsing="false" text="Nuevo" />
-                                    <Button layoutX="521.0" layoutY="175.0" mnemonicParsing="false" text="Actualizar" />
+                                    <Label layoutX="21.0" layoutY="119.0" text="Categoría:">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font></Label>
+                                    <Label layoutX="289.0" layoutY="58.0" text="Precio:">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font></Label>
+                                    <Label layoutX="21.0" layoutY="58.0" text="Nombre:">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font></Label>
+                                    <TextField fx:id="txtNombreProducto" layoutX="95.0" layoutY="55.0" prefHeight="25.0" prefWidth="164.0" />
+                                    <TextField fx:id="txtCategoria" layoutX="95.0" layoutY="116.0" prefHeight="25.0" prefWidth="164.0" />
+                                    <TextField fx:id="txtPrecio" layoutX="379.0" layoutY="55.0" prefHeight="25.0" prefWidth="178.0" />
+                                    <ImageView fx:id="ivProducto" fitHeight="171.0" fitWidth="268.0" layoutX="588.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" />
+                                    <Button fx:id="btnAgregarProducto" layoutX="405.0" layoutY="191.0" mnemonicParsing="false" onAction="#onAgregarProducto" prefHeight="25.0" prefWidth="125.0" text="Agregar producto" />
+                                    <Button fx:id="btnNuevoProducto" layoutX="106.0" layoutY="191.0" mnemonicParsing="false" onAction="#onNuevoProducto" prefHeight="25.0" prefWidth="110.0" text="Nuevo" />
+                                    <Button fx:id="btnActualizarProducto" layoutX="684.0" layoutY="191.0" mnemonicParsing="false" onAction="#onActualizarProducto" prefHeight="25.0" prefWidth="110.0" text="Actualizar" />
+                                    <Separator layoutX="13.0" layoutY="180.0" prefHeight="2.0" prefWidth="549.0" />
+                                    <Label layoutX="286.0" layoutY="119.0" text="Identificador:">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField fx:id="txtIdentificador" layoutX="379.0" layoutY="116.0" prefHeight="25.0" prefWidth="178.0" />
+                                    <RadioButton fx:id="rdbAgregarFoto" layoutX="578.0" layoutY="1.0" maxWidth="1.7976931348623157E308" minHeight="7.0" minWidth="15.0" mnemonicParsing="false" onAction="#onAgregarFoto" prefHeight="26.0" prefWidth="28.0">
+                                       <font>
+                                          <Font size="17.0" />
+                                       </font>
+                                    </RadioButton>
                                  </children>
                               </AnchorPane>
-                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="199.0" prefWidth="789.0">
                                  <children>
-                                    <TableView layoutX="-1.0" layoutY="1.0" prefHeight="191.0" prefWidth="726.0">
+                                    <TableView fx:id="tableProducto" layoutX="-1.0" layoutY="1.0" prefHeight="195.0" prefWidth="911.0">
                                       <columns>
-                                        <TableColumn prefWidth="250.0" text="Nombre" />
-                                        <TableColumn prefWidth="250.0" text="Categoria" />
-                                          <TableColumn prefWidth="250.0" text="Precio" />
+                                        <TableColumn fx:id="tcNombreProducto" prefWidth="181.0" text="Nombre" />
+                                          <TableColumn fx:id="tcCategoriaProducto" prefWidth="181.0" text="Categoria" />
+                                        <TableColumn fx:id="tcPrecioProducto" prefWidth="181.0" text="Precio" />
+                                          <TableColumn fx:id="tcIdentificadorProducto" prefWidth="181.0" text="Identificador" />
+                                          <TableColumn fx:id="tcEstadoProducto" prefWidth="184.66664632161462" text="Estado" />
                                       </columns>
                                     </TableView>
                                  </children>
                               </AnchorPane>
                           </items>
                         </SplitPane>
-                        <Button layoutX="307.0" layoutY="423.0" mnemonicParsing="false" text="Eliminar producto" />
+                        <Button fx:id="btnEliminarProducto" layoutX="405.0" layoutY="427.0" mnemonicParsing="false" onAction="#onEliminarProducto" prefHeight="25.0" prefWidth="125.0" text="Eliminar producto" />
                      </children>
                   </AnchorPane>
             </content>
