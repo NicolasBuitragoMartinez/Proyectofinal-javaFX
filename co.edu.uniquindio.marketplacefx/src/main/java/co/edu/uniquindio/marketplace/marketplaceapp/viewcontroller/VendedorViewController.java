@@ -7,8 +7,11 @@ import java.util.ResourceBundle;
 
 import co.edu.uniquindio.marketplace.marketplaceapp.constants.EstadoProducto;
 import co.edu.uniquindio.marketplace.marketplaceapp.controller.ProductoController;
+import co.edu.uniquindio.marketplace.marketplaceapp.controller.VendedorController;
 import co.edu.uniquindio.marketplace.marketplaceapp.mapping.dto.ProductoDto;
+import co.edu.uniquindio.marketplace.marketplaceapp.mapping.dto.VendedorDto;
 import co.edu.uniquindio.marketplace.marketplaceapp.model.Producto;
+import co.edu.uniquindio.marketplace.marketplaceapp.model.Vendedor;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -20,13 +23,16 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
+import javafx.scene.control.Label;
 
 import static co.edu.uniquindio.marketplace.marketplaceapp.utils.MarketplaceConstantes.*;
 
 public class VendedorViewController {
 
     ProductoController productoController;
+    VendedorController vendedorController;
     ObservableList<ProductoDto> listaProductos = FXCollections.observableArrayList();
+    ObservableList<VendedorDto> listaVendedores = FXCollections.observableArrayList();
     ProductoDto productoSeleccionado;
 
     @FXML
@@ -52,6 +58,9 @@ public class VendedorViewController {
 
     @FXML
     private ImageView ivProducto;
+
+    @FXML
+    private Label lbVendedor;
 
     @FXML
     private TableView<ProductoDto> tableProducto;
@@ -86,6 +95,7 @@ public class VendedorViewController {
     @FXML
     void initialize() {
         productoController = new ProductoController();
+        vendedorController = new VendedorController();
         initView();
     }
 
@@ -200,6 +210,16 @@ public class VendedorViewController {
             ivProducto.setImage(imagen);
         }
         rdbAgregarFoto.setSelected(false);
+    }
+
+    public void updateView(String cedula) {
+        lbVendedor.setText("Vendedor: "+cedula);
+        VendedorDto vendedorDto = vendedorController.obtenerVendedorPorCedula(cedula);
+        if (vendedorDto != null) {
+            System.out.println("Vendedor encontrado: " + vendedorDto.nombre() + " " + vendedorDto.apellido());
+        } else {
+            System.out.println("Vendedor no encontrado.");
+        }
     }
 
     private void limpiarCampos() {

@@ -4,6 +4,7 @@ import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+import co.edu.uniquindio.marketplace.marketplaceapp.controller.AdministradorController;
 import co.edu.uniquindio.marketplace.marketplaceapp.controller.VendedorController;
 import co.edu.uniquindio.marketplace.marketplaceapp.mapping.dto.UsuarioDto;
 import co.edu.uniquindio.marketplace.marketplaceapp.mapping.dto.VendedorDto;
@@ -22,6 +23,7 @@ public class AdministradorViewController {
     ObservableList<VendedorDto> listaVendedores = FXCollections.observableArrayList();
     VendedorDto vendedorSeleccionado;
     private MarketplaceAppController marketplaceAppController;
+    private AdministradorController administradorController;
 
     public void setMarketplaceAppController(MarketplaceAppController marketplaceAppController){
         this.marketplaceAppController = marketplaceAppController;
@@ -147,7 +149,7 @@ public class AdministradorViewController {
         limpiarCampos();
     }
 
-    private void obtenerVendedor() {
+    public void obtenerVendedor() {
         listaVendedores.addAll(vendedorController.obtenerVendedores());
     }
 
@@ -179,11 +181,25 @@ public class AdministradorViewController {
             mostrarMensaje(TITULO_INCOMPLETO, HEADER, BODY_INCOMPLETO, Alert.AlertType.WARNING);
         }
     }
+
     private void agregarVendedor() {
-        VendedorDto vendedorDto = crearVendedorDto();
-        if(datosValidos(vendedorDto)){
-            if (vendedorController.agregarVendedor(vendedorDto)){
-                listaVendedores.addAll(vendedorDto);
+        String nombre = txtNombre.getText();
+        String apellido = txtApellido.getText();
+        String cedula = txtCedula.getText();
+        String direccion = txtDireccion.getText();
+        String correo = txtUsuario.getText();
+        String contraseña = txtContraseña.getText();
+
+        UsuarioDto usuarioDto = new UsuarioDto(correo, contraseña);
+
+        if (nombre != null && !nombre.isEmpty() && cedula != null && !cedula.isEmpty() &&
+                direccion != null && !direccion.isEmpty()) {
+
+            VendedorDto vendedorDto = new VendedorDto(nombre, apellido, cedula, direccion, usuarioDto);
+
+            if (vendedorController.agregarVendedor(vendedorDto)) {
+                marketplaceAppController.agregarTabVendedor(cedula);
+                listaVendedores.add(vendedorDto);
                 limpiarCampos();
                 mostrarMensaje(TITULO_VENDEDOR_AGREGADO, HEADER, BODI_VENDEDOR_AGREGADO, Alert.AlertType.INFORMATION);
             } else {
@@ -195,19 +211,31 @@ public class AdministradorViewController {
     }
 
     private void eliminarVendedor() {
-        VendedorDto vendedorDto = eliminarVendedorDto();
-        if (vendedorDto == null || !datosValidos(vendedorDto)) {
-            mostrarMensaje(TITULO_INCOMPLETO, HEADER, BODY_INCOMPLETO, Alert.AlertType.WARNING);
-            return;
-        }
-        if (vendedorController.eliminarVendedor(vendedorDto)) {
-            listaVendedores.remove(vendedorSeleccionado);
-            limpiarCampos();
-            mostrarMensaje(TITULO_VENDEDOR_ELIMINADO, HEADER, BODI_VENDEDOR_ELIMINADO, Alert.AlertType.INFORMATION);
+        String nombre = txtNombre.getText();
+        String apellido = txtApellido.getText();
+        String cedula = txtCedula.getText();
+        String direccion = txtDireccion.getText();
+        String correo = txtUsuario.getText();
+        String contraseña = txtContraseña.getText();
+
+        UsuarioDto usuarioDto = new UsuarioDto(correo, contraseña);
+
+        if (cedula != null && !cedula.isEmpty()) {
+            VendedorDto vendedorDto = new VendedorDto(nombre, apellido, cedula, direccion, usuarioDto);
+
+            if (vendedorController.eliminarVendedor(vendedorDto)) {
+                marketplaceAppController.eliminarTabVendedor(cedula);
+                listaVendedores.remove(vendedorSeleccionado);
+                limpiarCampos();
+                mostrarMensaje(TITULO_VENDEDOR_ELIMINADO, HEADER, BODI_VENDEDOR_ELIMINADO, Alert.AlertType.INFORMATION);
+            } else {
+                mostrarMensaje(TITULO_VENDEDOR_NO_ELIMINADO, HEADER, BODI_VENDEDOR_NO_ELIMINADO, Alert.AlertType.ERROR);
+            }
         } else {
-            mostrarMensaje(TITULO_VENDEDOR_NO_ELIMINADO, HEADER, BODI_VENDEDOR_NO_ELIMINADO, Alert.AlertType.ERROR);
+            mostrarMensaje(TITULO_INCOMPLETO, HEADER, BODY_INCOMPLETO, Alert.AlertType.WARNING);
         }
     }
+
 
     private void limpiarCampos() {
         txtNombre.setText("");

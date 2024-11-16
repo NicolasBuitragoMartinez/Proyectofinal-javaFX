@@ -1,6 +1,7 @@
 package co.edu.uniquindio.marketplace.marketplaceapp.model;
 
 import co.edu.uniquindio.marketplace.marketplaceapp.constants.EstadoProducto;
+import co.edu.uniquindio.marketplace.marketplaceapp.service.IMarketplace;
 import javafx.scene.image.Image;
 
 import java.util.ArrayList;
@@ -86,7 +87,7 @@ public class MarketplaceObjeto {
                 .usuario(usuario)
                 .build();
     }
-    private Vendedor obtenerVendedor(String cedula) {
+    public Vendedor obtenerVendedor(String cedula) {
         Vendedor vendedor = null;
         for (Vendedor vendedor1 : getListaVendedores()) {
             if(vendedor1.getCedula().equalsIgnoreCase(cedula)){

@@ -1,5 +1,8 @@
 package co.edu.uniquindio.marketplace.marketplaceapp.viewcontroller;
 
+import co.edu.uniquindio.marketplace.marketplaceapp.controller.VendedorController;
+import co.edu.uniquindio.marketplace.marketplaceapp.mapping.dto.VendedorDto;
+import co.edu.uniquindio.marketplace.marketplaceapp.model.Administrador;
 import co.edu.uniquindio.marketplace.marketplaceapp.model.Usuario;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -22,6 +25,7 @@ import static co.edu.uniquindio.marketplace.marketplaceapp.utils.MarketplaceCons
 public class MarketplaceAppController {
 
     private LoginViewController loginViewController;
+    VendedorController vendedorController;
 
     @FXML
     private ResourceBundle resources;
@@ -38,6 +42,7 @@ public class MarketplaceAppController {
     @FXML
     void initialize() {
         mostrarLogin();
+        asignarPestaña();
     }
 
     private void mostrarLogin() {
@@ -56,5 +61,97 @@ public class MarketplaceAppController {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+    private void asignarPestaña() {
+        try {
+            URL administradorUrl = getClass().getResource("/co/edu/uniquindio/marketplace/marketplaceapp/Administrador.fxml");
+            System.out.println("URL encontrada: " + administradorUrl);
+
+            if (administradorUrl == null) {
+                throw new IOException("No se puede encontrar Administrador.fxml en la ruta especificada.");
+            }
+
+            FXMLLoader loader = new FXMLLoader(administradorUrl);
+            AnchorPane adminContent = loader.load();
+            AdministradorViewController administradorViewController = loader.getController();
+            administradorViewController.setMarketplaceAppController(this);
+            adminTab.setContent(adminContent);
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    public void agregarTabVendedor(String cedula) {
+        if (cedula == null || cedula.isEmpty()) {
+            System.out.println("Cédula no puede estar vacía.");
+            return;
+        }
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/co/edu/uniquindio/marketplace/marketplaceapp/Vendedor.fxml"));
+            AnchorPane vendedorContent = loader.load();
+
+            VendedorViewController vendedorViewController = loader.getController();
+            vendedorViewController.updateView(cedula);
+            Tab nuevoTab = new Tab();
+            nuevoTab.setText(cedula);
+            nuevoTab.setContent(vendedorContent);
+            tabPane.getTabs().add(nuevoTab);
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("Error al cargar la vista de Vendedor.");
+        }
+    }
+    public void eliminarTabVendedor(String cedula){
+        if (cedula == null || cedula.isEmpty()) {
+            System.out.println("Cédula no puede estar vacía.");
+            return;
+        }
+
+        Tab tabToRemove = null;
+        for (Tab tab : tabPane.getTabs()) {
+            if (cedula.equals(tab.getText())) {
+                tabToRemove = tab;
+                break;
+            }
+        }
+
+        if (tabToRemove != null) {
+            tabPane.getTabs().remove(tabToRemove);
+            System.out.println("Tab con cédula " + cedula + " eliminado.");
+        } else {
+            System.out.println("No se encontró un tab con la cédula " + cedula);
+        }
+    }
+
+    public void crearTabsVendedores(String cedula) {
+        if (cedula == null || cedula.isEmpty()) {
+            System.out.println("Cédula no puede estar vacía.");
+            return;
+        }
+
+        List<VendedorDto> listaVendedores = vendedorController.obtenerVendedores();
+
+        if (listaVendedores == null || listaVendedores.isEmpty()) {
+            System.out.println("No hay vendedores registrados para crear tabuladores.");
+            return;
+        }
+
+        for (VendedorDto vendedor : listaVendedores) {
+            if (!existeTabVendedor(vendedor.cedula())) {
+                agregarTabVendedor(vendedor.cedula());
+            } else {
+                System.out.println("El tabulador para el vendedor con cédula " + vendedor.cedula() + " ya existe.");
+            }
+        }
+    }
+
+    private boolean existeTabVendedor(String cedula) {
+        for (Tab tab : tabPane.getTabs()) {
+            if (tab.getText().equals(cedula)) {
+                return true;
+            }
+        }
+        return false;
     }
 }

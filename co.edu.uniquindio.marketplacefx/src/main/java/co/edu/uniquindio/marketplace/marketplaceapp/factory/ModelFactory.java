@@ -15,13 +15,15 @@ public class ModelFactory implements IModelFactoryService {
     private static ModelFactory modelFactory;
     private MarketplaceObjeto marketplaceObjeto;
     private IMarketplaceMapping mapper;
+
     public static ModelFactory getInstancia() {
-        if(modelFactory == null) {
+        if (modelFactory == null) {
             modelFactory = new ModelFactory();
         }
         return modelFactory;
     }
-    private ModelFactory(){
+
+    private ModelFactory() {
         mapper = new MarketplaceMappingImpl();
         marketplaceObjeto = DataUtil.inicializarDatos();
     }
@@ -29,46 +31,40 @@ public class ModelFactory implements IModelFactoryService {
     public List<VendedorDto> obtenerVendedores() {
         return mapper.getVendedoresDto(marketplaceObjeto.getListaVendedores());
     }
-
+    @Override
+    public VendedorDto obtenerVendedores(String cedula) {
+        return mapper.vendedorToVendedorDto(marketplaceObjeto.obtenerVendedor(cedula));
+    }
     @Override
     public boolean agregarVendedor(VendedorDto vendedorDto) {
         return marketplaceObjeto.crearVendedor(mapper.vendedorDtoToVendedor(vendedorDto));
     }
-
     @Override
     public boolean eliminarVendedor(VendedorDto vendedorDto) {
         return marketplaceObjeto.eliminarVendedor(mapper.vendedorDtoToVendedor(vendedorDto));
     }
-
     @Override
     public boolean actualizarVendedor(VendedorDto vendedorDto) {
         return marketplaceObjeto.actualizarVendedor(mapper.vendedorDtoToVendedor(vendedorDto));
     }
-
     @Override
     public List<UsuarioDto> obtenerUsuarios() {
         return mapper.getUsuariosDto(marketplaceObjeto.getListaUsuarios());
     }
-
     @Override
     public List<ProductoDto> obtenerProductos() {
         return mapper.getProductosDto(marketplaceObjeto.obtenerListaProducto());
     }
-
     @Override
     public boolean agregarProducto(ProductoDto productoDto) {
         return marketplaceObjeto.crearProducto(mapper.productoDtoToProducto(productoDto));
     }
-
     @Override
     public boolean eliminarProducto(ProductoDto productoDto) {
         return marketplaceObjeto.eliminarProducto(mapper.productoDtoToProducto(productoDto));
     }
-
     @Override
     public boolean actualizarProducto(ProductoDto productoDto) {
         return marketplaceObjeto.actualizarProducto(mapper.productoDtoToProducto(productoDto));
     }
-
-
 }
