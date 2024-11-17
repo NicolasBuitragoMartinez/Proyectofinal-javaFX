@@ -8,6 +8,7 @@ import co.edu.uniquindio.marketplace.marketplaceapp.controller.AdministradorCont
 import co.edu.uniquindio.marketplace.marketplaceapp.controller.VendedorController;
 import co.edu.uniquindio.marketplace.marketplaceapp.mapping.dto.UsuarioDto;
 import co.edu.uniquindio.marketplace.marketplaceapp.mapping.dto.VendedorDto;
+import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -27,6 +28,7 @@ public class AdministradorViewController {
 
     public void setMarketplaceAppController(MarketplaceAppController marketplaceAppController){
         this.marketplaceAppController = marketplaceAppController;
+        inicializarVista();
     }
 
     @FXML
@@ -137,6 +139,7 @@ public class AdministradorViewController {
     private void initView() {
         initDataBinding();
         obtenerVendedor();
+        configurarMarketplace();
         tableVendedor.getItems().clear();
         tableVendedor.setItems(listaVendedores);
         listenerSelection();
@@ -166,6 +169,7 @@ public class AdministradorViewController {
             mostrarInformacionVendedor(vendedorSeleccionado);
         });
     }
+
     private void actualizarVendedor(){
         VendedorDto vendedorDto = actualizarVendedorDto();
         if(datosValidos(vendedorDto)){
@@ -236,6 +240,20 @@ public class AdministradorViewController {
         }
     }
 
+    private void configurarMarketplace() {
+        Platform.runLater(() -> {
+            if (marketplaceAppController != null) {
+                inicializarVista();
+            }
+        });
+    }
+
+    private void inicializarVista() {
+        if (vendedorController == null) {
+            vendedorController = new VendedorController();
+        }
+        marketplaceAppController.crearTabsParaVendedoresExistentes(vendedorController);
+    }
 
     private void limpiarCampos() {
         txtNombre.setText("");

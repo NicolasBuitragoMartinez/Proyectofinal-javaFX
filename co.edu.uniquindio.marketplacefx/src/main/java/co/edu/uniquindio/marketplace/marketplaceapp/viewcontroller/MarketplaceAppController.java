@@ -82,29 +82,40 @@ public class MarketplaceAppController {
             e.printStackTrace();
         }
     }
+    private int contadorVendedores = 1;
     public void agregarTabVendedor(String cedula) {
         if (cedula == null || cedula.isEmpty()) {
-            System.out.println("Cédula no puede estar vacía.");
+            mostrarMensaje(TITULO_CEDULA_VACIA, HEADER, BODI_CEDULA_VACIA, Alert.AlertType.WARNING);
             return;
         }
+
+        for (Tab tab : tabPane.getTabs()) {
+            if (tab.getId() != null && tab.getId().equals(cedula)) {
+                return;
+            }
+        }
+
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/co/edu/uniquindio/marketplace/marketplaceapp/Vendedor.fxml"));
             AnchorPane vendedorContent = loader.load();
 
             VendedorViewController vendedorViewController = loader.getController();
             vendedorViewController.updateView(cedula);
+
             Tab nuevoTab = new Tab();
-            nuevoTab.setText(cedula);
+            nuevoTab.setId(cedula);
+            nuevoTab.setText("Vendedor " + contadorVendedores);
             nuevoTab.setContent(vendedorContent);
             tabPane.getTabs().add(nuevoTab);
+            contadorVendedores++;
         } catch (IOException e) {
             e.printStackTrace();
-            System.out.println("Error al cargar la vista de Vendedor.");
         }
     }
+
     public void eliminarTabVendedor(String cedula){
         if (cedula == null || cedula.isEmpty()) {
-            System.out.println("Cédula no puede estar vacía.");
+            mostrarMensaje(TITULO_CEDULA_VACIA, HEADER, BODI_CEDULA_VACIA, Alert.AlertType.WARNING);
             return;
         }
 
@@ -118,30 +129,19 @@ public class MarketplaceAppController {
 
         if (tabToRemove != null) {
             tabPane.getTabs().remove(tabToRemove);
-            System.out.println("Tab con cédula " + cedula + " eliminado.");
-        } else {
-            System.out.println("No se encontró un tab con la cédula " + cedula);
         }
     }
 
-    public void crearTabsVendedores(String cedula) {
-        if (cedula == null || cedula.isEmpty()) {
-            System.out.println("Cédula no puede estar vacía.");
-            return;
-        }
-
+    public void crearTabsParaVendedoresExistentes(VendedorController vendedorController) {
         List<VendedorDto> listaVendedores = vendedorController.obtenerVendedores();
-
         if (listaVendedores == null || listaVendedores.isEmpty()) {
-            System.out.println("No hay vendedores registrados para crear tabuladores.");
+            mostrarMensaje(TITULO_VENDEDOR_NO_REGISTRADO, HEADER, BODI_VENDEDOR_NO_REGISTRADO, Alert.AlertType.WARNING);
             return;
         }
 
         for (VendedorDto vendedor : listaVendedores) {
             if (!existeTabVendedor(vendedor.cedula())) {
                 agregarTabVendedor(vendedor.cedula());
-            } else {
-                System.out.println("El tabulador para el vendedor con cédula " + vendedor.cedula() + " ya existe.");
             }
         }
     }
@@ -153,5 +153,13 @@ public class MarketplaceAppController {
             }
         }
         return false;
+    }
+
+    private void mostrarMensaje(String titulo, String header, String contenido, Alert.AlertType alertType){
+        Alert alert = new Alert(alertType);
+        alert.setTitle(titulo);
+        alert.setHeaderText(header);
+        alert.setContentText(contenido);
+        alert.showAndWait();
     }
 }
