@@ -10,6 +10,8 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Rectangle?>
@@ -23,44 +25,81 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="450.0" prefWidth="701.0">
                      <children>
-                        <TableView layoutX="673.0" layoutY="43.0" prefHeight="411.0" prefWidth="203.0">
-                          <columns>
-                            <TableColumn prefWidth="202.0000203450521" text="Contactos" />
-                          </columns>
-                        </TableView>
-                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#bababa64" height="409.0" layoutX="14.0" layoutY="43.0" stroke="BLACK" strokeType="INSIDE" width="410.0" />
                         <Label layoutX="14.0" layoutY="-3.0" text="Productos publicados">
                            <font>
                               <Font size="22.0" />
                            </font></Label>
-                        <Label layoutX="281.0" layoutY="73.0" text="Comentarios" />
-                        <Label layoutX="280.0" layoutY="207.0" text="Reacciones" />
-                        <Button layoutX="43.0" layoutY="60.0" mnemonicParsing="false" text="Producto 1">
-                           <font>
-                              <Font name="System Bold" size="20.0" />
-                           </font>
-                        </Button>
-                        <Button layoutX="43.0" layoutY="130.0" mnemonicParsing="false" text="Producto 2">
-                           <font>
-                              <Font name="System Bold" size="20.0" />
-                           </font>
-                        </Button>
-                        <Button layoutX="43.0" layoutY="194.0" mnemonicParsing="false" text="Producto 3">
-                           <font>
-                              <Font name="System Bold" size="20.0" />
-                           </font>
-                        </Button>
-                        <TableView layoutX="452.0" layoutY="42.0" prefHeight="411.0" prefWidth="203.0">
-                           <columns>
-                              <TableColumn prefWidth="201.99998982747397" text="Mensajes" />
-                           </columns>
-                        </TableView>
                         <Separator layoutX="15.0" layoutY="31.0" prefHeight="6.0" prefWidth="861.0" />
                         <Label fx:id="lbVendedor" layoutX="233.0" layoutY="4.0" prefHeight="24.0" prefWidth="405.0" text="Perfil:">
                            <font>
                               <Font name="Arial Bold Italic" size="12.0" />
                            </font>
                         </Label>
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#d0d0d0" height="218.0" layoutX="22.0" layoutY="254.0" nodeOrientation="RIGHT_TO_LEFT" opacity="0.14" stroke="BLACK" strokeType="INSIDE" width="456.0" />
+                        <TableView layoutX="33.0" layoutY="264.0" prefHeight="200.0" prefWidth="433.0">
+                           <columns>
+                              <TableColumn prefWidth="145.0" text="Nombre" />
+                              <TableColumn prefWidth="145.0" text="Precio " />
+                              <TableColumn prefWidth="145.0" text="Categoria " />
+                           </columns>
+                        </TableView>
+                        <Label layoutX="42.0" layoutY="59.0" prefHeight="21.0" prefWidth="173.0" text="Nombre: ">
+                           <font>
+                              <Font name="System Italic" size="15.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="42.0" layoutY="108.0" prefHeight="17.0" prefWidth="173.0" text="Categoria:">
+                           <font>
+                              <Font name="System Italic" size="15.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="42.0" layoutY="158.0" prefHeight="21.0" prefWidth="169.0" text="Precio:">
+                           <font>
+                              <Font name="System Italic" size="15.0" />
+                           </font>
+                        </Label>
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" height="139.0" layoutX="266.0" layoutY="44.0" stroke="BLACK" strokeType="INSIDE" width="200.0" />
+                        <ImageView fitHeight="135.0" fitWidth="193.0" layoutX="270.0" layoutY="46.0" pickOnBounds="true" preserveRatio="true" />
+                        <Button layoutX="323.0" layoutY="204.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="85.0" text="Me gusta" />
+                        <ImageView fitHeight="19.0" fitWidth="23.0" layoutX="293.0" layoutY="207.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../../../images/Captura%20de%20pantalla%202024-11-17%20011217.png" />
+                           </image>
+                        </ImageView>
+                        <Label layoutX="42.0" layoutY="206.0" prefHeight="21.0" prefWidth="175.0" text="Reacciones: ">
+                           <font>
+                              <Font name="System Italic" size="15.0" />
+                           </font>
+                        </Label>
+                        <TitledPane animated="false" layoutX="497.0" layoutY="41.0" prefHeight="389.0" prefWidth="202.0" text="Comentarios">
+                          <content>
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="370.0" prefWidth="226.0">
+                                 <children>
+                                    <TableView layoutX="-1.0" prefHeight="359.0" prefWidth="202.0">
+                                      <columns>
+                                        <TableColumn prefWidth="75.0" text="Nombre" />
+                                        <TableColumn prefWidth="125.33333587646484" text="Comentario" />
+                                      </columns>
+                                    </TableView>
+                                 </children>
+                              </AnchorPane>
+                          </content>
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </TitledPane>
+                        <TextField layoutX="563.0" layoutY="441.0" prefHeight="25.0" prefWidth="135.0" />
+                        <Label layoutX="497.0" layoutY="444.0" text="Comentar:">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <TableView layoutX="709.0" layoutY="42.0" prefHeight="387.0" prefWidth="173.0">
+                          <columns>
+                            <TableColumn prefWidth="172.0000203450521" text="Amigos" />
+                          </columns>
+                        </TableView>
+                        <Button layoutX="770.0" layoutY="441.0" mnemonicParsing="false" text="Agregar" />
                      </children>
                   </AnchorPane>
             </content>
