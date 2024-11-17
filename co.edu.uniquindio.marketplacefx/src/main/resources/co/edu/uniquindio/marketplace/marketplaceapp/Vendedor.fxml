@@ -43,17 +43,17 @@
                               <TableColumn fx:id="tcCategoriaPublicacion" prefWidth="145.0" text="Categoria " />
                            </columns>
                         </TableView>
-                        <Label fx:id="lbNombreProPublicado" layoutX="42.0" layoutY="59.0" prefHeight="21.0" prefWidth="173.0" text="Nombre: ">
+                        <Label fx:id="lbNombreProPublicado" layoutX="42.0" layoutY="59.0" prefHeight="21.0" prefWidth="201.0" text="Nombre: ">
                            <font>
                               <Font name="System Italic" size="15.0" />
                            </font>
                         </Label>
-                        <Label fx:id="lbCategoriaProPublicado" layoutX="42.0" layoutY="108.0" prefHeight="17.0" prefWidth="173.0" text="Categoria:">
+                        <Label fx:id="lbCategoriaProPublicado" layoutX="42.0" layoutY="108.0" prefHeight="21.0" prefWidth="205.0" text="Categoria:">
                            <font>
                               <Font name="System Italic" size="15.0" />
                            </font>
                         </Label>
-                        <Label fx:id="lbPrecioProPublicado" layoutX="42.0" layoutY="158.0" prefHeight="21.0" prefWidth="169.0" text="Precio:">
+                        <Label fx:id="lbPrecioProPublicado" layoutX="42.0" layoutY="158.0" prefHeight="21.0" prefWidth="213.0" text="Precio:">
                            <font>
                               <Font name="System Italic" size="15.0" />
                            </font>
@@ -63,10 +63,10 @@
                         <Button fx:id="btnMeGusta" layoutX="323.0" layoutY="204.0" mnemonicParsing="false" onAction="#onActionMeGusta" prefHeight="25.0" prefWidth="85.0" text="Me gusta" />
                         <ImageView fitHeight="19.0" fitWidth="23.0" layoutX="293.0" layoutY="207.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../../../../images/Captura%20de%20pantalla%202024-11-17%20011217.png" />
+                              <Image url="@../../../../../images/Captura de pantalla 2024-11-17 011217.png" />
                            </image>
                         </ImageView>
-                        <Label fx:id="lbReaccionesProPublicado" layoutX="42.0" layoutY="206.0" prefHeight="21.0" prefWidth="175.0" text="Reacciones: ">
+                        <Label fx:id="lbReaccionesProPublicado" layoutX="42.0" layoutY="206.0" prefHeight="21.0" prefWidth="209.0" text="Reacciones: ">
                            <font>
                               <Font name="System Italic" size="15.0" />
                            </font>
@@ -103,7 +103,7 @@
                         <Button fx:id="btnAgregarComentario" layoutX="564.0" layoutY="430.0" mnemonicParsing="false" onAction="#onActionAgregarComentario" text="Comentar" />
                         <ImageView fitHeight="23.0" fitWidth="21.0" layoutX="638.0" layoutY="432.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../../../../images/Captura%20de%20pantalla%202024-11-17%20020305.png" />
+                              <Image url="@../../../../../images/Captura de pantalla 2024-11-17 020305.png" />
                            </image>
                         </ImageView>
                      </children>
