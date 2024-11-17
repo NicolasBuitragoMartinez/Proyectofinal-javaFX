@@ -216,6 +216,10 @@ public class VendedorViewController {
         VendedorDto vendedorDto = vendedorController.obtenerVendedorPorCedula(cedula);
         if (vendedorDto != null) {
             lbVendedor.setText("Vendedor: " + vendedorDto.nombre() + " " + vendedorDto.apellido());
+
+            listaProductos.clear();
+            listaProductos.addAll(productoController.obtenerProductosPorVendedor(cedula));
+            tableProducto.setItems(listaProductos);
         } else {
             mostrarMensaje(TITULO_VENDEDOR_NO_ENCONTRADO, HEADER, BODI_VENDEDOR_NO_ENCOTRADO, Alert.AlertType.ERROR);
         }

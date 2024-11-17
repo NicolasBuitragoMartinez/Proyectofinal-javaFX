@@ -6,6 +6,7 @@ import javafx.scene.image.Image;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class MarketplaceObjeto {
     private List<Vendedor> listaVendedores;
@@ -194,6 +195,13 @@ public class MarketplaceObjeto {
             productos.addAll(vendedor.getProductosAgregados());
         }
         return productos;
+    }
+    public List<Producto> obtenerProductosPorVendedor(String cedulaVendedor) {
+        return listaVendedores.stream()
+                .filter(vendedor -> vendedor.getCedula().equals(cedulaVendedor))
+                .findFirst()
+                .map(Vendedor::getProductosAgregados)
+                .orElse(List.of());
     }
     public List<Vendedor> getListaVendedores() {return listaVendedores;}
     public List<Usuario> getListaUsuarios(){return listaUsuarios;}

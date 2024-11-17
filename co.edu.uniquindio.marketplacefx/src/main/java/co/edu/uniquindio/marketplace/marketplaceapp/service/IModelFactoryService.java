@@ -16,6 +16,7 @@ public interface IModelFactoryService {
     List<UsuarioDto> obtenerUsuarios();
 
     List<ProductoDto> obtenerProductos();
+    List<ProductoDto> obtenerProductosPorVendedor(String cedulaVendedor);
     boolean agregarProducto(ProductoDto productoDto);
     boolean eliminarProducto(ProductoDto productoDto);
     boolean actualizarProducto(ProductoDto productoDto);
