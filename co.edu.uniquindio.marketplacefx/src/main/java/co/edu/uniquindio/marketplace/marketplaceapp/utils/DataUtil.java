@@ -4,6 +4,8 @@ import co.edu.uniquindio.marketplace.marketplaceapp.constants.EstadoProducto;
 import co.edu.uniquindio.marketplace.marketplaceapp.model.*;
 import javafx.scene.image.Image;
 
+import java.time.LocalDate;
+
 public class DataUtil {
     public static MarketplaceObjeto inicializarDatos() {
         MarketplaceObjeto marketplaceObjeto = new MarketplaceObjeto();
@@ -235,6 +237,8 @@ public class DataUtil {
                 .categoria("Consola de videojuegos")
                 .precio((int) 2000000)
                 .estado(EstadoProducto.PUBLICADO)
+                .fechaPublicacion(LocalDate.of(2023, 6, 15))
+
                 .build();
         Producto producto2 = Producto.builder()
                 .nombre("iPhone 15 Pro Max")
@@ -243,6 +247,7 @@ public class DataUtil {
                 .categoria("Telefonos")
                 .precio((int) 3800000)
                 .estado(EstadoProducto.PUBLICADO)
+                .fechaPublicacion(LocalDate.of(2024, 4, 15))
                 .build();
         Producto producto3 = Producto.builder()
                 .nombre("Televisor Samsung")
@@ -251,6 +256,7 @@ public class DataUtil {
                 .categoria("Televisores")
                 .precio((int) 2250000)
                 .estado(EstadoProducto.VENDIDO)
+                .fechaPublicacion(LocalDate.of(2022, 6, 1))
                 .build();
         Producto producto4 = Producto.builder()
                 .nombre("EA FC24")
@@ -259,6 +265,7 @@ public class DataUtil {
                 .categoria("Videojuegos")
                 .precio((int) 250000)
                 .estado(EstadoProducto.VENDIDO)
+                .fechaPublicacion(LocalDate.of(2023, 11, 17))
                 .build();
         Producto producto5 = Producto.builder()
                 .nombre("Tarjeta grafica AMD Radeon")
@@ -267,6 +274,7 @@ public class DataUtil {
                 .categoria("Computación")
                 .precio((int) 1980000)
                 .estado(EstadoProducto.PUBLICADO)
+                .fechaPublicacion(LocalDate.of(2023, 7, 15))
                 .build();
         Producto producto6 = Producto.builder()
                 .nombre("Kia Rio")
@@ -275,6 +283,7 @@ public class DataUtil {
                 .categoria("Vehículos")
                 .precio((int) 35000000)
                 .estado(EstadoProducto.PUBLICADO)
+                .fechaPublicacion(LocalDate.of(2023, 5, 5))
                 .build();
         Producto producto7 = Producto.builder()
                 .nombre("NMax")
@@ -283,6 +292,7 @@ public class DataUtil {
                 .categoria("Vehículos")
                 .precio((int) 17500000)
                 .estado(EstadoProducto.VENDIDO)
+                .fechaPublicacion(LocalDate.of(2023, 11, 10))
                 .build();
         Producto producto8 = Producto.builder()
                 .nombre("PC gamer")
@@ -291,6 +301,7 @@ public class DataUtil {
                 .categoria("Computación")
                 .precio((int) 5200000)
                 .estado(EstadoProducto.VENDIDO)
+                .fechaPublicacion(LocalDate.of(2023, 8, 7))
                 .build();
         Producto producto9 = Producto.builder()
                 .nombre("Casa")
@@ -299,6 +310,7 @@ public class DataUtil {
                 .categoria("Vivienda")
                 .precio((int) 450000000)
                 .estado(EstadoProducto.PUBLICADO)
+                .fechaPublicacion(LocalDate.of(2024, 12, 4))
                 .build();
         Producto producto10 = Producto.builder()
                 .nombre("Comedor")
@@ -307,6 +319,7 @@ public class DataUtil {
                 .categoria("Muebles")
                 .precio((int) 1249990)
                 .estado(EstadoProducto.VENDIDO)
+                .fechaPublicacion(LocalDate.of(2023, 1, 1))
                 .build();
         Producto producto11 = Producto.builder()
                 .nombre("Hot Wheels")
@@ -315,6 +328,7 @@ public class DataUtil {
                 .categoria("Jugueteria")
                 .precio((int) 20000)
                 .estado(EstadoProducto.PUBLICADO)
+                .fechaPublicacion(LocalDate.of(2023, 1, 2))
                 .build();
         Producto producto12 = Producto.builder()
                 .nombre("Camiseta Real Madrid")
@@ -323,6 +337,7 @@ public class DataUtil {
                 .categoria("Ropa")
                 .precio((int)650000)
                 .estado(EstadoProducto.NO_AGREGADO)
+                .fechaPublicacion(LocalDate.of(2023, 3, 3))
                 .build();
         Producto producto13 = Producto.builder()
                 .nombre("Camiseta Manchester United 2008 CR7")
@@ -331,6 +346,7 @@ public class DataUtil {
                 .categoria("Ropa")
                 .precio((int)530000)
                 .estado(EstadoProducto.NO_AGREGADO)
+                .fechaPublicacion(LocalDate.of(2023, 4, 4))
                 .build();
 
         Publicacion publicacion1 = Publicacion.builder()
@@ -377,6 +393,7 @@ public class DataUtil {
                 .like(30)
                 .producto(producto11)
                 .build();
+
 
         Muro muro1 = new Muro();
         Muro muro2 = new Muro();
@@ -483,6 +500,7 @@ public class DataUtil {
         muro6.getPublicacionesActivas().add(publicacion9);
         muro7.getPublicacionesActivas().add(publicacion10);
         muro7.getPublicacionesActivas().add(publicacion11);
+
 
         return marketplaceObjeto;
     }

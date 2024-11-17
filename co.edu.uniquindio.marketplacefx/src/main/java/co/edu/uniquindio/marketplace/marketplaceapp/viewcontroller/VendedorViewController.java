@@ -213,12 +213,11 @@ public class VendedorViewController {
     }
 
     public void updateView(String cedula) {
-        lbVendedor.setText("Vendedor: "+cedula);
         VendedorDto vendedorDto = vendedorController.obtenerVendedorPorCedula(cedula);
         if (vendedorDto != null) {
-            System.out.println("Vendedor encontrado: " + vendedorDto.nombre() + " " + vendedorDto.apellido());
+            lbVendedor.setText("Vendedor: " + vendedorDto.nombre() + " " + vendedorDto.apellido());
         } else {
-            System.out.println("Vendedor no encontrado.");
+            mostrarMensaje(TITULO_VENDEDOR_NO_ENCONTRADO, HEADER, BODI_VENDEDOR_NO_ENCOTRADO, Alert.AlertType.ERROR);
         }
     }
 

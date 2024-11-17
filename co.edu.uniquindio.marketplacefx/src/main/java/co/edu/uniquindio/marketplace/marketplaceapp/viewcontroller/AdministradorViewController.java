@@ -1,21 +1,40 @@
 package co.edu.uniquindio.marketplace.marketplaceapp.viewcontroller;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
 
 import co.edu.uniquindio.marketplace.marketplaceapp.controller.AdministradorController;
 import co.edu.uniquindio.marketplace.marketplaceapp.controller.VendedorController;
 import co.edu.uniquindio.marketplace.marketplaceapp.mapping.dto.UsuarioDto;
 import co.edu.uniquindio.marketplace.marketplaceapp.mapping.dto.VendedorDto;
+import co.edu.uniquindio.marketplace.marketplaceapp.model.*;
+import co.edu.uniquindio.marketplace.marketplaceapp.utils.DataUtil;
+import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.layout.VBox;
+import javafx.stage.FileChooser;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
 import static co.edu.uniquindio.marketplace.marketplaceapp.utils.MarketplaceConstantes.*;
+
 
 public class AdministradorViewController {
 
@@ -27,6 +46,7 @@ public class AdministradorViewController {
 
     public void setMarketplaceAppController(MarketplaceAppController marketplaceAppController){
         this.marketplaceAppController = marketplaceAppController;
+        inicializarVista();
     }
 
     @FXML
@@ -102,6 +122,8 @@ public class AdministradorViewController {
 
     @FXML
     private TextField txtUsuario;
+    @FXML
+    private ToggleGroup tgSolicitud;
 
     @FXML
     void initialize() {
@@ -110,9 +132,131 @@ public class AdministradorViewController {
     }
 
     @FXML
-    void onActionExportarDatosAdministrador(ActionEvent event) {
+    void onExportarReporte(ActionEvent event) {
+
+        MarketplaceObjeto marketplace = DataUtil.inicializarDatos();
+        String rutaArchivo = "estadisticas.txt";
+
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(rutaArchivo))) {
+            writer.write("Estadísticas del Marketplace\n");
+            writer.write("Número de Vendedores: " + marketplace.getListaVendedores().size() + "\n");
+            writer.write("Productos Publicados:\n");
+
+            for (Vendedor vendedor : marketplace.getListaVendedores()) {
+                for (Producto producto : vendedor.getProductosAgregados()) {
+                    writer.write("- " + producto.getNombre() + " (" + producto.getEstado() + ")\n");
+                }
+            }
+
+            System.out.println("Archivo exportado en: " + rutaArchivo);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
 
     }
+    @FXML
+    void onActionMensajesEntreVendedores(ActionEvent event) {
+        manejarMensajesEntreVendedores();
+    }
+
+    private void manejarMensajesEntreVendedores() {
+
+
+    }
+
+    @FXML
+    void onActionProductosEntreFechas(ActionEvent event) {
+        manejarProductosEntreFechas();
+    }
+
+
+    private void manejarProductosEntreFechas() {
+        MarketplaceObjeto marketplace = DataUtil.inicializarDatos();
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/co/edu/uniquindio/marketplace/marketplaceapp/ProductosPublicadosFechas.fxml"));
+            Parent root = loader.load();
+
+            // Obtener el controlador y pasarle el marketplace
+            ProductosPublicadosFechasViewController controller = loader.getController();
+            controller.setMarketplace(marketplace);
+
+            // Crear una nueva escena
+            Stage stage = new Stage();
+            stage.setTitle("Productos Entre Fechas");
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+
+    }
+
+    @FXML
+    void onActionProductosPorVendedor(ActionEvent event) {
+        MarketplaceObjeto marketplace= DataUtil.inicializarDatos();
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/co/edu/uniquindio/marketplace/marketplaceapp/ProductosPorVendedor.fxml"));
+            Parent root = loader.load();
+
+            // Obtener el controlador y pasarle el marketplace
+            productosVendedorController controller = loader.getController();
+            controller.setMarketplace(marketplace);
+
+            // Crear una nueva escena
+            Stage stage = new Stage();
+            stage.setTitle("Productos por Vendedor");
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+
+
+    @FXML
+    void onActionContactosPorVendedor(ActionEvent event) {
+        manejarContactosPorVendedor(); // Implementar si es necesario
+    }
+
+    private void manejarContactosPorVendedor() {
+        
+    }
+
+    @FXML
+    void onActionTopProductosLikes(ActionEvent event) {
+        manejarTopProductosLike();
+    }
+
+    private void manejarTopProductosLike() {
+        MarketplaceObjeto marketplace = DataUtil.inicializarDatos();
+
+        List<Publicacion> publicacionesTop = marketplace.getListaVendedores().stream()
+                .flatMap(vendedor -> vendedor.getMuro().getPublicacionesActivas().stream())
+                .sorted((p1, p2) -> Integer.compare(p2.getLike(), p1.getLike())) // Descendente
+                .limit(10) // Mostrar los 10 mejores
+                .collect(Collectors.toList());
+
+        publicacionesTop.forEach(pub -> System.out.println(
+                "Producto: " + pub.getProducto().getNombre() + ", Likes: " + pub.getLike()
+        ));
+    }
+
+
+
+
+
+
+
+
+
+
+
+
 
     @FXML
     void onActualizarVendedor(ActionEvent event) {
@@ -137,6 +281,7 @@ public class AdministradorViewController {
     private void initView() {
         initDataBinding();
         obtenerVendedor();
+        configurarMarketplace();
         tableVendedor.getItems().clear();
         tableVendedor.setItems(listaVendedores);
         listenerSelection();
@@ -166,6 +311,7 @@ public class AdministradorViewController {
             mostrarInformacionVendedor(vendedorSeleccionado);
         });
     }
+
     private void actualizarVendedor(){
         VendedorDto vendedorDto = actualizarVendedorDto();
         if(datosValidos(vendedorDto)){
@@ -236,6 +382,20 @@ public class AdministradorViewController {
         }
     }
 
+    private void configurarMarketplace() {
+        Platform.runLater(() -> {
+            if (marketplaceAppController != null) {
+                inicializarVista();
+            }
+        });
+    }
+
+    private void inicializarVista() {
+        if (vendedorController == null) {
+            vendedorController = new VendedorController();
+        }
+        marketplaceAppController.crearTabsParaVendedoresExistentes(vendedorController);
+    }
 
     private void limpiarCampos() {
         txtNombre.setText("");

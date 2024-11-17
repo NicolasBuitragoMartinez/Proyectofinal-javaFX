@@ -5,6 +5,8 @@ import co.edu.uniquindio.marketplace.marketplaceapp.model.Producto;
 import co.edu.uniquindio.marketplace.marketplaceapp.model.Publicacion;
 import javafx.scene.image.Image;
 
+import java.time.LocalDate;
+
 public class ProductoBuilder {
     protected Publicacion publicacion;
     protected String nombre;
@@ -13,6 +15,7 @@ public class ProductoBuilder {
     protected String categoria;
     protected int precio;
     protected EstadoProducto estado;
+    protected LocalDate fechaPublicacion;
     public ProductoBuilder publicacion(Publicacion publicacion){
         this.publicacion = publicacion;
         return this;
@@ -41,12 +44,17 @@ public class ProductoBuilder {
         this.estado = estado;
         return this;
     }
+    public ProductoBuilder fechaPublicacion(LocalDate fechaPublicacion){
+        this.fechaPublicacion=fechaPublicacion;
+        return this;
+    }
     public Producto build(){
         return new Producto(nombre,
                 identificador,
                 imagen,
                 categoria,
                 precio,
-                estado);
+                estado,
+                fechaPublicacion);
     }
 }

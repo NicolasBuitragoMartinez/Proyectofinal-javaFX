@@ -1,0 +1,16 @@
+Estadísticas del Marketplace
+Número de Vendedores: 8
+Productos Publicados:
+- PlayStation5 (PUBLICADO)
+- iPhone 15 Pro Max (PUBLICADO)
+- Televisor Samsung (VENDIDO)
+- EA FC24 (VENDIDO)
+- Tarjeta grafica AMD Radeon (PUBLICADO)
+- Kia Rio (PUBLICADO)
+- NMax (VENDIDO)
+- PC gamer (VENDIDO)
+- Casa (PUBLICADO)
+- Comedor (VENDIDO)
+- Hot Wheels (PUBLICADO)
+- Camiseta Real Madrid (NO_AGREGADO)
+- Camiseta Manchester United 2008 CR7 (NO_AGREGADO)
