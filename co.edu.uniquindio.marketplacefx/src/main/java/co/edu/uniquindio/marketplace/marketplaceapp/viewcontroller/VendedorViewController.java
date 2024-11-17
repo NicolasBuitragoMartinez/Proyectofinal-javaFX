@@ -45,10 +45,19 @@ public class VendedorViewController {
     private Button btnActualizarProducto;
 
     @FXML
+    private Button btnAgregarComentario;
+
+    @FXML
+    private Button btnAgregarContactos;
+
+    @FXML
     private Button btnAgregarProducto;
 
     @FXML
     private Button btnEliminarProducto;
+
+    @FXML
+    private Button btnMeGusta;
 
     @FXML
     private Button btnNuevoProducto;
@@ -60,10 +69,34 @@ public class VendedorViewController {
     private ImageView ivProducto;
 
     @FXML
+    private ImageView ivProPublicado;
+
+    @FXML
     private Label lbVendedor;
 
     @FXML
+    private Label lbCategoriaProPublicado;
+
+    @FXML
+    private Label lbNombreProPublicado;
+
+    @FXML
+    private Label lbPrecioProPublicado;
+
+    @FXML
+    private Label lbReaccionesProPublicado;
+
+    @FXML
     private TableView<ProductoDto> tableProducto;
+
+    @FXML
+    private TableView<?> tableComentario;
+
+    @FXML
+    private TableView<?> tableContactos;
+
+    @FXML
+    private TableView<?> tableProductoPublicado;
 
     @FXML
     private TableColumn<ProductoDto, String> tcCategoriaProducto;
@@ -81,6 +114,24 @@ public class VendedorViewController {
     private TableColumn<ProductoDto, String> tcPrecioProducto;
 
     @FXML
+    private TableColumn<?, ?> tcCategoriaPublicacion;
+
+    @FXML
+    private TableColumn<?, ?> tcNombrePublicacion;
+
+    @FXML
+    private TableColumn<?, ?> tcPrecioPublicacion;
+
+    @FXML
+    private TableColumn<?, ?> tcNombreComentarista;
+
+    @FXML
+    private TableColumn<?, ?> tcTextoComentario;
+
+    @FXML
+    private TableColumn<?, ?> tcContactos;
+
+    @FXML
     private TextField txtCategoria;
 
     @FXML
@@ -93,10 +144,28 @@ public class VendedorViewController {
     private TextField txtPrecio;
 
     @FXML
+    private TextField txtComentario;
+
+    @FXML
     void initialize() {
         productoController = new ProductoController();
         vendedorController = new VendedorController();
         initView();
+    }
+
+    @FXML
+    void onActionAgregarComentario(ActionEvent event) {
+
+    }
+
+    @FXML
+    void onActionAgregarContactos(ActionEvent event) {
+
+    }
+
+    @FXML
+    void onActionMeGusta(ActionEvent event) {
+
     }
 
     @FXML
