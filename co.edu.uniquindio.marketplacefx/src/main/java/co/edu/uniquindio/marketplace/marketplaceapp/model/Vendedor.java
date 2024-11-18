@@ -2,13 +2,28 @@ package co.edu.uniquindio.marketplace.marketplaceapp.model;
 
 import co.edu.uniquindio.marketplace.marketplaceapp.model.builder.VendedorBuilder;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Set;
+
+import static javafx.scene.input.KeyCode.E;
 
 public class Vendedor extends Persona{
     private Muro muro;
     private List<Vendedor> vendedoresAliados;
+    private Set<Vendedor> aliados = new HashSet<>();
     private List<Producto> productosAgregados;
+
+
+    public void agregarAliado(Vendedor vendedor) {
+        if (aliados.size() < 10) {
+            aliados.add(vendedor);
+            vendedor.getAliados().add(aliados.add(vendedor));
+        }
+    }
+
+
     public Vendedor(String nombre,
                     String apellido,
                     String cedula,
@@ -34,9 +49,29 @@ public class Vendedor extends Persona{
     public void setVendedoresAliados(List<Vendedor> vendedoresAliados){
         this.vendedoresAliados = vendedoresAliados;
     }
-    public void setProductosAgregados(List<Producto> productosAgregados){
+    public List<Object> setProductosAgregados(List<Producto> productosAgregados){
         this.productosAgregados = productosAgregados;
+
+        return List.of();
     }
+    <E> List<E> getAliados() {
+        return List.of();
+    }
+
+    public <E> List<E> getProductos() {
+        return List.of();
+    }
+
+    /**
+    public void agregarAliado(Vendedor vendedor) {
+        if (aliados.size() < 10) {
+            aliados.add(vendedor);
+            vendedor.getAliados().add(aliados.add(vendedor));
+        }
+    }
+     */
+
+
     @Override
     public String toString() {
         return "Vendedor{" +

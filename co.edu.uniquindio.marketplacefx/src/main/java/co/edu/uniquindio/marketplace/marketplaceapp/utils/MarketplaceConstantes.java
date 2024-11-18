@@ -19,6 +19,7 @@ public class MarketplaceConstantes {
     public static final String TITULO_LOGIN_INCORRECTO = "Usuario no registrado";
     public static final String BODI_LOGIN_INCORRECTO = "El usuario es incorrecto o no ha sido registrado";
     public static final String TITULO_PRODUCTO_ACTUALIZADO = "Producto actualizado";
+    public static final String BODI_LOGIN_CORRECTO = "El usuario es correcto";
     public static final String BODI_PRODUCTO_ACTUALIZADO = "El producto se actualizo con éxito";
     public static final String TITULO_PRODUCTO_NO_ACTUALIZADO = "Producto no actualizado";
     public static final String BODI_PRODUCTO_NO_ACTUALIZADO = "El producto no se actualizo, ya que no existe";

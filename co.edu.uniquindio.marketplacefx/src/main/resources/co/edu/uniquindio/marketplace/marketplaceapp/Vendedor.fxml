@@ -17,10 +17,11 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="504.0" prefWidth="907.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.marketplace.marketplaceapp.viewcontroller.VendedorViewController">
+<AnchorPane prefHeight="504.0" prefWidth="907.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.marketplace.marketplaceapp.viewcontroller.VendedorViewController">
    <children>
-      <TabPane prefHeight="504.0" prefWidth="909.0" tabClosingPolicy="UNAVAILABLE">
-        <tabs>
+      <TabPane fx:id="tpVendedor" layoutX="58.0" prefHeight="504.0" prefWidth="909.0" tabClosingPolicy="UNAVAILABLE">
+           <tabs>
+
           <Tab text="Muro">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="450.0" prefWidth="701.0">

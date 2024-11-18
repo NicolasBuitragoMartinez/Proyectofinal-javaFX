@@ -87,6 +87,9 @@ public class VendedorViewController {
     private Label lbReaccionesProPublicado;
 
     @FXML
+    private TabPane tpVendedor;
+
+    @FXML
     private TableView<ProductoDto> tableProducto;
 
     @FXML
@@ -145,6 +148,7 @@ public class VendedorViewController {
 
     @FXML
     private TextField txtComentario;
+    private Vendedor vendedor;
 
     @FXML
     void initialize() {
@@ -224,8 +228,8 @@ public class VendedorViewController {
 
     private void actualizarProducto() {
         ProductoDto productoDto = actualizarProductoDto();
-        if(datosValidos(productoDto)){
-            if(productoController.actualizarProducto(productoDto)){
+        if (datosValidos(productoDto)) {
+            if (productoController.actualizarProducto(productoDto)) {
                 int index = listaProductos.indexOf(productoSeleccionado);
                 listaProductos.set(index, productoDto);
                 limpiarCampos();
@@ -240,8 +244,8 @@ public class VendedorViewController {
 
     private void agregarProducto() {
         ProductoDto productoDto = crearProductoDto();
-        if(datosValidos(productoDto)){
-            if(productoController.agregarProducto(productoDto)){
+        if (datosValidos(productoDto)) {
+            if (productoController.agregarProducto(productoDto)) {
                 listaProductos.addAll(productoDto);
                 limpiarCampos();
                 mostrarMensaje(TITULO_PRODUCTO_AGREGADO, HEADER, BODI_PRODUCTO_AGREGADO, Alert.AlertType.INFORMATION);
@@ -255,11 +259,11 @@ public class VendedorViewController {
 
     private void eliminarProducto() {
         ProductoDto productoDto = eliminarProductoDto();
-        if(productoDto == null || !datosValidos(productoDto)){
+        if (productoDto == null || !datosValidos(productoDto)) {
             mostrarMensaje(TITULO_INCOMPLETO, HEADER, BODY_INCOMPLETO, Alert.AlertType.WARNING);
             return;
         }
-        if(productoController.eliminarProducto(productoDto)){
+        if (productoController.eliminarProducto(productoDto)) {
             listaProductos.remove(productoSeleccionado);
             limpiarCampos();
             mostrarMensaje(TITULO_PRODUCTO_ELIMINADO, HEADER, BODI_PRODUCTO_ELIMINADO, Alert.AlertType.INFORMATION);
@@ -309,9 +313,9 @@ public class VendedorViewController {
 
     private boolean datosValidos(ProductoDto productoDto) {
         if (productoDto.nombre().isEmpty() ||
-            productoDto.identificador().isEmpty() ||
-            productoDto.categoria().isEmpty() ||
-            productoDto.precio() <= 0
+                productoDto.identificador().isEmpty() ||
+                productoDto.categoria().isEmpty() ||
+                productoDto.precio() <= 0
         ) {
             return false;
         } else {
@@ -319,7 +323,7 @@ public class VendedorViewController {
         }
     }
 
-    private void mostrarMensaje(String titulo, String header, String contenido, Alert.AlertType alertType){
+    private void mostrarMensaje(String titulo, String header, String contenido, Alert.AlertType alertType) {
         Alert alert = new Alert(alertType);
         alert.setTitle(titulo);
         alert.setHeaderText(header);
@@ -350,7 +354,7 @@ public class VendedorViewController {
     }
 
     private ProductoDto eliminarProductoDto() {
-        if(productoSeleccionado == null){
+        if (productoSeleccionado == null) {
             return null;
         }
         return new ProductoDto(
@@ -364,11 +368,11 @@ public class VendedorViewController {
     }
 
     private void mostrarInformacionProducto(ProductoDto productoSeleccionado) {
-        if(productoSeleccionado != null){
-          txtNombreProducto.setText(productoSeleccionado.nombre());
-          txtIdentificador.setText(productoSeleccionado.identificador());
-          txtCategoria.setText(productoSeleccionado.categoria());
-          txtPrecio.setText(String.valueOf(productoSeleccionado.precio()));
+        if (productoSeleccionado != null) {
+            txtNombreProducto.setText(productoSeleccionado.nombre());
+            txtIdentificador.setText(productoSeleccionado.identificador());
+            txtCategoria.setText(productoSeleccionado.categoria());
+            txtPrecio.setText(String.valueOf(productoSeleccionado.precio()));
         }
     }
 
@@ -379,4 +383,40 @@ public class VendedorViewController {
             ivProducto.setImage(null);
         }
     }
+
+    public void setVendedor(Vendedor vendedor) {
+
+
+        this.vendedor = vendedor;
+    }
+
+    public void seleccionarPestanaVendedor(Vendedor vendedor) {
+
+
+        for (Tab tab : tpVendedor.getTabs()) {
+
+
+            if (tab.getText().equals(vendedor.getNombre())) {
+                tpVendedor.getSelectionModel().select(tab);
+
+                break;
+            }
+        }
+    }
+
 }
+
+
+/**
+    comboBox.setOnAction(event -> {
+        String seleccion = comboBox.getValue();
+        try {
+            cambiarEstrategia(seleccion);
+            System.out.println("Estrategia cambiada a: " + seleccion);
+        } catch (IllegalArgumentException ex) {
+            System.err.println("Error: " + ex.getMessage());
+        }
+    });
+}
+ */
+

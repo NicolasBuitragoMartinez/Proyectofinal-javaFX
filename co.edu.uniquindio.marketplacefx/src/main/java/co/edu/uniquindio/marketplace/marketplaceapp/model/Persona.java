@@ -38,4 +38,12 @@ public abstract class Persona {
                 ", usuario=" + usuario +
                 '}';
     }
+
+    public Object getContrasena() {
+        return null;
+    }
+
+    public Object getUsername() {
+        return null;
+    }
 }

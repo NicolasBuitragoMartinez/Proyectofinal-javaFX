@@ -5,6 +5,7 @@ import co.edu.uniquindio.marketplace.marketplaceapp.mapping.dto.UsuarioDto;
 import co.edu.uniquindio.marketplace.marketplaceapp.mapping.dto.VendedorDto;
 import co.edu.uniquindio.marketplace.marketplaceapp.mapping.mappers.MarketplaceMappingImpl;
 import co.edu.uniquindio.marketplace.marketplaceapp.model.MarketplaceObjeto;
+import co.edu.uniquindio.marketplace.marketplaceapp.model.Persona;
 import co.edu.uniquindio.marketplace.marketplaceapp.service.IModelFactoryService;
 import co.edu.uniquindio.marketplace.marketplaceapp.service.IMarketplaceMapping;
 import co.edu.uniquindio.marketplace.marketplaceapp.utils.DataUtil;
@@ -70,5 +71,9 @@ public class ModelFactory implements IModelFactoryService {
     @Override
     public boolean actualizarProducto(ProductoDto productoDto) {
         return marketplaceObjeto.actualizarProducto(mapper.productoDtoToProducto(productoDto));
+    }
+
+    public Persona validarUsuario(String username, String contrasena) throws Exception{
+        return marketplaceObjeto.validarUsuario(username, contrasena);
     }
 }

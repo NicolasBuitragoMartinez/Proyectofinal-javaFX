@@ -8,6 +8,7 @@ import co.edu.uniquindio.marketplace.marketplaceapp.controller.AdministradorCont
 import co.edu.uniquindio.marketplace.marketplaceapp.controller.VendedorController;
 import co.edu.uniquindio.marketplace.marketplaceapp.mapping.dto.UsuarioDto;
 import co.edu.uniquindio.marketplace.marketplaceapp.mapping.dto.VendedorDto;
+import co.edu.uniquindio.marketplace.marketplaceapp.model.Vendedor;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -253,6 +254,7 @@ public class AdministradorViewController {
             vendedorController = new VendedorController();
         }
         marketplaceAppController.crearTabsParaVendedoresExistentes(vendedorController);
+
     }
 
     private void limpiarCampos() {
@@ -324,14 +326,19 @@ public class AdministradorViewController {
         }
     }
 
+
     private void mostrarInformacionVendedor(VendedorDto vendedorSeleccionado) {
+
         if(vendedorSeleccionado != null){
+
             txtNombre.setText(vendedorSeleccionado.nombre());
             txtApellido.setText(vendedorSeleccionado.apellido());
             txtCedula.setText(vendedorSeleccionado.cedula());
             txtDireccion.setText(vendedorSeleccionado.direccion());
             txtUsuario.setText(vendedorSeleccionado.usuario().userName());
             txtContraseña.setText(vendedorSeleccionado.usuario().password());
+
+            marketplaceAppController.obtenerTabVendedor(vendedorController.toString());
         }
     }
 

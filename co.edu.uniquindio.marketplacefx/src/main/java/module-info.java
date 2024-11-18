@@ -12,4 +12,7 @@ module co.edu.uniquindio.marketplace.marketplaceapp {
 
     opens co.edu.uniquindio.marketplace.marketplaceapp.viewcontroller;
     exports co.edu.uniquindio.marketplace.marketplaceapp.viewcontroller;
+
+    opens co.edu.uniquindio.marketplace.marketplaceapp.model.builder;
+    exports co.edu.uniquindio.marketplace.marketplaceapp.model.builder;
 }
