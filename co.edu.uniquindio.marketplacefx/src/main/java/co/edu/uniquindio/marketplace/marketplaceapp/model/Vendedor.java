@@ -1,19 +1,20 @@
 package co.edu.uniquindio.marketplace.marketplaceapp.model;
 
-import co.edu.uniquindio.marketplace.marketplaceapp.model.builder.VendedorBuilder;
+import co.edu.uniquindio.marketplace.marketplaceapp.patrones.builder.VendedorBuilder;
 
 import java.util.HashSet;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Set;
 
-import static javafx.scene.input.KeyCode.E;
-
 public class Vendedor extends Persona{
     private Muro muro;
     private List<Vendedor> vendedoresAliados;
     private Set<Vendedor> aliados = new HashSet<>();
     private List<Producto> productosAgregados;
+
+    public Vendedor(String juan, String number, String direcciónX) {
+    }
 
 
     public void agregarAliado(Vendedor vendedor) {

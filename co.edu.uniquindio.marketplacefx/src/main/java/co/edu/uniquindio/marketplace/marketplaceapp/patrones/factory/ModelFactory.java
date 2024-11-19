@@ -1,4 +1,4 @@
-package co.edu.uniquindio.marketplace.marketplaceapp.factory;
+package co.edu.uniquindio.marketplace.marketplaceapp.patrones.factory;
 
 import co.edu.uniquindio.marketplace.marketplaceapp.mapping.dto.ProductoDto;
 import co.edu.uniquindio.marketplace.marketplaceapp.mapping.dto.UsuarioDto;
@@ -80,6 +80,8 @@ public class ModelFactory implements IModelFactoryService {
     public Persona validarUsuario(String username, String contrasena) throws Exception{
         return marketplaceObjeto.validarUsuario(username, contrasena);
     }
+
+
 
 
     public void mostrarProductoConDecoradores() {

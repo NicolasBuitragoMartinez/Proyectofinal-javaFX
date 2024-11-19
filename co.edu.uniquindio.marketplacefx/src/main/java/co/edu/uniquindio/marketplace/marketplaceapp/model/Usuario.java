@@ -1,6 +1,6 @@
 package co.edu.uniquindio.marketplace.marketplaceapp.model;
 
-import co.edu.uniquindio.marketplace.marketplaceapp.model.builder.UsuarioBuilder;
+import co.edu.uniquindio.marketplace.marketplaceapp.patrones.builder.UsuarioBuilder;
 
 import java.util.HashMap;
 import java.util.Map;

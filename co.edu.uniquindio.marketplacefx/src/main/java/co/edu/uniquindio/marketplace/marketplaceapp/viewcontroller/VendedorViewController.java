@@ -77,6 +77,13 @@ public class VendedorViewController {
     private Label lbVendedor;
 
     @FXML
+    private RadioButton rbtGarantiaExt;
+
+    @FXML
+    private RadioButton rbtPromocion;
+
+
+    @FXML
     private Label lbCategoriaProPublicado;
 
     @FXML
@@ -157,6 +164,17 @@ public class VendedorViewController {
         productoController = new ProductoController();
         vendedorController = new VendedorController();
         initView();
+    }
+
+
+    @FXML
+    void onActionGarantiaExt(ActionEvent event) {
+
+    }
+
+    @FXML
+    void onActionPromocion(ActionEvent event) {
+
     }
 
     @FXML
@@ -381,6 +399,9 @@ public class VendedorViewController {
 
     public void mostrarProductoConDecoradores(ProductoDto productoSeleccionado) {
         this.productoSeleccionado = productoSeleccionado;
+        if (productoSeleccionado != null){
+
+        }
         Producto productoBase = new ProductoBase("Laptop Gaming", 1200.0);
 
         Producto productoConGarantia = new GarantiaExtendidaDecorator(productoBase);

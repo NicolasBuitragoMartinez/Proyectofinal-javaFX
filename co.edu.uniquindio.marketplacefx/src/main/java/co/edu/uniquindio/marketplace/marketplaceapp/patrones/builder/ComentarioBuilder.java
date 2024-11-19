@@ -1,4 +1,4 @@
-package co.edu.uniquindio.marketplace.marketplaceapp.model.builder;
+package co.edu.uniquindio.marketplace.marketplaceapp.patrones.builder;
 
 import co.edu.uniquindio.marketplace.marketplaceapp.model.Comentario;
 

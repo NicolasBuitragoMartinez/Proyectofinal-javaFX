@@ -1,10 +1,7 @@
-package co.edu.uniquindio.marketplace.marketplaceapp.model.builder;
+package co.edu.uniquindio.marketplace.marketplaceapp.patrones.builder;
 
-import co.edu.uniquindio.marketplace.marketplaceapp.model.Comentario;
 import co.edu.uniquindio.marketplace.marketplaceapp.model.Producto;
 import co.edu.uniquindio.marketplace.marketplaceapp.model.Publicacion;
-
-import java.util.List;
 
 public class PublicacionBuilder {
     protected int like;

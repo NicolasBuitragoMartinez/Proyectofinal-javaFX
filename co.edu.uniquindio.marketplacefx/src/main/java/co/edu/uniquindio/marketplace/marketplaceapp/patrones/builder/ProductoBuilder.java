@@ -1,4 +1,4 @@
-package co.edu.uniquindio.marketplace.marketplaceapp.model.builder;
+package co.edu.uniquindio.marketplace.marketplaceapp.patrones.builder;
 
 import co.edu.uniquindio.marketplace.marketplaceapp.constants.EstadoProducto;
 import co.edu.uniquindio.marketplace.marketplaceapp.model.Producto;
@@ -47,6 +47,11 @@ public class ProductoBuilder {
                 imagen,
                 categoria,
                 precio,
-                estado);
+                estado) {
+            @Override
+            public String getDetalles() {
+                return "";
+            }
+        };
     }
 }

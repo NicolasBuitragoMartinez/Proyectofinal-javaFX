@@ -5,10 +5,10 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import co.edu.uniquindio.marketplace.marketplaceapp.MarketplaceApplication;
-import co.edu.uniquindio.marketplace.marketplaceapp.factory.ModelFactory;
+import co.edu.uniquindio.marketplace.marketplaceapp.patrones.factory.ModelFactory;
 import co.edu.uniquindio.marketplace.marketplaceapp.model.MarketplaceObjeto;
+import co.edu.uniquindio.marketplace.marketplaceapp.patrones.proxy.SesionUsuario;
 import co.edu.uniquindio.marketplace.marketplaceapp.utils.DataUtil;
-import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -57,51 +57,26 @@ public class LoginViewController {
 
         if (marketplaceObjeto.getAdministrador().getUsuario().getUserName().equals(username) &&
                 marketplaceObjeto.getAdministrador().getUsuario().getPassword().equals(password)) {
+            SesionUsuario.setRolActual("ADMINISTRADOR");
             authenticated = true;
             cerrarVentana();
             abrirVentana("Administrador.fxml");
-            return;
+
         }
         marketplaceObjeto.getListaVendedores().stream()
                 .filter(v -> v.getUsuario().getUserName().equals(username) &&
                         v.getUsuario().getPassword().equals(password))
                 .findFirst()
                 .ifPresentOrElse(vendedor -> {
-                    // Acciones cuando el vendedor existe
+                    SesionUsuario.setRolActual("VENDEDOR");
                     authenticated = true;
-
                     cerrarVentana();
                     abrirVentana("Vendedor.fxml");
 
-                    Platform.runLater(() -> {
-                        if (tabPane != null) {
-                            // Obtener o agregar el tab correspondiente al vendedor
-                            Tab adminTab = obtenerTabVendedor(vendedor.getCedula());
-                            if (adminTab != null) {
-                                tabPane.getSelectionModel().select(adminTab);
-                            } else {
-                                agregarTabVendedor(vendedor.getCedula());
-                            }
-                        }
-                    });
-
-                    // Mostrar mensaje después de configurar el tab
                     mostrarMensaje(BODI_LOGIN_CORRECTO, Alert.AlertType.INFORMATION);
-                }, () -> {
-                    // Acciones cuando el vendedor no existe
-                    mostrarMensaje("Usuario o contraseña incorrectos.", Alert.AlertType.ERROR);
+                }, () ->{
+
                 });
-
-
-
-    }
-
-
-    private void agregarTabVendedor(String cedula) {
-    }
-
-    private ProxySelector getSelectionModel() {
-        return null;
     }
 
     public void abrirVentana(String ventana) {
@@ -114,7 +89,7 @@ public class LoginViewController {
             Stage stage = new Stage();
 
             Scene scene = new Scene(fxmlLoader.load());
-            stage.setTitle("Marketplace App");
+            stage.setTitle("Marketplace");
             stage.setScene(scene);
             stage.show();
         } catch (Exception e) {
@@ -138,53 +113,9 @@ public class LoginViewController {
         return authenticated;
     }
 
-    private Tab obtenerTabVendedor(String cedula){
-
-        return null;
-    }
-    
 
 
 }
 
 
-/**
-    @FXML
-    void initialize() {
-        sugerenciaPista();
-    }
 
-    private void sugerenciaPista() {
-        txtUsuario.setPromptText("Ingrese el usuario...");
-        txtContraseña.setPromptText("Ingrese la contraseña...");
-    }
-
-
-
-
-}
-
-
-/**
- String username = txtUsuario.getText();
- String password = txtContraseña.getText();
-
- MarketplaceObjeto marketplaceObjeto = DataUtil.inicializarDatos();
-
-
- if (marketplaceObjeto.getAdministrador().getUsuario().getUserName().equals(username) &&
- marketplaceObjeto.getAdministrador().getUsuario().getPassword().equals(password)) {
- authenticated = true;
- cerrarVentana();
- return;
- }
-
- for (Vendedor vendedor : marketplaceObjeto.getListaVendedores()) {
- if (vendedor.getUsuario().getUserName().equals(username) &&
- vendedor.getUsuario().getPassword().equals(password)) {
- authenticated = true;
- cerrarVentana();
- return;
- }
- }
- */

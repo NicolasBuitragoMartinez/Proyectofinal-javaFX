@@ -19,42 +19,43 @@
 
 <AnchorPane prefHeight="504.0" prefWidth="907.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.marketplace.marketplaceapp.viewcontroller.VendedorViewController">
    <children>
-      <TabPane fx:id="tpVendedor" layoutX="58.0" prefHeight="504.0" prefWidth="909.0" tabClosingPolicy="UNAVAILABLE">
+      <TabPane fx:id="tpVendedor" layoutX="87.0" prefHeight="504.0" prefWidth="909.0" tabClosingPolicy="UNAVAILABLE">
            <tabs>
 
           <Tab text="Muro">
             <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="450.0" prefWidth="701.0">
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="475.0" prefWidth="963.0">
                      <children>
                         <Label layoutX="14.0" layoutY="-3.0" text="Productos publicados">
                            <font>
                               <Font size="22.0" />
-                           </font></Label>
+                           </font>
+                        </Label>
                         <Separator layoutX="15.0" layoutY="31.0" prefHeight="6.0" prefWidth="861.0" />
                         <Label fx:id="lbVendedor" layoutX="233.0" layoutY="4.0" prefHeight="24.0" prefWidth="405.0" text="Perfil:">
                            <font>
                               <Font name="Arial Bold Italic" size="12.0" />
                            </font>
                         </Label>
-                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#d0d0d0" height="206.0" layoutX="22.0" layoutY="257.0" nodeOrientation="RIGHT_TO_LEFT" opacity="0.14" stroke="BLACK" strokeType="INSIDE" width="456.0" />
-                        <TableView fx:id="tableProductoPublicado" layoutX="33.0" layoutY="264.0" prefHeight="191.0" prefWidth="433.0">
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#d0d0d0" height="152.0" layoutX="10.0" layoutY="304.0" nodeOrientation="RIGHT_TO_LEFT" opacity="0.14" stroke="BLACK" strokeType="INSIDE" width="479.0" />
+                        <TableView fx:id="tableProductoPublicado" layoutX="12.0" layoutY="305.0" prefHeight="150.0" prefWidth="475.0">
                            <columns>
                               <TableColumn fx:id="tcNombrePublicacion" prefWidth="145.0" text="Nombre" />
                               <TableColumn fx:id="tcPrecioPublicacion" prefWidth="145.0" text="Precio " />
                               <TableColumn fx:id="tcCategoriaPublicacion" prefWidth="145.0" text="Categoria " />
                            </columns>
                         </TableView>
-                        <Label fx:id="lbNombreProPublicado" layoutX="42.0" layoutY="59.0" prefHeight="21.0" prefWidth="201.0" text="Nombre: ">
+                        <Label fx:id="lbNombreProPublicado" layoutX="44.0" layoutY="46.0" prefHeight="21.0" prefWidth="201.0" text="Nombre: ">
                            <font>
                               <Font name="System Italic" size="15.0" />
                            </font>
                         </Label>
-                        <Label fx:id="lbCategoriaProPublicado" layoutX="42.0" layoutY="108.0" prefHeight="21.0" prefWidth="205.0" text="Categoria:">
+                        <Label fx:id="lbCategoriaProPublicado" layoutX="42.0" layoutY="83.0" prefHeight="21.0" prefWidth="205.0" text="Categoria:">
                            <font>
                               <Font name="System Italic" size="15.0" />
                            </font>
                         </Label>
-                        <Label fx:id="lbPrecioProPublicado" layoutX="42.0" layoutY="158.0" prefHeight="21.0" prefWidth="213.0" text="Precio:">
+                        <Label fx:id="lbPrecioProPublicado" layoutX="44.0" layoutY="121.0" prefHeight="21.0" prefWidth="213.0" text="Precio:">
                            <font>
                               <Font name="System Italic" size="15.0" />
                            </font>
@@ -67,7 +68,7 @@
                               <Image url="@../../../../../images/Captura de pantalla 2024-11-17 011217.png" />
                            </image>
                         </ImageView>
-                        <Label fx:id="lbReaccionesProPublicado" layoutX="42.0" layoutY="206.0" prefHeight="21.0" prefWidth="209.0" text="Reacciones: ">
+                        <Label fx:id="lbReaccionesProPublicado" layoutX="40.0" layoutY="160.0" prefHeight="21.0" prefWidth="209.0" text="Reacciones: ">
                            <font>
                               <Font name="System Italic" size="15.0" />
                            </font>
@@ -107,6 +108,8 @@
                               <Image url="@../../../../../images/Captura de pantalla 2024-11-17 020305.png" />
                            </image>
                         </ImageView>
+                        <RadioButton fx:id="rbtPromocion" layoutX="32.0" layoutY="208.0" mnemonicParsing="false" onAction="#onActionPromocion" text="Promoción" />
+                        <RadioButton fx:id="rbtGarantiaExt" layoutX="32.0" layoutY="249.0" mnemonicParsing="false" onAction="#onActionGarantiaExt" text="Garantía extendida" />
                      </children>
                   </AnchorPane>
             </content>
