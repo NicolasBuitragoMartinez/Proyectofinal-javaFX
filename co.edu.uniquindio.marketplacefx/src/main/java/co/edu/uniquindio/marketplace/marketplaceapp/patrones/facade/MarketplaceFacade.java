@@ -5,6 +5,8 @@ import co.edu.uniquindio.marketplace.marketplaceapp.model.Producto;
 import co.edu.uniquindio.marketplace.marketplaceapp.model.Usuario;
 import co.edu.uniquindio.marketplace.marketplaceapp.model.Vendedor;
 import co.edu.uniquindio.marketplace.marketplaceapp.patrones.strategy.TransaccionAliadosDirectos;
+import co.edu.uniquindio.marketplace.marketplaceapp.patrones.strategy.TransaccionPorCategoria;
+import co.edu.uniquindio.marketplace.marketplaceapp.service.IStrategyTransaccion;
 
 public class MarketplaceFacade {
 
@@ -12,6 +14,23 @@ public class MarketplaceFacade {
     private Vendedor vendedor;
     private Usuario autenticacion;
     private TransaccionAliadosDirectos IStrategyTransaccion;
+
+    private IStrategyTransaccion strategyTransaccion;
+
+    public void setStrategyTransaccion(IStrategyTransaccion strategyTransaccion) {
+        this.strategyTransaccion = strategyTransaccion;
+    }
+    public void procesarTransaccion() {
+
+
+        if (strategyTransaccion == null) {
+
+
+            throw new IllegalStateException("No se ha configurado una estrategia de transacción.");
+        }
+        strategyTransaccion.ejecutarTransaccion();
+    }
+
 
     public MarketplaceFacade() {
 
@@ -68,5 +87,9 @@ public class MarketplaceFacade {
 
     public boolean autenticar(String usuario, String contrasena) {
         return false;
+    }
+
+
+    public void setEstrategiaTransaccion(TransaccionPorCategoria transaccionPorCategoria) {
     }
 }

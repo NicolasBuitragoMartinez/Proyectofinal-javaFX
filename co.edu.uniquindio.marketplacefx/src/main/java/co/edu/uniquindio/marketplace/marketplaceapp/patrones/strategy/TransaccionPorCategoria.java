@@ -15,8 +15,16 @@ public class TransaccionPorCategoria implements IStrategyTransaccion {
 
     private List<String> categoriasPermitidas;
 
+
     public TransaccionPorCategoria(List<String> categoriasPermitidas) {
         this.categoriasPermitidas = categoriasPermitidas;
+    }
+
+    @Override
+    public void ejecutarTransaccion() {
+        System.out.println("Ejecutando transacción por categorías: " + String.join(", ", categoriasPermitidas));
+
+
     }
 
     @Override

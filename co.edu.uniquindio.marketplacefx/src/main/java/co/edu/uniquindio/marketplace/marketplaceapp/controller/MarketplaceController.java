@@ -8,6 +8,7 @@ import co.edu.uniquindio.marketplace.marketplaceapp.patrones.facade.MarketplaceF
 import co.edu.uniquindio.marketplace.marketplaceapp.model.MarketplaceObjeto;
 import co.edu.uniquindio.marketplace.marketplaceapp.patrones.proxy.MarketplaceProxy;
 import co.edu.uniquindio.marketplace.marketplaceapp.patrones.strategy.TransaccionAliadosDirectos;
+import co.edu.uniquindio.marketplace.marketplaceapp.patrones.strategy.TransaccionPorCategoria;
 import co.edu.uniquindio.marketplace.marketplaceapp.patrones.strategy.TransaccionPorIntercambio;
 import co.edu.uniquindio.marketplace.marketplaceapp.service.IMarketplaceServiceImpl;
 import co.edu.uniquindio.marketplace.marketplaceapp.service.IStrategyTransaccion;
@@ -70,13 +71,14 @@ public class MarketplaceController {
 
             case "Por Categoría":
                 List<String> categorias = Arrays.asList("Electrónica", "Juguetes");
-                facade.setEstrategiaTransaccion(new TransaccionAliadosDirectos());
+                facade.setEstrategiaTransaccion(new TransaccionPorCategoria(categorias));
                 break;
 
             default:
                 throw new IllegalArgumentException("Tipo de estrategia no válida: " + tipoEstrategia);
         }
     }
+
 
     public boolean realizarTransaccion(String usuarioVendedor1,
                                                String usuarioVendedor2,
