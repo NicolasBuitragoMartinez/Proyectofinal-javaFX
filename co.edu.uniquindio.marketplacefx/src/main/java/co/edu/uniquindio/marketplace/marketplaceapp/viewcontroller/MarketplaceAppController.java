@@ -2,9 +2,6 @@ package co.edu.uniquindio.marketplace.marketplaceapp.viewcontroller;
 
 import co.edu.uniquindio.marketplace.marketplaceapp.controller.VendedorController;
 import co.edu.uniquindio.marketplace.marketplaceapp.mapping.dto.VendedorDto;
-import co.edu.uniquindio.marketplace.marketplaceapp.model.Administrador;
-import co.edu.uniquindio.marketplace.marketplaceapp.model.Usuario;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -112,7 +109,7 @@ public class MarketplaceAppController {
             e.printStackTrace();
         }
     }
-    public void eliminarTabVendedor(String cedula){
+    public void eliminarTabVendedor(String cedula) {
         if (cedula == null || cedula.isEmpty()) {
             mostrarMensaje(TITULO_CEDULA_VACIA, HEADER, BODI_CEDULA_VACIA, Alert.AlertType.WARNING);
             return;
@@ -120,7 +117,7 @@ public class MarketplaceAppController {
 
         Tab tabToRemove = null;
         for (Tab tab : tabPane.getTabs()) {
-            if (cedula.equals(tab.getText())) {
+            if (cedula.equals(tab.getId())) {
                 tabToRemove = tab;
                 break;
             }
@@ -130,6 +127,7 @@ public class MarketplaceAppController {
             tabPane.getTabs().remove(tabToRemove);
         }
     }
+
     public void crearTabsParaVendedoresExistentes(VendedorController vendedorController) {
         List<VendedorDto> listaVendedores = vendedorController.obtenerVendedores();
         if (listaVendedores == null || listaVendedores.isEmpty()) {
@@ -176,21 +174,5 @@ public class MarketplaceAppController {
         alert.setHeaderText(header);
         alert.setContentText(contenido);
         alert.showAndWait();
-    }
-
-    public void onActionExportarDatosAdministrador(ActionEvent event) {
-    }
-
-    public void onAgregarVendedor(ActionEvent event) {
-    }
-
-    public void onNuevoVendedor(ActionEvent event) {
-    }
-
-    public void onActualizarVendedor(ActionEvent event) {
-    }
-
-    public void onEliminarVendedor(ActionEvent event) {
-
     }
 }

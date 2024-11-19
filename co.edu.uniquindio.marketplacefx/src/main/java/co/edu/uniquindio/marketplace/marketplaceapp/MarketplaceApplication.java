@@ -1,7 +1,6 @@
 package co.edu.uniquindio.marketplace.marketplaceapp;
 
 import co.edu.uniquindio.marketplace.marketplaceapp.model.Vendedor;
-import co.edu.uniquindio.marketplace.marketplaceapp.patrones.proxy.ProxyVendedorController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;

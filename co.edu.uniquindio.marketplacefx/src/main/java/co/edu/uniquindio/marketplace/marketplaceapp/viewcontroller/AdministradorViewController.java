@@ -8,8 +8,6 @@ import co.edu.uniquindio.marketplace.marketplaceapp.controller.AdministradorCont
 import co.edu.uniquindio.marketplace.marketplaceapp.controller.VendedorController;
 import co.edu.uniquindio.marketplace.marketplaceapp.mapping.dto.UsuarioDto;
 import co.edu.uniquindio.marketplace.marketplaceapp.mapping.dto.VendedorDto;
-import co.edu.uniquindio.marketplace.marketplaceapp.patrones.proxy.ProxyVendedorController;
-import co.edu.uniquindio.marketplace.marketplaceapp.patrones.proxy.SesionUsuario;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -111,21 +109,6 @@ public class AdministradorViewController {
     void initialize() {
         vendedorController = new VendedorController();
         initView();
-        ejecutarAccionesProxy();
-
-        if (SesionUsuario.getRolActual() == null) {
-            SesionUsuario.setRolActual("VENDEDOR");
-        }
-
-        verificarPermisos();
-    }
-
-    private void verificarPermisos() {
-        if (!"ADMIN".equals(SesionUsuario.getRolActual())) {
-            btnEliminarVendedor.setDisable(true);
-            btnAgregarVendedor.setDisable(true);
-        }
-
     }
 
     @FXML
@@ -233,32 +216,32 @@ public class AdministradorViewController {
     }
 
     private void eliminarVendedor() {
-        String rolActual = SesionUsuario.getRolActual();
+        String nombre = txtNombre.getText();
+        String apellido = txtApellido.getText();
+        String cedula = txtCedula.getText();
+        String direccion = txtDireccion.getText();
+        String correo = txtUsuario.getText();
+        String contraseña = txtContraseña.getText();
 
-        ProxyVendedorController proxy = new ProxyVendedorController(rolActual);
+        UsuarioDto usuarioDto = new UsuarioDto(correo, contraseña);
 
-        VendedorDto vendedorSeleccionado = tableVendedor.getSelectionModel().getSelectedItem();
+        if (nombre != null && !nombre.isEmpty() && cedula != null && !cedula.isEmpty() &&
+                direccion != null && !direccion.isEmpty()) {
 
-        if (vendedorSeleccionado != null) {
-            try {
-                proxy.eliminarVendedor(vendedorSeleccionado.cedula(), vendedorSeleccionado);
-                tableVendedor.getItems().remove(vendedorSeleccionado);
-            } catch (SecurityException e) {
-                mostrarAlerta("Acceso Denegado", e.getMessage());
+            VendedorDto vendedorDto = new VendedorDto(nombre, apellido, cedula, direccion, usuarioDto);
+
+            if (vendedorController.eliminarVendedor(cedula, vendedorDto)) {
+                marketplaceAppController.eliminarTabVendedor(cedula);
+                listaVendedores.remove(vendedorDto);
+                limpiarCampos();
+                mostrarMensaje(TITULO_VENDEDOR_ELIMINADO, HEADER, BODI_VENDEDOR_ELIMINADO, Alert.AlertType.INFORMATION);
+            } else {
+                mostrarMensaje(TITULO_VENDEDOR_NO_ELIMINADO, HEADER, BODI_VENDEDOR_NO_ELIMINADO, Alert.AlertType.ERROR);
             }
         } else {
-            mostrarAlerta("Error", "Por favor, seleccione un vendedor de la lista.");
+            mostrarMensaje(TITULO_INCOMPLETO, HEADER, BODY_INCOMPLETO, Alert.AlertType.WARNING);
         }
     }
-
-    private void mostrarAlerta(String titulo, String mensaje) {
-        Alert alerta = new Alert(Alert.AlertType.WARNING);
-        alerta.setTitle(titulo);
-        alerta.setContentText(mensaje);
-        alerta.showAndWait();
-    }
-
-
 
     private void configurarMarketplace() {
         Platform.runLater(() -> {
@@ -267,7 +250,6 @@ public class AdministradorViewController {
             }
         });
     }
-
 
     private void inicializarVista() {
         if (vendedorController == null) {
@@ -346,7 +328,6 @@ public class AdministradorViewController {
         }
     }
 
-
     private void mostrarInformacionVendedor(VendedorDto vendedorSeleccionado) {
 
         if(vendedorSeleccionado != null){
@@ -369,35 +350,6 @@ public class AdministradorViewController {
         alert.setHeaderText(header);
         alert.setContentText(contenido);
         alert.showAndWait();
-    }
-
-    private boolean mostrarMensajeConfirmacion(String mensaje){
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setHeaderText(null);
-        alert.setTitle("Confirmación");
-        alert.setContentText(mensaje);
-        Optional<ButtonType> action = alert.showAndWait();
-        if (action.get() == ButtonType.OK){
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-
-    public void ejecutarAccionesProxy() {
-        ProxyVendedorController proxy = new ProxyVendedorController(SesionUsuario.getRolActual());
-
-        if ("ADMIN".equals(SesionUsuario.getRolActual())) {
-
-            UsuarioDto usuario = new UsuarioDto("Juan_B", "1094JUAN");
-            proxy.agregarVendedor(new VendedorDto("Luis", "Díaz", "1073",
-                    "Cali", usuario));
-            System.out.println("Vendedor agregado correctamente por ADMIN.");
-        } else if ("VENDEDOR".equals(SesionUsuario.getRolActual())) {
-            proxy.eliminarVendedor("1234", vendedorSeleccionado);
-            System.out.println("Intento de eliminar vendedor realizado por VENDEDOR.");
-        }
     }
 
 }

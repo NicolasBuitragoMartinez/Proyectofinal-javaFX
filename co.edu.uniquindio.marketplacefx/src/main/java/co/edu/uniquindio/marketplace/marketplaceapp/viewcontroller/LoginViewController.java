@@ -79,6 +79,7 @@ public class LoginViewController {
                 return;
             }
         }
+        mostrarMensaje(TITULO_LOGIN_INCORRECTO, HEADER, BODI_LOGIN_INCORRECTO, Alert.AlertType.WARNING);
     }
 
     private ProxySelector getSelectionModel() {
@@ -94,11 +95,13 @@ public class LoginViewController {
         return authenticated;
     }
 
-    private Tab obtenerTabVendedor(String cedula){
-
-        return null;
+    private void mostrarMensaje(String titulo, String header, String contenido,
+                                Alert.AlertType alertType){
+        Alert alert = new Alert(alertType);
+        alert.setTitle(titulo);
+        alert.setHeaderText(header);
+        alert.setContentText(contenido);
+        alert.showAndWait();
     }
-    
-
 
 }

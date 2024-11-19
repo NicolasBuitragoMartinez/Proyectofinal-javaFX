@@ -2,11 +2,9 @@ package co.edu.uniquindio.marketplace.marketplaceapp.controller;
 
 import co.edu.uniquindio.marketplace.marketplaceapp.patrones.factory.ModelFactory;
 import co.edu.uniquindio.marketplace.marketplaceapp.mapping.dto.VendedorDto;
-import co.edu.uniquindio.marketplace.marketplaceapp.patrones.proxy.IGestionVendedores;
-
 import java.util.List;
 
-public class VendedorController implements IGestionVendedores {
+public class VendedorController {
     ModelFactory modelFactory;
     public VendedorController(){
         modelFactory = ModelFactory.getInstancia();

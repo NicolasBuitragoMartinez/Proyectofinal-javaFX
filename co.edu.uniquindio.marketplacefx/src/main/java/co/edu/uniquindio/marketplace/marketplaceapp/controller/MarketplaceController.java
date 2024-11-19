@@ -9,7 +9,6 @@ import co.edu.uniquindio.marketplace.marketplaceapp.patrones.decorator.ProductoB
 import co.edu.uniquindio.marketplace.marketplaceapp.patrones.decorator.PromocionDecorator;
 import co.edu.uniquindio.marketplace.marketplaceapp.patrones.facade.MarketplaceFacade;
 import co.edu.uniquindio.marketplace.marketplaceapp.model.MarketplaceObjeto;
-import co.edu.uniquindio.marketplace.marketplaceapp.patrones.proxy.MarketplaceProxy;
 import co.edu.uniquindio.marketplace.marketplaceapp.patrones.strategy.TransaccionAliadosDirectos;
 import co.edu.uniquindio.marketplace.marketplaceapp.patrones.strategy.TransaccionPorCategoria;
 import co.edu.uniquindio.marketplace.marketplaceapp.patrones.strategy.TransaccionPorIntercambio;
@@ -20,7 +19,6 @@ import java.util.Arrays;
 import java.util.List;
 
 public class MarketplaceController {
-    private MarketplaceProxy proxy;
     private final MarketplaceObjeto marketplaceObjeto;
     public static MarketplaceController INSTANCIA;
 
@@ -38,19 +36,13 @@ public class MarketplaceController {
         return INSTANCIA;
     }
 
-
-
     public MarketplaceController(Marketplace marketplace){
         this.marketplaceObjeto = new MarketplaceObjeto();
         MarketplaceFacade facade = new MarketplaceFacade();
         IMarketplaceServiceImpl servicioReal = new IMarketplaceServiceImpl(facade);
         Usuario autenticacion = new Usuario();
-        this.proxy = new MarketplaceProxy( servicioReal,  autenticacion);
         facade.setEstrategiaTransaccion((TransaccionAliadosDirectos) new TransaccionAliadosDirectos());
-
     }
-
-
 
     private MarketplaceFacade facade = new MarketplaceFacade();
 
@@ -90,12 +82,6 @@ public class MarketplaceController {
         return facade.realizarTransaccion(usuarioVendedor1, usuarioVendedor2,
                 producto);
     }
-
-    public boolean agregarProducto(String usuario, Producto producto) {
-        return proxy.agregarProducto(usuario,  producto);
-    }
-
-
 
     public void mostrarProductoConDecoradores() {
 
