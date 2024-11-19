@@ -1,8 +1,7 @@
 package co.edu.uniquindio.marketplace.marketplaceapp.factory;
 
-import co.edu.uniquindio.marketplace.marketplaceapp.mapping.dto.ProductoDto;
-import co.edu.uniquindio.marketplace.marketplaceapp.mapping.dto.UsuarioDto;
-import co.edu.uniquindio.marketplace.marketplaceapp.mapping.dto.VendedorDto;
+import co.edu.uniquindio.marketplace.marketplaceapp.constants.EstadoProducto;
+import co.edu.uniquindio.marketplace.marketplaceapp.mapping.dto.*;
 import co.edu.uniquindio.marketplace.marketplaceapp.mapping.mappers.MarketplaceMappingImpl;
 import co.edu.uniquindio.marketplace.marketplaceapp.model.MarketplaceObjeto;
 import co.edu.uniquindio.marketplace.marketplaceapp.service.IModelFactoryService;
@@ -30,6 +29,10 @@ public class ModelFactory implements IModelFactoryService {
     @Override
     public List<VendedorDto> obtenerVendedores() {
         return mapper.getVendedoresDto(marketplaceObjeto.getListaVendedores());
+    }
+    @Override
+    public List<VendedorDto> obtenerVendedoresAgregados(String cedulaVendedor){
+        return mapper.getVendedoresDto(marketplaceObjeto.obtenerListaVendedorAgregado(cedulaVendedor));
     }
     @Override
     public VendedorDto obtenerVendedores(String cedula) {
@@ -60,6 +63,10 @@ public class ModelFactory implements IModelFactoryService {
         return mapper.getProductosDto(marketplaceObjeto.obtenerProductosPorVendedor(cedulaVendedor));
     }
     @Override
+    public List<ProductoDto> obtenerProductosPublicados(String cedulaVendedor) {
+        return mapper.getProductosDto(marketplaceObjeto.obtenerProductosPorEstado(cedulaVendedor, EstadoProducto.PUBLICADO, EstadoProducto.VENDIDO));
+    }
+    @Override
     public boolean agregarProducto(ProductoDto productoDto) {
         return marketplaceObjeto.crearProducto(mapper.productoDtoToProducto(productoDto));
     }
@@ -70,5 +77,17 @@ public class ModelFactory implements IModelFactoryService {
     @Override
     public boolean actualizarProducto(ProductoDto productoDto) {
         return marketplaceObjeto.actualizarProducto(mapper.productoDtoToProducto(productoDto));
+    }
+    @Override
+    public int obtenerLikesPublicacion(String identificadorProducto) {
+        return marketplaceObjeto.obtenerLikesPublicacion(identificadorProducto);
+    }
+    @Override
+    public List<ComentarioDto> obtenerComentariosPublicacion(String identificadorProducto){
+        return mapper.getComentariosDto(marketplaceObjeto.obtenerComentariosPublicacion(identificadorProducto));
+    }
+    @Override
+    public boolean incrementarLikesPublicacion(String identificadorProducto){
+        return marketplaceObjeto.incrementarLikesPublicacion(identificadorProducto);
     }
 }

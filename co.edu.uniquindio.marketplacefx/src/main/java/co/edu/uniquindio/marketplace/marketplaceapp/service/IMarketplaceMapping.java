@@ -1,13 +1,8 @@
 package co.edu.uniquindio.marketplace.marketplaceapp.service;
 
-import co.edu.uniquindio.marketplace.marketplaceapp.mapping.dto.ProductoDto;
-import co.edu.uniquindio.marketplace.marketplaceapp.mapping.dto.PublicacionDto;
-import co.edu.uniquindio.marketplace.marketplaceapp.mapping.dto.UsuarioDto;
-import co.edu.uniquindio.marketplace.marketplaceapp.mapping.dto.VendedorDto;
-import co.edu.uniquindio.marketplace.marketplaceapp.model.Producto;
-import co.edu.uniquindio.marketplace.marketplaceapp.model.Publicacion;
-import co.edu.uniquindio.marketplace.marketplaceapp.model.Usuario;
-import co.edu.uniquindio.marketplace.marketplaceapp.model.Vendedor;
+import co.edu.uniquindio.marketplace.marketplaceapp.mapping.dto.*;
+import co.edu.uniquindio.marketplace.marketplaceapp.model.*;
+
 import java.util.List;
 
 public interface IMarketplaceMapping {
@@ -23,5 +18,8 @@ public interface IMarketplaceMapping {
     List<PublicacionDto> getPublicacionesDto(List<Publicacion> listaPublicaciones);
     PublicacionDto publicacionToPublicacionDto(Publicacion publicacion);
     Publicacion publicacionDtoToPublicacion(PublicacionDto publicacionDto);
+    List<ComentarioDto> getComentariosDto(List<Comentario> listaComentarios);
+    ComentarioDto comentarioToComentarioDto(Comentario comentario);
+    Comentario comentarioDtoToComentario(ComentarioDto comentarioDto);
 
 }

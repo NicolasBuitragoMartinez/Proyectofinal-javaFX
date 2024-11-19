@@ -13,6 +13,7 @@ public class VendedorController {
     public List<VendedorDto> obtenerVendedores(){
         return modelFactory.obtenerVendedores();
     }
+    public List<VendedorDto> obtenerVendedoresAgregados(String cedulaVendedor){return modelFactory.obtenerVendedoresAgregados(cedulaVendedor);}
     public VendedorDto obtenerVendedorPorCedula(String cedula) {return modelFactory.obtenerVendedores(cedula);}
     public boolean agregarVendedor(VendedorDto vendedorDto) {return modelFactory.agregarVendedor(vendedorDto);}
     public boolean eliminarVendedor(VendedorDto vendedorDto) {return modelFactory.eliminarVendedor(vendedorDto);}

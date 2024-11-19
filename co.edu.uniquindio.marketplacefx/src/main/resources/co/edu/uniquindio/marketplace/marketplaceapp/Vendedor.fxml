@@ -58,8 +58,10 @@
                               <Font name="System Italic" size="15.0" />
                            </font>
                         </Label>
-                        <Rectangle arcHeight="5.0" arcWidth="5.0" height="139.0" layoutX="266.0" layoutY="44.0" stroke="BLACK" strokeType="INSIDE" width="200.0" />
-                        <ImageView fx:id="ivProPublicado" fitHeight="135.0" fitWidth="193.0" layoutX="270.0" layoutY="46.0" pickOnBounds="true" preserveRatio="true" />
+                        <ImageView fx:id="ivProPublicado" fitHeight="135.0" fitWidth="193.0" layoutX="270.0" layoutY="46.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../../../images/Captura de pantalla 2024-11-17 224050.png" />
+                           </image></ImageView>
                         <Button fx:id="btnMeGusta" layoutX="323.0" layoutY="204.0" mnemonicParsing="false" onAction="#onActionMeGusta" prefHeight="25.0" prefWidth="85.0" text="Me gusta" />
                         <ImageView fitHeight="19.0" fitWidth="23.0" layoutX="293.0" layoutY="207.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -71,14 +73,13 @@
                               <Font name="System Italic" size="15.0" />
                            </font>
                         </Label>
-                        <TitledPane animated="false" layoutX="497.0" layoutY="41.0" prefHeight="345.0" prefWidth="202.0" text="Comentarios">
+                        <TitledPane animated="false" layoutX="497.0" layoutY="41.0" prefHeight="345.0" prefWidth="202.0" text="Comentarios realizados">
                           <content>
                             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="299.0" prefWidth="200.0">
                                  <children>
                                     <TableView fx:id="tableComentario" layoutX="-1.0" prefHeight="315.0" prefWidth="202.0">
                                       <columns>
-                                        <TableColumn fx:id="tcNombreComentarista" prefWidth="75.0" text="Nombre" />
-                                        <TableColumn fx:id="tcTextoComentario" prefWidth="125.33333587646484" text="Comentario" />
+                                        <TableColumn fx:id="tcTextoComentario" prefWidth="200.66667687892914" text="Comentario" />
                                       </columns>
                                     </TableView>
                                  </children>
