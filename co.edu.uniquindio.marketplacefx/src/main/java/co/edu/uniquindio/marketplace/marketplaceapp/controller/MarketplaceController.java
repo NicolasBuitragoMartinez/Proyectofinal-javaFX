@@ -4,6 +4,9 @@ package co.edu.uniquindio.marketplace.marketplaceapp.controller;
 import co.edu.uniquindio.marketplace.marketplaceapp.model.Marketplace;
 import co.edu.uniquindio.marketplace.marketplaceapp.model.Producto;
 import co.edu.uniquindio.marketplace.marketplaceapp.model.Usuario;
+import co.edu.uniquindio.marketplace.marketplaceapp.patrones.decorator.GarantiaExtendidaDecorator;
+import co.edu.uniquindio.marketplace.marketplaceapp.patrones.decorator.ProductoBase;
+import co.edu.uniquindio.marketplace.marketplaceapp.patrones.decorator.PromocionDecorator;
 import co.edu.uniquindio.marketplace.marketplaceapp.patrones.facade.MarketplaceFacade;
 import co.edu.uniquindio.marketplace.marketplaceapp.model.MarketplaceObjeto;
 import co.edu.uniquindio.marketplace.marketplaceapp.patrones.proxy.MarketplaceProxy;
@@ -92,4 +95,21 @@ public class MarketplaceController {
         return proxy.agregarProducto(usuario,  producto);
     }
 
+
+
+    public void mostrarProductoConDecoradores() {
+
+        Producto productoBase = new ProductoBase("Laptop Gaming", 1200.0);
+
+        Producto productoConGarantia = new GarantiaExtendidaDecorator(productoBase);
+
+        Producto productoConPromocion = new PromocionDecorator(productoConGarantia);
+
+        System.out.println("Descripción: " + productoConPromocion.getDescripcion());
+
+        System.out.println("Precio final: $" + productoConPromocion.getPrecio());
+    }
 }
+
+
+

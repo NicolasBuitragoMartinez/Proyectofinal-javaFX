@@ -1,8 +1,9 @@
-package co.edu.uniquindio.marketplace.marketplaceapp.factory;
+package co.edu.uniquindio.marketplace.marketplaceapp.patrones.factory;
 
 import co.edu.uniquindio.marketplace.marketplaceapp.constants.EstadoProducto;
 import co.edu.uniquindio.marketplace.marketplaceapp.mapping.dto.*;
 import co.edu.uniquindio.marketplace.marketplaceapp.mapping.mappers.MarketplaceMappingImpl;
+import co.edu.uniquindio.marketplace.marketplaceapp.model.Comentario;
 import co.edu.uniquindio.marketplace.marketplaceapp.model.MarketplaceObjeto;
 import co.edu.uniquindio.marketplace.marketplaceapp.model.Persona;
 import co.edu.uniquindio.marketplace.marketplaceapp.model.Producto;
@@ -96,9 +97,15 @@ public class ModelFactory implements IModelFactoryService {
     public boolean incrementarLikesPublicacion(String identificadorProducto) {
         return marketplaceObjeto.incrementarLikesPublicacion(identificadorProducto);
     }
+    @Override
+    public boolean agregearComentariosPublicacion(String identificadorProducto, ComentarioDto comentarioDto){
+        return marketplaceObjeto.agregarComentarioPublicacion(identificadorProducto, mapper.comentarioDtoToComentario(comentarioDto));
+    }
     public Persona validarUsuario(String username, String contrasena) throws Exception{
         return marketplaceObjeto.validarUsuario(username, contrasena);
     }
+
+
 
 
     public void mostrarProductoConDecoradores() {

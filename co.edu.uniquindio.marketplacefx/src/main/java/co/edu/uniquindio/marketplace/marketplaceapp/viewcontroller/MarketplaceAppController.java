@@ -4,6 +4,7 @@ import co.edu.uniquindio.marketplace.marketplaceapp.controller.VendedorControlle
 import co.edu.uniquindio.marketplace.marketplaceapp.mapping.dto.VendedorDto;
 import co.edu.uniquindio.marketplace.marketplaceapp.model.Administrador;
 import co.edu.uniquindio.marketplace.marketplaceapp.model.Usuario;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -37,7 +38,7 @@ public class MarketplaceAppController {
     private Tab adminTab;
 
     @FXML
-    private TabPane tabPane;
+    public TabPane tabPane;
 
     @FXML
     void initialize() {
@@ -111,7 +112,6 @@ public class MarketplaceAppController {
             e.printStackTrace();
         }
     }
-
     public void eliminarTabVendedor(String cedula){
         if (cedula == null || cedula.isEmpty()) {
             mostrarMensaje(TITULO_CEDULA_VACIA, HEADER, BODI_CEDULA_VACIA, Alert.AlertType.WARNING);
@@ -130,7 +130,6 @@ public class MarketplaceAppController {
             tabPane.getTabs().remove(tabToRemove);
         }
     }
-
     public void crearTabsParaVendedoresExistentes(VendedorController vendedorController) {
         List<VendedorDto> listaVendedores = vendedorController.obtenerVendedores();
         if (listaVendedores == null || listaVendedores.isEmpty()) {
@@ -144,8 +143,6 @@ public class MarketplaceAppController {
             }
         }
     }
-
-
     public Tab obtenerTabVendedor(String cedula) {
         if (cedula == null || cedula.isEmpty()) {
             mostrarMensaje(TITULO_CEDULA_VACIA, HEADER, BODI_CEDULA_VACIA, Alert.AlertType.WARNING);
@@ -160,8 +157,11 @@ public class MarketplaceAppController {
 
         return null;
     }
-
-
+    public void seleccionarAdminTab() {
+        if (tabPane != null && adminTab != null) {
+            tabPane.getSelectionModel().select(adminTab);
+        }
+    }
     private boolean existeTabVendedor(String cedula) {
         for (Tab tab : tabPane.getTabs()) {
             if (tab.getText().equals(cedula)) {
@@ -170,12 +170,27 @@ public class MarketplaceAppController {
         }
         return false;
     }
-
     private void mostrarMensaje(String titulo, String header, String contenido, Alert.AlertType alertType){
         Alert alert = new Alert(alertType);
         alert.setTitle(titulo);
         alert.setHeaderText(header);
         alert.setContentText(contenido);
         alert.showAndWait();
+    }
+
+    public void onActionExportarDatosAdministrador(ActionEvent event) {
+    }
+
+    public void onAgregarVendedor(ActionEvent event) {
+    }
+
+    public void onNuevoVendedor(ActionEvent event) {
+    }
+
+    public void onActualizarVendedor(ActionEvent event) {
+    }
+
+    public void onEliminarVendedor(ActionEvent event) {
+
     }
 }

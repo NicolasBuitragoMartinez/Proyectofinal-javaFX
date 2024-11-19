@@ -259,6 +259,15 @@ public class MarketplaceObjeto {
 
         return productoOpt.map(Producto::getPublicacion);
     }
+    public boolean agregarComentarioPublicacion(String identificadorPublicacion, Comentario comentario) {
+        Optional<Publicacion> publicacionOpt = obtenerPublicacionPorIdentificador(identificadorPublicacion);
+        if (publicacionOpt.isPresent()) {
+            Publicacion publicacion = publicacionOpt.get();
+            publicacion.agregarComentario(comentario);
+            return true;
+        }
+        return false;
+    }
     public List<Vendedor> getListaVendedores() {return listaVendedores;}
     public List<Usuario> getListaUsuarios(){return listaUsuarios;}
     public Administrador getAdministrador(){return administrador;}
@@ -272,7 +281,6 @@ public class MarketplaceObjeto {
         this.administrador = administrador;
     }
 
-
     public Vendedor getVendedorPorCredenciales(String username, String password) {
         for (Vendedor vendedor : listaVendedores) {
             if (vendedor.getUsuario().getUserName().equals(username) &&
@@ -282,7 +290,6 @@ public class MarketplaceObjeto {
         }
         return null;
     }
-
 
     private Map<String, String> credenciales = new HashMap<>();
 
