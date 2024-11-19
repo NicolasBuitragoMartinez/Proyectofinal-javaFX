@@ -1,6 +1,6 @@
 package co.edu.uniquindio.marketplace.marketplaceapp.model;
 
-import co.edu.uniquindio.marketplace.marketplaceapp.model.builder.AdministradorBuilder;
+import co.edu.uniquindio.marketplace.marketplaceapp.patrones.builder.AdministradorBuilder;
 
 public class Administrador extends Persona{
     public Administrador(String nombre,

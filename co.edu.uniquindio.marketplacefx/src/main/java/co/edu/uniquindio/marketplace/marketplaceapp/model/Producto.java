@@ -1,10 +1,10 @@
 package co.edu.uniquindio.marketplace.marketplaceapp.model;
 
 import co.edu.uniquindio.marketplace.marketplaceapp.constants.EstadoProducto;
-import co.edu.uniquindio.marketplace.marketplaceapp.model.builder.ProductoBuilder;
+import co.edu.uniquindio.marketplace.marketplaceapp.patrones.builder.ProductoBuilder;
 import javafx.scene.image.Image;
 
-public class Producto {
+public  class Producto {
     private Publicacion publicacion;
     private String nombre;
     private String identificador;
@@ -39,7 +39,7 @@ public class Producto {
     public Image getImagen(){return imagen;}
     public String getCategoria(){return categoria;}
 
-    public String getDetalles(){
+    public String getDetalles() {
         return null;
     }
 

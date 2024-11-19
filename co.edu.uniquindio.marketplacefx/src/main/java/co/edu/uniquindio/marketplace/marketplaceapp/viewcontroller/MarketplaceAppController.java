@@ -4,6 +4,7 @@ import co.edu.uniquindio.marketplace.marketplaceapp.controller.VendedorControlle
 import co.edu.uniquindio.marketplace.marketplaceapp.mapping.dto.VendedorDto;
 import co.edu.uniquindio.marketplace.marketplaceapp.model.Administrador;
 import co.edu.uniquindio.marketplace.marketplaceapp.model.Usuario;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -175,5 +176,21 @@ public class MarketplaceAppController {
         alert.setHeaderText(header);
         alert.setContentText(contenido);
         alert.showAndWait();
+    }
+
+    public void onActionExportarDatosAdministrador(ActionEvent event) {
+    }
+
+    public void onAgregarVendedor(ActionEvent event) {
+    }
+
+    public void onNuevoVendedor(ActionEvent event) {
+    }
+
+    public void onActualizarVendedor(ActionEvent event) {
+    }
+
+    public void onEliminarVendedor(ActionEvent event) {
+
     }
 }

@@ -1,6 +1,6 @@
 package co.edu.uniquindio.marketplace.marketplaceapp.model;
 
-import co.edu.uniquindio.marketplace.marketplaceapp.model.builder.ComentarioBuilder;
+import co.edu.uniquindio.marketplace.marketplaceapp.patrones.builder.ComentarioBuilder;
 
 public class Comentario {
     private String comentario;

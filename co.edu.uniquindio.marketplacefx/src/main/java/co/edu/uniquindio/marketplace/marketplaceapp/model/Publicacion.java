@@ -1,6 +1,6 @@
 package co.edu.uniquindio.marketplace.marketplaceapp.model;
 
-import co.edu.uniquindio.marketplace.marketplaceapp.model.builder.PublicacionBuilder;
+import co.edu.uniquindio.marketplace.marketplaceapp.patrones.builder.PublicacionBuilder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,7 +12,12 @@ public class Publicacion {
     public Publicacion(int like, Producto producto, List<Comentario> comentarios){
         this.like = like;
         this.comentarios = new ArrayList<>();
-        this.producto = producto;
+        this.producto = new Producto() {
+            @Override
+            public String getDetalles() {
+                return "";
+            }
+        };
     }
     public Publicacion(){}
     public static PublicacionBuilder builder(){return new PublicacionBuilder();}

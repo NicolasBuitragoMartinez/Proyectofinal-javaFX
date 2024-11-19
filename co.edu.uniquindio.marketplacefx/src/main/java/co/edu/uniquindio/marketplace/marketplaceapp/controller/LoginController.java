@@ -1,6 +1,6 @@
 package co.edu.uniquindio.marketplace.marketplaceapp.controller;
 
-import co.edu.uniquindio.marketplace.marketplaceapp.factory.ModelFactory;
+import co.edu.uniquindio.marketplace.marketplaceapp.patrones.factory.ModelFactory;
 import co.edu.uniquindio.marketplace.marketplaceapp.model.Persona;
 
 public class LoginController {
