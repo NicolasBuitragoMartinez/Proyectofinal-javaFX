@@ -1,6 +1,5 @@
 package co.edu.uniquindio.marketplace.marketplaceapp.viewcontroller;
 
-import java.awt.*;
 import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -12,6 +11,9 @@ import co.edu.uniquindio.marketplace.marketplaceapp.mapping.dto.ProductoDto;
 import co.edu.uniquindio.marketplace.marketplaceapp.mapping.dto.VendedorDto;
 import co.edu.uniquindio.marketplace.marketplaceapp.model.Producto;
 import co.edu.uniquindio.marketplace.marketplaceapp.model.Vendedor;
+import co.edu.uniquindio.marketplace.marketplaceapp.patrones.decorator.GarantiaExtendidaDecorator;
+import co.edu.uniquindio.marketplace.marketplaceapp.patrones.decorator.ProductoBase;
+import co.edu.uniquindio.marketplace.marketplaceapp.patrones.decorator.PromocionDecorator;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -223,6 +225,7 @@ public class VendedorViewController {
             productoSeleccionado = newSelection;
             mostrarInformacionProducto(productoSeleccionado);
             mostrarImagenProducto(productoSeleccionado);
+            mostrarProductoConDecoradores(productoSeleccionado);
         });
     }
 
@@ -376,6 +379,18 @@ public class VendedorViewController {
         }
     }
 
+    public void mostrarProductoConDecoradores(ProductoDto productoSeleccionado) {
+        this.productoSeleccionado = productoSeleccionado;
+        Producto productoBase = new ProductoBase("Laptop Gaming", 1200.0);
+
+        Producto productoConGarantia = new GarantiaExtendidaDecorator(productoBase);
+
+        Producto productoConPromocion = new PromocionDecorator(productoConGarantia);
+
+        System.out.println("Descripción: " + productoConPromocion.getDescripcion());
+        System.out.println("Precio final: $" + productoConPromocion.getPrecio());
+    }
+
     private void mostrarImagenProducto(ProductoDto producto) {
         if (producto != null && producto.imagen() != null) {
             ivProducto.setImage(producto.imagen());
@@ -403,6 +418,9 @@ public class VendedorViewController {
             }
         }
     }
+
+
+
 
 }
 

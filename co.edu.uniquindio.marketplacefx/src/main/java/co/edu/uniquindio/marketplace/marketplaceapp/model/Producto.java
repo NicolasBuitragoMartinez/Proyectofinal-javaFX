@@ -4,7 +4,7 @@ import co.edu.uniquindio.marketplace.marketplaceapp.constants.EstadoProducto;
 import co.edu.uniquindio.marketplace.marketplaceapp.model.builder.ProductoBuilder;
 import javafx.scene.image.Image;
 
-public class Producto {
+public abstract class Producto {
     private Publicacion publicacion;
     private String nombre;
     private String identificador;
@@ -27,12 +27,20 @@ public class Producto {
         this.estado = estado;
     }
     public Producto(){}
+
+    public Producto(String nombre, String categoria, int precio, EstadoProducto estado,
+                    Object idProducto) {
+    }
+
     public static ProductoBuilder builder(){return new ProductoBuilder();}
     public Publicacion getPublicacion(){return publicacion;}
     public String getNombre(){return nombre;}
     public String getIdentificador(){return identificador;}
     public Image getImagen(){return imagen;}
     public String getCategoria(){return categoria;}
+
+    public abstract String getDetalles();
+
     public int getPrecio(){return precio;}
     public EstadoProducto getEstado(){return estado;}
     public void setPublicacion(Publicacion publicacion){this.publicacion = publicacion;}
@@ -52,5 +60,13 @@ public class Producto {
                 ", precio=" + precio +
                 ", estado=" + estado +
                 '}';
+    }
+
+    public Object getIdProducto() {
+        return null;
+    }
+
+    public Object getDescripcion() {
+        return null;
     }
 }
