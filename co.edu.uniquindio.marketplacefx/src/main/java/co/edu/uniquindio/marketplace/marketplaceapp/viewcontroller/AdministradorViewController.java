@@ -217,11 +217,9 @@ public class AdministradorViewController {
 
     }
 
-
-
     @FXML
     void onActionContactosPorVendedor(ActionEvent event) {
-        manejarContactosPorVendedor(); // Implementar si es necesario
+        manejarContactosPorVendedor();
     }
 
     private void manejarContactosPorVendedor() {
@@ -246,18 +244,6 @@ public class AdministradorViewController {
                 "Producto: " + pub.getProducto().getNombre() + ", Likes: " + pub.getLike()
         ));
     }
-
-
-
-
-
-
-
-
-
-
-
-
 
     @FXML
     void onActualizarVendedor(ActionEvent event) {
