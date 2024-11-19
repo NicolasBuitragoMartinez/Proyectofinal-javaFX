@@ -1,7 +1,7 @@
 package co.edu.uniquindio.marketplace.marketplaceapp.model;
 
 import co.edu.uniquindio.marketplace.marketplaceapp.constants.EstadoProducto;
-import co.edu.uniquindio.marketplace.marketplaceapp.service.IMarketplace;
+import co.edu.uniquindio.marketplace.marketplaceapp.patrones.strategy.TransaccionPorIntercambio;
 import javafx.scene.image.Image;
 
 import java.util.ArrayList;
@@ -9,6 +9,9 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class MarketplaceObjeto {
     private List<Vendedor> listaVendedores;
@@ -267,5 +270,49 @@ public class MarketplaceObjeto {
     }
     public void setAdministrador(Administrador administrador){
         this.administrador = administrador;
+    }
+
+
+    public Vendedor getVendedorPorCredenciales(String username, String password) {
+        for (Vendedor vendedor : listaVendedores) {
+            if (vendedor.getUsuario().getUserName().equals(username) &&
+                    vendedor.getUsuario().getPassword().equals(password)) {
+                return vendedor;
+            }
+        }
+        return null;
+    }
+
+
+    private Map<String, String> credenciales = new HashMap<>();
+
+    public boolean autenticar(String usuario, String contrasena) {
+        return credenciales.containsKey(usuario) && credenciales.get(usuario).equals(contrasena);
+    }
+
+    public Persona validarUsuario(String username, String contrasena) throws Exception {
+        Persona persona = buscarPorCorreo(username);
+        if (persona != null) {
+            if (persona.getContrasena().equals(contrasena)) {
+                return persona;
+            }
+        }
+        throw new Exception("Los datos de acceso son incorrectos");
+    }
+
+    private Persona buscarPorCorreo(String username) {
+
+        Persona[] personas = new Persona[0];
+        for (Persona persona : personas) {
+            if (persona.getUsername().equals(username)) {
+                return persona;
+            }
+        }
+
+        return null;
+    }
+
+
+    public void setIStrategyTransaccion(TransaccionPorIntercambio transaccionPorIntercambio) {
     }
 }

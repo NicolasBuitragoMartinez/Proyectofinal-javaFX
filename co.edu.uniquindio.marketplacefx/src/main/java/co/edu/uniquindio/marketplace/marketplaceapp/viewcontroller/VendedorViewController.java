@@ -15,6 +15,9 @@ import co.edu.uniquindio.marketplace.marketplaceapp.mapping.dto.PublicacionDto;
 import co.edu.uniquindio.marketplace.marketplaceapp.mapping.dto.VendedorDto;
 import co.edu.uniquindio.marketplace.marketplaceapp.model.Producto;
 import co.edu.uniquindio.marketplace.marketplaceapp.model.Vendedor;
+import co.edu.uniquindio.marketplace.marketplaceapp.patrones.decorator.GarantiaExtendidaDecorator;
+import co.edu.uniquindio.marketplace.marketplaceapp.patrones.decorator.ProductoBase;
+import co.edu.uniquindio.marketplace.marketplaceapp.patrones.decorator.PromocionDecorator;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -95,6 +98,9 @@ public class VendedorViewController {
     private Label lbReaccionesProPublicado;
 
     @FXML
+    private TabPane tpVendedor;
+
+    @FXML
     private TableView<ProductoDto> tableProducto;
 
     @FXML
@@ -150,6 +156,7 @@ public class VendedorViewController {
 
     @FXML
     private TextField txtComentario;
+    private Vendedor vendedor;
 
     @FXML
     void initialize() {
@@ -244,6 +251,7 @@ public class VendedorViewController {
             productoSeleccionado = newSelection;
             mostrarInformacionProducto(productoSeleccionado);
             mostrarImagenProducto(productoSeleccionado);
+            mostrarProductoConDecoradores(productoSeleccionado);
         });
         tableProductoPublicado.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             productoSeleccionado = newSelection;
@@ -258,8 +266,8 @@ public class VendedorViewController {
 
     private void actualizarProducto() {
         ProductoDto productoDto = actualizarProductoDto();
-        if(datosValidos(productoDto)){
-            if(productoController.actualizarProducto(productoDto)){
+        if (datosValidos(productoDto)) {
+            if (productoController.actualizarProducto(productoDto)) {
                 int index = listaProductos.indexOf(productoSeleccionado);
                 listaProductos.set(index, productoDto);
                 limpiarCampos();
@@ -274,8 +282,8 @@ public class VendedorViewController {
 
     private void agregarProducto() {
         ProductoDto productoDto = crearProductoDto();
-        if(datosValidos(productoDto)){
-            if(productoController.agregarProducto(productoDto)){
+        if (datosValidos(productoDto)) {
+            if (productoController.agregarProducto(productoDto)) {
                 listaProductos.addAll(productoDto);
                 limpiarCampos();
                 mostrarMensaje(TITULO_PRODUCTO_AGREGADO, HEADER, BODI_PRODUCTO_AGREGADO, Alert.AlertType.INFORMATION);
@@ -289,11 +297,11 @@ public class VendedorViewController {
 
     private void eliminarProducto() {
         ProductoDto productoDto = eliminarProductoDto();
-        if(productoDto == null || !datosValidos(productoDto)){
+        if (productoDto == null || !datosValidos(productoDto)) {
             mostrarMensaje(TITULO_INCOMPLETO, HEADER, BODY_INCOMPLETO, Alert.AlertType.WARNING);
             return;
         }
-        if(productoController.eliminarProducto(productoDto)){
+        if (productoController.eliminarProducto(productoDto)) {
             listaProductos.remove(productoSeleccionado);
             limpiarCampos();
             mostrarMensaje(TITULO_PRODUCTO_ELIMINADO, HEADER, BODI_PRODUCTO_ELIMINADO, Alert.AlertType.INFORMATION);
@@ -367,9 +375,9 @@ public class VendedorViewController {
 
     private boolean datosValidos(ProductoDto productoDto) {
         if (productoDto.nombre().isEmpty() ||
-            productoDto.identificador().isEmpty() ||
-            productoDto.categoria().isEmpty() ||
-            productoDto.precio() <= 0
+                productoDto.identificador().isEmpty() ||
+                productoDto.categoria().isEmpty() ||
+                productoDto.precio() <= 0
         ) {
             return false;
         } else {
@@ -377,7 +385,7 @@ public class VendedorViewController {
         }
     }
 
-    private void mostrarMensaje(String titulo, String header, String contenido, Alert.AlertType alertType){
+    private void mostrarMensaje(String titulo, String header, String contenido, Alert.AlertType alertType) {
         Alert alert = new Alert(alertType);
         alert.setTitle(titulo);
         alert.setHeaderText(header);
@@ -408,7 +416,7 @@ public class VendedorViewController {
     }
 
     private ProductoDto eliminarProductoDto() {
-        if(productoSeleccionado == null){
+        if (productoSeleccionado == null) {
             return null;
         }
         return new ProductoDto(
@@ -422,22 +430,33 @@ public class VendedorViewController {
     }
 
     private void mostrarInformacionProducto(ProductoDto productoSeleccionado) {
-        if(productoSeleccionado != null){
-          txtNombreProducto.setText(productoSeleccionado.nombre());
-          txtIdentificador.setText(productoSeleccionado.identificador());
-          txtCategoria.setText(productoSeleccionado.categoria());
-          txtPrecio.setText(String.valueOf(productoSeleccionado.precio()));
+        if (productoSeleccionado != null) {
+            txtNombreProducto.setText(productoSeleccionado.nombre());
+            txtIdentificador.setText(productoSeleccionado.identificador());
+            txtCategoria.setText(productoSeleccionado.categoria());
+            txtPrecio.setText(String.valueOf(productoSeleccionado.precio()));
         }
     }
 
-    private void mostrarInformacionPublicacion(ProductoDto productoSeleccionado){
-        if(productoSeleccionado != null){
+    private void mostrarInformacionPublicacion(ProductoDto productoSeleccionado) {
+        if (productoSeleccionado != null) {
             lbNombreProPublicado.setText("Nombre: " + productoSeleccionado.nombre());
             lbCategoriaProPublicado.setText("Categoria: " + productoSeleccionado.categoria());
             lbPrecioProPublicado.setText(String.valueOf("Precio: " + productoSeleccionado.precio()));
             int likes = obtenerLikesDeProducto(productoSeleccionado.identificador());
             lbReaccionesProPublicado.setText("Reacciones: " + likes);
         }
+    }
+    public void mostrarProductoConDecoradores(ProductoDto productoSeleccionado) {
+        this.productoSeleccionado = productoSeleccionado;
+        Producto productoBase = new ProductoBase("Laptop Gaming", 1200.0);
+
+        Producto productoConGarantia = new GarantiaExtendidaDecorator(productoBase);
+
+        Producto productoConPromocion = new PromocionDecorator(productoConGarantia);
+
+        System.out.println("Descripción: " + productoConPromocion.getDescripcion());
+        System.out.println("Precio final: $" + productoConPromocion.getPrecio());
     }
 
     private void mostrarImagenProducto(ProductoDto producto) {
@@ -477,4 +496,20 @@ public class VendedorViewController {
     private void actualizarLikesProducto(int likes) {
         lbReaccionesProPublicado.setText("Reacciones: " + likes);
     }
+
 }
+
+
+/**
+    comboBox.setOnAction(event -> {
+        String seleccion = comboBox.getValue();
+        try {
+            cambiarEstrategia(seleccion);
+            System.out.println("Estrategia cambiada a: " + seleccion);
+        } catch (IllegalArgumentException ex) {
+            System.err.println("Error: " + ex.getMessage());
+        }
+    });
+}
+ */
+

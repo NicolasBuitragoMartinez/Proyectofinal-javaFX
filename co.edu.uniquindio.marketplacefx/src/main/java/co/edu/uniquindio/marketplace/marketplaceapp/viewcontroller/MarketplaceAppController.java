@@ -65,7 +65,6 @@ public class MarketplaceAppController {
     private void asignarPestaña() {
         try {
             URL administradorUrl = getClass().getResource("/co/edu/uniquindio/marketplace/marketplaceapp/Administrador.fxml");
-            System.out.println("URL encontrada: " + administradorUrl);
 
             if (administradorUrl == null) {
                 throw new IOException("No se puede encontrar Administrador.fxml en la ruta especificada.");
@@ -145,6 +144,23 @@ public class MarketplaceAppController {
             }
         }
     }
+
+
+    public Tab obtenerTabVendedor(String cedula) {
+        if (cedula == null || cedula.isEmpty()) {
+            mostrarMensaje(TITULO_CEDULA_VACIA, HEADER, BODI_CEDULA_VACIA, Alert.AlertType.WARNING);
+            return null;
+        }
+
+        for (Tab tab : tabPane.getTabs()) {
+            if (cedula.equals(tab.getId())) {
+                return tab;
+            }
+        }
+
+        return null;
+    }
+
 
     private boolean existeTabVendedor(String cedula) {
         for (Tab tab : tabPane.getTabs()) {

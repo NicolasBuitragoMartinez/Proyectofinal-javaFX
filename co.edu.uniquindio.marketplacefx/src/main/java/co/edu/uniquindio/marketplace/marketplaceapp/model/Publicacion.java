@@ -12,7 +12,7 @@ public class Publicacion {
     public Publicacion(int like, Producto producto, List<Comentario> comentarios){
         this.like = like;
         this.comentarios = new ArrayList<>();
-        this.producto = new Producto();
+        this.producto = producto;
     }
     public Publicacion(){}
     public static PublicacionBuilder builder(){return new PublicacionBuilder();}

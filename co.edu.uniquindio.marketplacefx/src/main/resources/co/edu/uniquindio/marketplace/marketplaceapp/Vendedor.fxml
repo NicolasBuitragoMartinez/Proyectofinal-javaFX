@@ -19,8 +19,9 @@
 
 <AnchorPane prefHeight="504.0" prefWidth="907.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.marketplace.marketplaceapp.viewcontroller.VendedorViewController">
    <children>
-      <TabPane prefHeight="504.0" prefWidth="909.0" tabClosingPolicy="UNAVAILABLE">
-        <tabs>
+      <TabPane fx:id="tpVendedor" prefHeight="504.0" prefWidth="913.0" tabClosingPolicy="UNAVAILABLE">
+           <tabs>
+
           <Tab text="Muro">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="450.0" prefWidth="701.0">
@@ -136,7 +137,10 @@
                                     <TextField fx:id="txtNombreProducto" layoutX="95.0" layoutY="55.0" prefHeight="25.0" prefWidth="164.0" />
                                     <TextField fx:id="txtCategoria" layoutX="95.0" layoutY="116.0" prefHeight="25.0" prefWidth="164.0" />
                                     <TextField fx:id="txtPrecio" layoutX="379.0" layoutY="55.0" prefHeight="25.0" prefWidth="178.0" />
-                                    <ImageView fx:id="ivProducto" fitHeight="171.0" fitWidth="268.0" layoutX="588.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" />
+                                    <ImageView fx:id="ivProducto" fitHeight="181.0" fitWidth="187.0" layoutX="588.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../../../../images/Captura de pantalla 2024-11-10 215634.png" />
+                                       </image></ImageView>
                                     <Button fx:id="btnAgregarProducto" layoutX="405.0" layoutY="191.0" mnemonicParsing="false" onAction="#onAgregarProducto" prefHeight="25.0" prefWidth="125.0" text="Agregar producto" />
                                     <Button fx:id="btnNuevoProducto" layoutX="106.0" layoutY="191.0" mnemonicParsing="false" onAction="#onNuevoProducto" prefHeight="25.0" prefWidth="110.0" text="Nuevo" />
                                     <Button fx:id="btnActualizarProducto" layoutX="684.0" layoutY="191.0" mnemonicParsing="false" onAction="#onActualizarProducto" prefHeight="25.0" prefWidth="110.0" text="Actualizar" />

@@ -4,6 +4,11 @@ import co.edu.uniquindio.marketplace.marketplaceapp.constants.EstadoProducto;
 import co.edu.uniquindio.marketplace.marketplaceapp.mapping.dto.*;
 import co.edu.uniquindio.marketplace.marketplaceapp.mapping.mappers.MarketplaceMappingImpl;
 import co.edu.uniquindio.marketplace.marketplaceapp.model.MarketplaceObjeto;
+import co.edu.uniquindio.marketplace.marketplaceapp.model.Persona;
+import co.edu.uniquindio.marketplace.marketplaceapp.model.Producto;
+import co.edu.uniquindio.marketplace.marketplaceapp.patrones.decorator.GarantiaExtendidaDecorator;
+import co.edu.uniquindio.marketplace.marketplaceapp.patrones.decorator.ProductoBase;
+import co.edu.uniquindio.marketplace.marketplaceapp.patrones.decorator.PromocionDecorator;
 import co.edu.uniquindio.marketplace.marketplaceapp.service.IModelFactoryService;
 import co.edu.uniquindio.marketplace.marketplaceapp.service.IMarketplaceMapping;
 import co.edu.uniquindio.marketplace.marketplaceapp.utils.DataUtil;
@@ -52,6 +57,7 @@ public class ModelFactory implements IModelFactoryService {
     }
     @Override
     public List<UsuarioDto> obtenerUsuarios() {
+
         return mapper.getUsuariosDto(marketplaceObjeto.getListaUsuarios());
     }
     @Override
@@ -87,7 +93,22 @@ public class ModelFactory implements IModelFactoryService {
         return mapper.getComentariosDto(marketplaceObjeto.obtenerComentariosPublicacion(identificadorProducto));
     }
     @Override
-    public boolean incrementarLikesPublicacion(String identificadorProducto){
+    public boolean incrementarLikesPublicacion(String identificadorProducto) {
         return marketplaceObjeto.incrementarLikesPublicacion(identificadorProducto);
+    }
+    public Persona validarUsuario(String username, String contrasena) throws Exception{
+        return marketplaceObjeto.validarUsuario(username, contrasena);
+    }
+
+
+    public void mostrarProductoConDecoradores() {
+        Producto productoBase = new ProductoBase("Laptop Gaming", 1200.0);
+
+        Producto productoConGarantia = new GarantiaExtendidaDecorator(productoBase);
+
+        Producto productoConPromocion = new PromocionDecorator(productoConGarantia);
+
+        System.out.println("Descripción: " + productoConPromocion.getDescripcion());
+        System.out.println("Precio final: $" + productoConPromocion.getPrecio());
     }
 }
