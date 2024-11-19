@@ -12,4 +12,5 @@ public class PublicacionController {
     public int obtenerLikesPublicaciones(String identificadorProducto){return modelFactory.obtenerLikesPublicacion(identificadorProducto);}
     public List<ComentarioDto> obtenerComentariosPublicaciones(String identificadorProducto){return modelFactory.obtenerComentariosPublicacion(identificadorProducto);}
     public boolean incrementarLikesPublicaciones(String identificadorProducto){return modelFactory.incrementarLikesPublicacion(identificadorProducto);}
+    public boolean agregarComentariosPublicacion(String identificadorProducto, ComentarioDto comentarioDto){return modelFactory.agregearComentariosPublicacion(identificadorProducto, comentarioDto);}
 }

@@ -28,4 +28,9 @@ public class Publicacion {
     public void setProducto(Producto producto){this.producto = producto;}
     public void darMeGusta() {this.like++;}
     public int obtenerMeGusta() {return this.like;}
+    public void agregarComentario(Comentario comentario) {
+        if (comentario != null) {
+            this.comentarios.add(comentario);
+        }
+    }
 }

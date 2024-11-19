@@ -37,7 +37,7 @@ public class MarketplaceAppController {
     private Tab adminTab;
 
     @FXML
-    private TabPane tabPane;
+    public TabPane tabPane;
 
     @FXML
     void initialize() {
@@ -111,7 +111,6 @@ public class MarketplaceAppController {
             e.printStackTrace();
         }
     }
-
     public void eliminarTabVendedor(String cedula){
         if (cedula == null || cedula.isEmpty()) {
             mostrarMensaje(TITULO_CEDULA_VACIA, HEADER, BODI_CEDULA_VACIA, Alert.AlertType.WARNING);
@@ -130,7 +129,6 @@ public class MarketplaceAppController {
             tabPane.getTabs().remove(tabToRemove);
         }
     }
-
     public void crearTabsParaVendedoresExistentes(VendedorController vendedorController) {
         List<VendedorDto> listaVendedores = vendedorController.obtenerVendedores();
         if (listaVendedores == null || listaVendedores.isEmpty()) {
@@ -144,8 +142,6 @@ public class MarketplaceAppController {
             }
         }
     }
-
-
     public Tab obtenerTabVendedor(String cedula) {
         if (cedula == null || cedula.isEmpty()) {
             mostrarMensaje(TITULO_CEDULA_VACIA, HEADER, BODI_CEDULA_VACIA, Alert.AlertType.WARNING);
@@ -160,8 +156,11 @@ public class MarketplaceAppController {
 
         return null;
     }
-
-
+    public void seleccionarAdminTab() {
+        if (tabPane != null && adminTab != null) {
+            tabPane.getSelectionModel().select(adminTab);
+        }
+    }
     private boolean existeTabVendedor(String cedula) {
         for (Tab tab : tabPane.getTabs()) {
             if (tab.getText().equals(cedula)) {
@@ -170,7 +169,6 @@ public class MarketplaceAppController {
         }
         return false;
     }
-
     private void mostrarMensaje(String titulo, String header, String contenido, Alert.AlertType alertType){
         Alert alert = new Alert(alertType);
         alert.setTitle(titulo);

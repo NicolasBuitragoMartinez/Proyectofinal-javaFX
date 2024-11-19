@@ -156,7 +156,6 @@ public class VendedorViewController {
 
     @FXML
     private TextField txtComentario;
-    private Vendedor vendedor;
 
     @FXML
     void initialize() {
@@ -324,7 +323,23 @@ public class VendedorViewController {
     }
 
     private void agregarComentario() {
+        if (productoSeleccionado == null) {
+            return;
+        }
 
+        String textoComentario = txtComentario.getText().trim();
+        if (textoComentario.isEmpty()) {
+            return;
+        }
+
+        ComentarioDto nuevoComentario = new ComentarioDto(textoComentario);
+        boolean exito = publicacionController.agregarComentariosPublicacion(productoSeleccionado.identificador(), nuevoComentario);
+
+        if (exito) {
+            listaComentarios.add(nuevoComentario);
+            txtComentario.clear();
+
+        }
     }
 
     private void agregarContactos() {
@@ -498,18 +513,3 @@ public class VendedorViewController {
     }
 
 }
-
-
-/**
-    comboBox.setOnAction(event -> {
-        String seleccion = comboBox.getValue();
-        try {
-            cambiarEstrategia(seleccion);
-            System.out.println("Estrategia cambiada a: " + seleccion);
-        } catch (IllegalArgumentException ex) {
-            System.err.println("Error: " + ex.getMessage());
-        }
-    });
-}
- */
-

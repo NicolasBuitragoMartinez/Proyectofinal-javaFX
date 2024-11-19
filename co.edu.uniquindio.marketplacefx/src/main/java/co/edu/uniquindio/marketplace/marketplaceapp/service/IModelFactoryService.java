@@ -25,4 +25,6 @@ public interface IModelFactoryService {
     int obtenerLikesPublicacion(String identificadorProducto);
     List<ComentarioDto> obtenerComentariosPublicacion(String identificadorProducto);
     boolean incrementarLikesPublicacion(String identificadorProducto);
+
+    boolean agregearComentariosPublicacion(String identificadorProducto, ComentarioDto comentarioDto);
 }

@@ -62,16 +62,6 @@ public class Vendedor extends Persona{
         return List.of();
     }
 
-    /**
-    public void agregarAliado(Vendedor vendedor) {
-        if (aliados.size() < 10) {
-            aliados.add(vendedor);
-            vendedor.getAliados().add(aliados.add(vendedor));
-        }
-    }
-     */
-
-
     @Override
     public String toString() {
         return "Vendedor{" +
