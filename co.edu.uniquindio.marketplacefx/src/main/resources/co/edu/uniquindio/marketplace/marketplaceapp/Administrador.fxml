@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.chart.PieChart?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.RadioButton?>
@@ -11,13 +12,13 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/22"
-            xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="co.edu.uniquindio.marketplace.marketplaceapp.viewcontroller.AdministradorViewController">
-   <children>
+<AnchorPane xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.marketplace.marketplaceapp.viewcontroller.AdministradorViewController">
+
+<children>
       <TabPane>
 
          <tabs>
@@ -25,27 +26,30 @@
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <RadioButton fx:id="rbMensajes2Vendedores" layoutX="220.0" layoutY="64.0" mnemonicParsing="false" text="Cantidad de mensajes enviados entre 2 vendedores">
+                        <RadioButton fx:id="rbMensajes2Vendedores" layoutX="213.0" layoutY="56.0" mnemonicParsing="false" onAction="#onActionMensajesEntreVendedores" text="Cantidad de mensajes enviados entre 2 vendedores">
+                           <font>
+                              <Font size="17.0" />
+                           </font>
+                           <toggleGroup>
+                              <ToggleGroup fx:id="tgSolicitud" />
+                           </toggleGroup>
+                        </RadioButton>
+                        <RadioButton fx:id="rbProductosXFecha" layoutX="214.0" layoutY="119.0" mnemonicParsing="false" onAction="#onActionProductosEntreFechas" prefHeight="26.0" prefWidth="483.0" text="Cantidad de productos publicados entre determinada fecha" toggleGroup="$tgSolicitud">
                            <font>
                               <Font size="17.0" />
                            </font>
                         </RadioButton>
-                        <RadioButton fx:id="rbProductosXFecha" layoutX="220.0" layoutY="137.0" mnemonicParsing="false" text="Cantidad de productos publicados entre determinada fecha">
+                        <RadioButton fx:id="rbTopProductosLike" layoutX="213.0" layoutY="323.0" mnemonicParsing="false" onAction="#onActionTopProductosLikes" text="Top 10 de los productos con más reacciones (me gusta)" toggleGroup="$tgSolicitud">
                            <font>
                               <Font size="17.0" />
                            </font>
                         </RadioButton>
-                        <RadioButton fx:id="rbTopProductosLike" layoutX="220.0" layoutY="354.0" mnemonicParsing="false" text="Top 10 de los productos con más reacciones (me gusta)">
+                        <RadioButton fx:id="rbCantidadProductosVendedor" layoutX="214.0" layoutY="187.0" mnemonicParsing="false" onAction="#onActionProductosPorVendedor" prefHeight="26.0" prefWidth="474.0" text="Cantidad de productos publicados por cierto vendedor" toggleGroup="$tgSolicitud">
                            <font>
                               <Font size="17.0" />
                            </font>
                         </RadioButton>
-                        <RadioButton fx:id="rbCantidadProductosVendedor" layoutX="220.0" layoutY="208.0" mnemonicParsing="false" text="Cantidad de productos publicados por cierto vendedor">
-                           <font>
-                              <Font size="17.0" />
-                           </font>
-                        </RadioButton>
-                        <RadioButton fx:id="rbContactosXVendedor" layoutX="220.0" layoutY="283.0" mnemonicParsing="false" text="Cantidad de contactos por cada vendedor">
+                        <RadioButton fx:id="rbContactosXVendedor" layoutX="213.0" layoutY="256.0" mnemonicParsing="false" onAction="#onActionContactosPorVendedor" text="Cantidad de contactos por cada vendedor" toggleGroup="$tgSolicitud">
                            <font>
                               <Font size="17.0" />
                            </font>
@@ -56,7 +60,8 @@
                               <Font size="15.0" />
                            </font>
                         </Label>
-                        <Button fx:id="btnExportarEstadisticas" layoutX="414.0" layoutY="407.0" mnemonicParsing="false" onAction="#onActionExportarDatosAdministrador" text="Exportar" />
+                        <Button fx:id="btnExportarEstadisticas" layoutX="392.0" layoutY="404.0" mnemonicParsing="false" onAction="#onExportarReporte" text="Exportar información" />
+                        <PieChart layoutX="14.0" layoutY="249.0" prefHeight="198.0" prefWidth="202.0" />
                      </children>
                   </AnchorPane>
                </content>
