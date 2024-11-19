@@ -1,8 +1,7 @@
 package co.edu.uniquindio.marketplace.marketplaceapp.patrones.factory;
 
-import co.edu.uniquindio.marketplace.marketplaceapp.mapping.dto.ProductoDto;
-import co.edu.uniquindio.marketplace.marketplaceapp.mapping.dto.UsuarioDto;
-import co.edu.uniquindio.marketplace.marketplaceapp.mapping.dto.VendedorDto;
+import co.edu.uniquindio.marketplace.marketplaceapp.constants.EstadoProducto;
+import co.edu.uniquindio.marketplace.marketplaceapp.mapping.dto.*;
 import co.edu.uniquindio.marketplace.marketplaceapp.mapping.mappers.MarketplaceMappingImpl;
 import co.edu.uniquindio.marketplace.marketplaceapp.model.MarketplaceObjeto;
 import co.edu.uniquindio.marketplace.marketplaceapp.model.Persona;
@@ -37,6 +36,10 @@ public class ModelFactory implements IModelFactoryService {
         return mapper.getVendedoresDto(marketplaceObjeto.getListaVendedores());
     }
     @Override
+    public List<VendedorDto> obtenerVendedoresAgregados(String cedulaVendedor){
+        return mapper.getVendedoresDto(marketplaceObjeto.obtenerListaVendedorAgregado(cedulaVendedor));
+    }
+    @Override
     public VendedorDto obtenerVendedores(String cedula) {
         return mapper.vendedorToVendedorDto(marketplaceObjeto.obtenerVendedor(cedula));
     }
@@ -54,6 +57,7 @@ public class ModelFactory implements IModelFactoryService {
     }
     @Override
     public List<UsuarioDto> obtenerUsuarios() {
+
         return mapper.getUsuariosDto(marketplaceObjeto.getListaUsuarios());
     }
     @Override
@@ -63,6 +67,10 @@ public class ModelFactory implements IModelFactoryService {
     @Override
     public List<ProductoDto> obtenerProductosPorVendedor(String cedulaVendedor) {
         return mapper.getProductosDto(marketplaceObjeto.obtenerProductosPorVendedor(cedulaVendedor));
+    }
+    @Override
+    public List<ProductoDto> obtenerProductosPublicados(String cedulaVendedor) {
+        return mapper.getProductosDto(marketplaceObjeto.obtenerProductosPorEstado(cedulaVendedor, EstadoProducto.PUBLICADO, EstadoProducto.VENDIDO));
     }
     @Override
     public boolean agregarProducto(ProductoDto productoDto) {
@@ -76,7 +84,18 @@ public class ModelFactory implements IModelFactoryService {
     public boolean actualizarProducto(ProductoDto productoDto) {
         return marketplaceObjeto.actualizarProducto(mapper.productoDtoToProducto(productoDto));
     }
-
+    @Override
+    public int obtenerLikesPublicacion(String identificadorProducto) {
+        return marketplaceObjeto.obtenerLikesPublicacion(identificadorProducto);
+    }
+    @Override
+    public List<ComentarioDto> obtenerComentariosPublicacion(String identificadorProducto){
+        return mapper.getComentariosDto(marketplaceObjeto.obtenerComentariosPublicacion(identificadorProducto));
+    }
+    @Override
+    public boolean incrementarLikesPublicacion(String identificadorProducto) {
+        return marketplaceObjeto.incrementarLikesPublicacion(identificadorProducto);
+    }
     public Persona validarUsuario(String username, String contrasena) throws Exception{
         return marketplaceObjeto.validarUsuario(username, contrasena);
     }

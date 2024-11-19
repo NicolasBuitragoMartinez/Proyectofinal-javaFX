@@ -5,6 +5,10 @@ import co.edu.uniquindio.marketplace.marketplaceapp.patrones.strategy.Transaccio
 import javafx.scene.image.Image;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -197,12 +201,63 @@ public class MarketplaceObjeto {
         }
         return productos;
     }
+    public List<Vendedor> obtenerListaVendedorAgregado(String cedulaVendedor) {
+        return listaVendedores.stream()
+                .filter(vendedor -> vendedor.getCedula() != null && vendedor.getCedula().equals(cedulaVendedor))
+                .findFirst()
+                .map(Vendedor::getVendedoresAliados)
+                .orElse(new ArrayList<>());
+    }
     public List<Producto> obtenerProductosPorVendedor(String cedulaVendedor) {
         return listaVendedores.stream()
                 .filter(vendedor -> vendedor.getCedula().equals(cedulaVendedor))
                 .findFirst()
                 .map(Vendedor::getProductosAgregados)
                 .orElse(List.of());
+    }
+    public List<Producto> obtenerProductosPorEstado(String cedula, EstadoProducto estado1, EstadoProducto estado2) {
+        return obtenerProductosPorVendedor(cedula).stream()
+                .filter(producto -> producto.getEstado() == estado1 || producto.getEstado() == estado2)
+                .toList();
+    }
+    public int obtenerLikesPublicacion(String identificadorProducto) {
+        return obtenerProductoPorIdentificador(identificadorProducto)
+                .map(producto -> {
+                    Publicacion publicacion = producto.getPublicacion();
+                    return publicacion != null ? publicacion.getLike() : 0;
+                })
+                .orElse(0);
+    }
+    public List<Comentario> obtenerComentariosPublicacion(String identificadorProducto) {
+        return obtenerProductoPorIdentificador(identificadorProducto)
+                .map(producto -> {
+                    Publicacion publicacion = producto.getPublicacion();
+                    return publicacion != null ? publicacion.getComentarios() : Collections.<Comentario>emptyList();
+                })
+                .orElse(Collections.emptyList());
+    }
+    private Optional<Producto> obtenerProductoPorIdentificador(String identificadorProducto) {
+        return obtenerListaProducto().stream()
+                .filter(producto -> producto.getIdentificador().equals(identificadorProducto))
+                .findFirst();
+    }
+    public boolean incrementarLikesPublicacion(String identificadorProducto) {
+        Optional<Publicacion> publicacionOpt = obtenerPublicacionPorIdentificador(identificadorProducto);
+
+        if (publicacionOpt.isPresent()) {
+            Publicacion publicacion = publicacionOpt.get();
+            publicacion.darMeGusta();
+            return true;
+        } else {
+            return false;
+        }
+    }
+    public Optional<Publicacion> obtenerPublicacionPorIdentificador(String identificador) {
+        Optional<Producto> productoOpt = obtenerListaProducto().stream()
+                .filter(producto -> producto.getIdentificador() != null && producto.getIdentificador().equals(identificador))
+                .findFirst();
+
+        return productoOpt.map(Producto::getPublicacion);
     }
     public List<Vendedor> getListaVendedores() {return listaVendedores;}
     public List<Usuario> getListaUsuarios(){return listaUsuarios;}

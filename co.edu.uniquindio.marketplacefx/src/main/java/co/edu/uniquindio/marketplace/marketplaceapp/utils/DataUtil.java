@@ -483,6 +483,17 @@ public class DataUtil {
         muro6.getPublicacionesActivas().add(publicacion9);
         muro7.getPublicacionesActivas().add(publicacion10);
         muro7.getPublicacionesActivas().add(publicacion11);
+        producto1.setPublicacion(publicacion1);
+        producto2.setPublicacion(publicacion2);
+        producto3.setPublicacion(publicacion3);
+        producto4.setPublicacion(publicacion4);
+        producto5.setPublicacion(publicacion5);
+        producto6.setPublicacion(publicacion6);
+        producto7.setPublicacion(publicacion7);
+        producto8.setPublicacion(publicacion8);
+        producto9.setPublicacion(publicacion9);
+        producto10.setPublicacion(publicacion10);
+        producto11.setPublicacion(publicacion11);
 
         return marketplaceObjeto;
     }

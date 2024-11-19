@@ -1,13 +1,17 @@
 package co.edu.uniquindio.marketplace.marketplaceapp.viewcontroller;
 
+import java.util.List;
 import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 import co.edu.uniquindio.marketplace.marketplaceapp.constants.EstadoProducto;
 import co.edu.uniquindio.marketplace.marketplaceapp.controller.ProductoController;
+import co.edu.uniquindio.marketplace.marketplaceapp.controller.PublicacionController;
 import co.edu.uniquindio.marketplace.marketplaceapp.controller.VendedorController;
+import co.edu.uniquindio.marketplace.marketplaceapp.mapping.dto.ComentarioDto;
 import co.edu.uniquindio.marketplace.marketplaceapp.mapping.dto.ProductoDto;
+import co.edu.uniquindio.marketplace.marketplaceapp.mapping.dto.PublicacionDto;
 import co.edu.uniquindio.marketplace.marketplaceapp.mapping.dto.VendedorDto;
 import co.edu.uniquindio.marketplace.marketplaceapp.model.Producto;
 import co.edu.uniquindio.marketplace.marketplaceapp.model.Vendedor;
@@ -33,9 +37,14 @@ public class VendedorViewController {
 
     ProductoController productoController;
     VendedorController vendedorController;
+    PublicacionController publicacionController;
     ObservableList<ProductoDto> listaProductos = FXCollections.observableArrayList();
-    ObservableList<VendedorDto> listaVendedores = FXCollections.observableArrayList();
+    ObservableList<ProductoDto> listaProductosPublicados = FXCollections.observableArrayList();
+    ObservableList<PublicacionDto> listaPublicaciones = FXCollections.observableArrayList();
+    ObservableList<VendedorDto> listaVendedoresAgregados = FXCollections.observableArrayList();
+    ObservableList<ComentarioDto> listaComentarios = FXCollections.observableArrayList();
     ProductoDto productoSeleccionado;
+    PublicacionDto publicacionLikeSeleccionado;
 
     @FXML
     private ResourceBundle resources;
@@ -102,13 +111,13 @@ public class VendedorViewController {
     private TableView<ProductoDto> tableProducto;
 
     @FXML
-    private TableView<?> tableComentario;
+    private TableView<ComentarioDto> tableComentario;
 
     @FXML
-    private TableView<?> tableContactos;
+    private TableView<VendedorDto> tableContactos;
 
     @FXML
-    private TableView<?> tableProductoPublicado;
+    private TableView<ProductoDto> tableProductoPublicado;
 
     @FXML
     private TableColumn<ProductoDto, String> tcCategoriaProducto;
@@ -126,22 +135,19 @@ public class VendedorViewController {
     private TableColumn<ProductoDto, String> tcPrecioProducto;
 
     @FXML
-    private TableColumn<?, ?> tcCategoriaPublicacion;
+    private TableColumn<ProductoDto, String> tcCategoriaPublicacion;
 
     @FXML
-    private TableColumn<?, ?> tcNombrePublicacion;
+    private TableColumn<ProductoDto, String> tcNombrePublicacion;
 
     @FXML
-    private TableColumn<?, ?> tcPrecioPublicacion;
+    private TableColumn<ProductoDto, String> tcPrecioPublicacion;
 
     @FXML
-    private TableColumn<?, ?> tcNombreComentarista;
+    private TableColumn<ComentarioDto, String> tcTextoComentario;
 
     @FXML
-    private TableColumn<?, ?> tcTextoComentario;
-
-    @FXML
-    private TableColumn<?, ?> tcContactos;
+    private TableColumn<VendedorDto, String> tcContactos;
 
     @FXML
     private TextField txtCategoria;
@@ -163,6 +169,7 @@ public class VendedorViewController {
     void initialize() {
         productoController = new ProductoController();
         vendedorController = new VendedorController();
+        publicacionController = new PublicacionController();
         initView();
     }
 
@@ -174,21 +181,6 @@ public class VendedorViewController {
 
     @FXML
     void onActionPromocion(ActionEvent event) {
-
-    }
-
-    @FXML
-    void onActionAgregarComentario(ActionEvent event) {
-
-    }
-
-    @FXML
-    void onActionAgregarContactos(ActionEvent event) {
-
-    }
-
-    @FXML
-    void onActionMeGusta(ActionEvent event) {
 
     }
 
@@ -217,11 +209,32 @@ public class VendedorViewController {
         agregarFoto();
     }
 
+    @FXML
+    void onActionAgregarComentario(ActionEvent event) {
+        agregarComentario();
+    }
+
+    @FXML
+    void onActionAgregarContactos(ActionEvent event) {
+        agregarContactos();
+    }
+
+    @FXML
+    void onActionMeGusta(ActionEvent event) {
+        darMeGusta();
+    }
+
     private void initView() {
         initDataBinding();
         obtenerProducto();
         tableProducto.getItems().clear();
         tableProducto.setItems(listaProductos);
+        tableProductoPublicado.getItems().clear();
+        tableProductoPublicado.setItems(listaProductosPublicados);
+        tableContactos.getItems().clear();
+        tableContactos.setItems(listaVendedoresAgregados);
+        tableComentario.getItems().clear();
+        tableComentario.setItems(listaComentarios);
         listenerSelection();
         limpiarCampos();
     }
@@ -230,12 +243,25 @@ public class VendedorViewController {
         listaProductos.addAll(productoController.obtenerProductos());
     }
 
+    private void obtenerProductoPublicado(String cedula){
+        listaProductosPublicados.addAll(productoController.obtenerProductosPublicados(cedula));
+    }
+
+    private void obtenerVendedoresAgregados(String cedula){
+        listaVendedoresAgregados.addAll(vendedorController.obtenerVendedoresAgregados(cedula));
+    }
+
     private void initDataBinding() {
         tcNombreProducto.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().nombre()));
         tcIdentificadorProducto.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().identificador()));
         tcCategoriaProducto.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().categoria()));
         tcPrecioProducto.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().precio())));
         tcEstadoProducto.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().estado().toString()));
+        tcCategoriaPublicacion.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().categoria()));
+        tcNombrePublicacion.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().nombre()));
+        tcPrecioPublicacion.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().precio())));
+        tcContactos.setCellValueFactory(cellData ->  new SimpleStringProperty(cellData.getValue().nombre()));
+        tcTextoComentario.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().comentario()));
     }
 
     private void listenerSelection() {
@@ -244,6 +270,15 @@ public class VendedorViewController {
             mostrarInformacionProducto(productoSeleccionado);
             mostrarImagenProducto(productoSeleccionado);
             mostrarProductoConDecoradores(productoSeleccionado);
+        });
+        tableProductoPublicado.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            productoSeleccionado = newSelection;
+            mostrarInformacionPublicacion(productoSeleccionado);
+            mostrarImagenPublicacion(productoSeleccionado);
+            int likes = publicacionController.obtenerLikesPublicaciones(productoSeleccionado.identificador());
+            List<ComentarioDto> comentarios = publicacionController.obtenerComentariosPublicaciones(productoSeleccionado.identificador());
+            actualizarLikesProducto(likes);
+            listaComentarios.setAll(comentarios);
         });
     }
 
@@ -306,6 +341,24 @@ public class VendedorViewController {
         rdbAgregarFoto.setSelected(false);
     }
 
+    private void agregarComentario() {
+
+    }
+
+    private void agregarContactos() {
+
+    }
+
+    private void darMeGusta() {
+        if (productoSeleccionado != null) {
+            boolean exito = publicacionController.incrementarLikesPublicaciones(productoSeleccionado.identificador());
+            if (exito) {
+                int nuevosLikes = publicacionController.obtenerLikesPublicaciones(productoSeleccionado.identificador());
+                actualizarLikesProducto(nuevosLikes);
+            }
+        }
+    }
+
     public void updateView(String cedula) {
         VendedorDto vendedorDto = vendedorController.obtenerVendedorPorCedula(cedula);
         if (vendedorDto != null) {
@@ -313,7 +366,13 @@ public class VendedorViewController {
 
             listaProductos.clear();
             listaProductos.addAll(productoController.obtenerProductosPorVendedor(cedula));
-            tableProducto.setItems(listaProductos);
+
+            listaProductosPublicados.clear();
+            listaProductosPublicados.addAll(productoController.obtenerProductosPublicados(cedula));
+
+            listaVendedoresAgregados.clear();
+            listaVendedoresAgregados.addAll(vendedorController.obtenerVendedoresAgregados(cedula));
+
         } else {
             mostrarMensaje(TITULO_VENDEDOR_NO_ENCONTRADO, HEADER, BODI_VENDEDOR_NO_ENCOTRADO, Alert.AlertType.ERROR);
         }
@@ -397,6 +456,15 @@ public class VendedorViewController {
         }
     }
 
+    private void mostrarInformacionPublicacion(ProductoDto productoSeleccionado) {
+        if (productoSeleccionado != null) {
+            lbNombreProPublicado.setText("Nombre: " + productoSeleccionado.nombre());
+            lbCategoriaProPublicado.setText("Categoria: " + productoSeleccionado.categoria());
+            lbPrecioProPublicado.setText(String.valueOf("Precio: " + productoSeleccionado.precio()));
+            int likes = obtenerLikesDeProducto(productoSeleccionado.identificador());
+            lbReaccionesProPublicado.setText("Reacciones: " + likes);
+        }
+    }
     public void mostrarProductoConDecoradores(ProductoDto productoSeleccionado) {
         this.productoSeleccionado = productoSeleccionado;
         if (productoSeleccionado != null){
@@ -420,28 +488,35 @@ public class VendedorViewController {
         }
     }
 
-    public void setVendedor(Vendedor vendedor) {
-
-
-        this.vendedor = vendedor;
-    }
-
-    public void seleccionarPestanaVendedor(Vendedor vendedor) {
-
-
-        for (Tab tab : tpVendedor.getTabs()) {
-
-
-            if (tab.getText().equals(vendedor.getNombre())) {
-                tpVendedor.getSelectionModel().select(tab);
-
-                break;
-            }
+    private void mostrarImagenPublicacion(ProductoDto productoDto){
+        if(productoDto != null && productoDto.imagen() != null){
+            ivProPublicado.setImage(productoDto.imagen());
+        } else {
+            ivProPublicado.setImage(null);
         }
     }
 
+    private int obtenerLikesDeProducto(String identificadorProducto) {
+        if (listaPublicaciones == null || listaPublicaciones.isEmpty()) {
+            return 0;
+        }
 
+        for (PublicacionDto publicacion : listaPublicaciones) {
+            if (publicacion != null && publicacion.producto() != null) {
+                String idProducto = publicacion.producto().identificador();
 
+                if (idProducto != null && idProducto.equals(identificadorProducto)) {
+                    return publicacion.like();
+                }
+            }
+        }
+
+        return 0;
+    }
+
+    private void actualizarLikesProducto(int likes) {
+        lbReaccionesProPublicado.setText("Reacciones: " + likes);
+    }
 
 }
 
