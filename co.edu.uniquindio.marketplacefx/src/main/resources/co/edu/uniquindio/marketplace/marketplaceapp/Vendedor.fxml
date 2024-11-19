@@ -10,6 +10,8 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Rectangle?>
@@ -17,50 +19,95 @@
 
 <AnchorPane prefHeight="504.0" prefWidth="907.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.marketplace.marketplaceapp.viewcontroller.VendedorViewController">
    <children>
-      <TabPane prefHeight="504.0" prefWidth="909.0" tabClosingPolicy="UNAVAILABLE">
-        <tabs>
+      <TabPane fx:id="tpVendedor" prefHeight="504.0" prefWidth="913.0" tabClosingPolicy="UNAVAILABLE">
+           <tabs>
+
           <Tab text="Muro">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="450.0" prefWidth="701.0">
                      <children>
-                        <TableView layoutX="673.0" layoutY="43.0" prefHeight="411.0" prefWidth="203.0">
-                          <columns>
-                            <TableColumn prefWidth="202.0000203450521" text="Contactos" />
-                          </columns>
-                        </TableView>
-                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#bababa64" height="409.0" layoutX="14.0" layoutY="43.0" stroke="BLACK" strokeType="INSIDE" width="410.0" />
                         <Label layoutX="14.0" layoutY="-3.0" text="Productos publicados">
                            <font>
                               <Font size="22.0" />
                            </font></Label>
-                        <Label layoutX="281.0" layoutY="73.0" text="Comentarios" />
-                        <Label layoutX="280.0" layoutY="207.0" text="Reacciones" />
-                        <Button layoutX="43.0" layoutY="60.0" mnemonicParsing="false" text="Producto 1">
-                           <font>
-                              <Font name="System Bold" size="20.0" />
-                           </font>
-                        </Button>
-                        <Button layoutX="43.0" layoutY="130.0" mnemonicParsing="false" text="Producto 2">
-                           <font>
-                              <Font name="System Bold" size="20.0" />
-                           </font>
-                        </Button>
-                        <Button layoutX="43.0" layoutY="194.0" mnemonicParsing="false" text="Producto 3">
-                           <font>
-                              <Font name="System Bold" size="20.0" />
-                           </font>
-                        </Button>
-                        <TableView layoutX="452.0" layoutY="42.0" prefHeight="411.0" prefWidth="203.0">
-                           <columns>
-                              <TableColumn prefWidth="201.99998982747397" text="Mensajes" />
-                           </columns>
-                        </TableView>
                         <Separator layoutX="15.0" layoutY="31.0" prefHeight="6.0" prefWidth="861.0" />
                         <Label fx:id="lbVendedor" layoutX="233.0" layoutY="4.0" prefHeight="24.0" prefWidth="405.0" text="Perfil:">
                            <font>
                               <Font name="Arial Bold Italic" size="12.0" />
                            </font>
                         </Label>
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#d0d0d0" height="206.0" layoutX="22.0" layoutY="257.0" nodeOrientation="RIGHT_TO_LEFT" opacity="0.14" stroke="BLACK" strokeType="INSIDE" width="456.0" />
+                        <TableView fx:id="tableProductoPublicado" layoutX="33.0" layoutY="264.0" prefHeight="191.0" prefWidth="433.0">
+                           <columns>
+                              <TableColumn fx:id="tcNombrePublicacion" prefWidth="145.0" text="Nombre" />
+                              <TableColumn fx:id="tcPrecioPublicacion" prefWidth="145.0" text="Precio " />
+                              <TableColumn fx:id="tcCategoriaPublicacion" prefWidth="145.0" text="Categoria " />
+                           </columns>
+                        </TableView>
+                        <Label fx:id="lbNombreProPublicado" layoutX="42.0" layoutY="59.0" prefHeight="21.0" prefWidth="201.0" text="Nombre: ">
+                           <font>
+                              <Font name="System Italic" size="15.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="lbCategoriaProPublicado" layoutX="42.0" layoutY="108.0" prefHeight="21.0" prefWidth="205.0" text="Categoria:">
+                           <font>
+                              <Font name="System Italic" size="15.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="lbPrecioProPublicado" layoutX="42.0" layoutY="158.0" prefHeight="21.0" prefWidth="213.0" text="Precio:">
+                           <font>
+                              <Font name="System Italic" size="15.0" />
+                           </font>
+                        </Label>
+                        <ImageView fx:id="ivProPublicado" fitHeight="135.0" fitWidth="193.0" layoutX="270.0" layoutY="46.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../../../images/Captura de pantalla 2024-11-17 224050.png" />
+                           </image></ImageView>
+                        <Button fx:id="btnMeGusta" layoutX="323.0" layoutY="204.0" mnemonicParsing="false" onAction="#onActionMeGusta" prefHeight="25.0" prefWidth="85.0" text="Me gusta" />
+                        <ImageView fitHeight="19.0" fitWidth="23.0" layoutX="293.0" layoutY="207.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../../../images/Captura de pantalla 2024-11-17 011217.png" />
+                           </image>
+                        </ImageView>
+                        <Label fx:id="lbReaccionesProPublicado" layoutX="42.0" layoutY="206.0" prefHeight="21.0" prefWidth="209.0" text="Reacciones: ">
+                           <font>
+                              <Font name="System Italic" size="15.0" />
+                           </font>
+                        </Label>
+                        <TitledPane animated="false" layoutX="497.0" layoutY="41.0" prefHeight="345.0" prefWidth="202.0" text="Comentarios realizados">
+                          <content>
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="299.0" prefWidth="200.0">
+                                 <children>
+                                    <TableView fx:id="tableComentario" layoutX="-1.0" prefHeight="315.0" prefWidth="202.0">
+                                      <columns>
+                                        <TableColumn fx:id="tcTextoComentario" prefWidth="200.66667687892914" text="Comentario" />
+                                      </columns>
+                                    </TableView>
+                                 </children>
+                              </AnchorPane>
+                          </content>
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </TitledPane>
+                        <TextField fx:id="txtComentario" layoutX="568.0" layoutY="393.0" prefHeight="25.0" prefWidth="129.0" />
+                        <Label layoutX="497.0" layoutY="396.0" text="Comentario:">
+                           <font>
+                              <Font size="13.0" />
+                           </font>
+                        </Label>
+                        <TableView fx:id="tableContactos" layoutX="709.0" layoutY="42.0" prefHeight="378.0" prefWidth="173.0">
+                          <columns>
+                            <TableColumn fx:id="tcContactos" prefWidth="172.0000203450521" text="Amigos" />
+                          </columns>
+                        </TableView>
+                        <Button fx:id="btnAgregarContactos" layoutX="766.0" layoutY="430.0" mnemonicParsing="false" onAction="#onActionAgregarContactos" text="Agregar" />
+                        <Button fx:id="btnAgregarComentario" layoutX="564.0" layoutY="430.0" mnemonicParsing="false" onAction="#onActionAgregarComentario" text="Comentar" />
+                        <ImageView fitHeight="23.0" fitWidth="21.0" layoutX="638.0" layoutY="432.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../../../images/Captura de pantalla 2024-11-17 020305.png" />
+                           </image>
+                        </ImageView>
                      </children>
                   </AnchorPane>
             </content>
@@ -90,7 +137,10 @@
                                     <TextField fx:id="txtNombreProducto" layoutX="95.0" layoutY="55.0" prefHeight="25.0" prefWidth="164.0" />
                                     <TextField fx:id="txtCategoria" layoutX="95.0" layoutY="116.0" prefHeight="25.0" prefWidth="164.0" />
                                     <TextField fx:id="txtPrecio" layoutX="379.0" layoutY="55.0" prefHeight="25.0" prefWidth="178.0" />
-                                    <ImageView fx:id="ivProducto" fitHeight="171.0" fitWidth="268.0" layoutX="588.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" />
+                                    <ImageView fx:id="ivProducto" fitHeight="181.0" fitWidth="187.0" layoutX="588.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../../../../images/Captura de pantalla 2024-11-10 215634.png" />
+                                       </image></ImageView>
                                     <Button fx:id="btnAgregarProducto" layoutX="405.0" layoutY="191.0" mnemonicParsing="false" onAction="#onAgregarProducto" prefHeight="25.0" prefWidth="125.0" text="Agregar producto" />
                                     <Button fx:id="btnNuevoProducto" layoutX="106.0" layoutY="191.0" mnemonicParsing="false" onAction="#onNuevoProducto" prefHeight="25.0" prefWidth="110.0" text="Nuevo" />
                                     <Button fx:id="btnActualizarProducto" layoutX="684.0" layoutY="191.0" mnemonicParsing="false" onAction="#onActualizarProducto" prefHeight="25.0" prefWidth="110.0" text="Actualizar" />

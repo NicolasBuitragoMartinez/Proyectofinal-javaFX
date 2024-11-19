@@ -1,13 +1,7 @@
 package co.edu.uniquindio.marketplace.marketplaceapp.mapping.mappers;
 
-import co.edu.uniquindio.marketplace.marketplaceapp.mapping.dto.ProductoDto;
-import co.edu.uniquindio.marketplace.marketplaceapp.mapping.dto.PublicacionDto;
-import co.edu.uniquindio.marketplace.marketplaceapp.mapping.dto.UsuarioDto;
-import co.edu.uniquindio.marketplace.marketplaceapp.mapping.dto.VendedorDto;
-import co.edu.uniquindio.marketplace.marketplaceapp.model.Producto;
-import co.edu.uniquindio.marketplace.marketplaceapp.model.Publicacion;
-import co.edu.uniquindio.marketplace.marketplaceapp.model.Usuario;
-import co.edu.uniquindio.marketplace.marketplaceapp.model.Vendedor;
+import co.edu.uniquindio.marketplace.marketplaceapp.mapping.dto.*;
+import co.edu.uniquindio.marketplace.marketplaceapp.model.*;
 import co.edu.uniquindio.marketplace.marketplaceapp.service.IMarketplaceMapping;
 
 import java.util.ArrayList;
@@ -123,9 +117,11 @@ public class MarketplaceMappingImpl implements IMarketplaceMapping {
     @Override
     public PublicacionDto publicacionToPublicacionDto(Publicacion publicacion) {
         ProductoDto productoDto = productoToProductoDto(publicacion.getProducto());
+        List<ComentarioDto> comentariosDto = getComentariosDto(publicacion.getComentarios());
         return new PublicacionDto(
                 publicacion.getLike(),
-                productoDto
+                productoDto,
+                comentariosDto
         );
     }
     @Override
@@ -136,4 +132,30 @@ public class MarketplaceMappingImpl implements IMarketplaceMapping {
                 .producto(producto)
                 .build();
     }
+    @Override
+    public List<ComentarioDto> getComentariosDto(List<Comentario> listaComentarios) {
+        if(listaComentarios == null){
+            return null;
+        }
+        List<ComentarioDto> listaComentariosDto = new ArrayList<>(listaComentarios.size());
+        for(Comentario comentario : listaComentarios){
+            listaComentariosDto.add(comentarioToComentarioDto(comentario));
+        }
+        return listaComentariosDto;
+    }
+
+    @Override
+    public ComentarioDto comentarioToComentarioDto(Comentario comentario) {
+        return new ComentarioDto(
+                comentario.getComentario()
+        );
+    }
+
+    @Override
+    public Comentario comentarioDtoToComentario(ComentarioDto comentarioDto) {
+        return Comentario.builder()
+                .comentario(comentarioDto.comentario())
+                .build();
+    }
+
 }

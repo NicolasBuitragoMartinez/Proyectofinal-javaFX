@@ -11,7 +11,8 @@
                 <Tab fx:id="adminTab" text="Administrador">
                     <content>
                         <AnchorPane prefHeight="200.0" prefWidth="200.0">
-                            <fx:include source="Administrador.fxml" />
+                            <fx:include
+                                    source="Administrador.fxml" />
                         </AnchorPane>
                     </content>
                 </Tab>

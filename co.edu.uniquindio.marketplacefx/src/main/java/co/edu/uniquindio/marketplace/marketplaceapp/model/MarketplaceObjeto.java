@@ -1,11 +1,17 @@
 package co.edu.uniquindio.marketplace.marketplaceapp.model;
 
 import co.edu.uniquindio.marketplace.marketplaceapp.constants.EstadoProducto;
-import co.edu.uniquindio.marketplace.marketplaceapp.service.IMarketplace;
+import co.edu.uniquindio.marketplace.marketplaceapp.patrones.strategy.TransaccionPorIntercambio;
 import javafx.scene.image.Image;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class MarketplaceObjeto {
     private List<Vendedor> listaVendedores;
@@ -195,6 +201,64 @@ public class MarketplaceObjeto {
         }
         return productos;
     }
+    public List<Vendedor> obtenerListaVendedorAgregado(String cedulaVendedor) {
+        return listaVendedores.stream()
+                .filter(vendedor -> vendedor.getCedula() != null && vendedor.getCedula().equals(cedulaVendedor))
+                .findFirst()
+                .map(Vendedor::getVendedoresAliados)
+                .orElse(new ArrayList<>());
+    }
+    public List<Producto> obtenerProductosPorVendedor(String cedulaVendedor) {
+        return listaVendedores.stream()
+                .filter(vendedor -> vendedor.getCedula().equals(cedulaVendedor))
+                .findFirst()
+                .map(Vendedor::getProductosAgregados)
+                .orElse(List.of());
+    }
+    public List<Producto> obtenerProductosPorEstado(String cedula, EstadoProducto estado1, EstadoProducto estado2) {
+        return obtenerProductosPorVendedor(cedula).stream()
+                .filter(producto -> producto.getEstado() == estado1 || producto.getEstado() == estado2)
+                .toList();
+    }
+    public int obtenerLikesPublicacion(String identificadorProducto) {
+        return obtenerProductoPorIdentificador(identificadorProducto)
+                .map(producto -> {
+                    Publicacion publicacion = producto.getPublicacion();
+                    return publicacion != null ? publicacion.getLike() : 0;
+                })
+                .orElse(0);
+    }
+    public List<Comentario> obtenerComentariosPublicacion(String identificadorProducto) {
+        return obtenerProductoPorIdentificador(identificadorProducto)
+                .map(producto -> {
+                    Publicacion publicacion = producto.getPublicacion();
+                    return publicacion != null ? publicacion.getComentarios() : Collections.<Comentario>emptyList();
+                })
+                .orElse(Collections.emptyList());
+    }
+    private Optional<Producto> obtenerProductoPorIdentificador(String identificadorProducto) {
+        return obtenerListaProducto().stream()
+                .filter(producto -> producto.getIdentificador().equals(identificadorProducto))
+                .findFirst();
+    }
+    public boolean incrementarLikesPublicacion(String identificadorProducto) {
+        Optional<Publicacion> publicacionOpt = obtenerPublicacionPorIdentificador(identificadorProducto);
+
+        if (publicacionOpt.isPresent()) {
+            Publicacion publicacion = publicacionOpt.get();
+            publicacion.darMeGusta();
+            return true;
+        } else {
+            return false;
+        }
+    }
+    public Optional<Publicacion> obtenerPublicacionPorIdentificador(String identificador) {
+        Optional<Producto> productoOpt = obtenerListaProducto().stream()
+                .filter(producto -> producto.getIdentificador() != null && producto.getIdentificador().equals(identificador))
+                .findFirst();
+
+        return productoOpt.map(Producto::getPublicacion);
+    }
     public List<Vendedor> getListaVendedores() {return listaVendedores;}
     public List<Usuario> getListaUsuarios(){return listaUsuarios;}
     public Administrador getAdministrador(){return administrador;}
@@ -206,5 +270,49 @@ public class MarketplaceObjeto {
     }
     public void setAdministrador(Administrador administrador){
         this.administrador = administrador;
+    }
+
+
+    public Vendedor getVendedorPorCredenciales(String username, String password) {
+        for (Vendedor vendedor : listaVendedores) {
+            if (vendedor.getUsuario().getUserName().equals(username) &&
+                    vendedor.getUsuario().getPassword().equals(password)) {
+                return vendedor;
+            }
+        }
+        return null;
+    }
+
+
+    private Map<String, String> credenciales = new HashMap<>();
+
+    public boolean autenticar(String usuario, String contrasena) {
+        return credenciales.containsKey(usuario) && credenciales.get(usuario).equals(contrasena);
+    }
+
+    public Persona validarUsuario(String username, String contrasena) throws Exception {
+        Persona persona = buscarPorCorreo(username);
+        if (persona != null) {
+            if (persona.getContrasena().equals(contrasena)) {
+                return persona;
+            }
+        }
+        throw new Exception("Los datos de acceso son incorrectos");
+    }
+
+    private Persona buscarPorCorreo(String username) {
+
+        Persona[] personas = new Persona[0];
+        for (Persona persona : personas) {
+            if (persona.getUsername().equals(username)) {
+                return persona;
+            }
+        }
+
+        return null;
+    }
+
+
+    public void setIStrategyTransaccion(TransaccionPorIntercambio transaccionPorIntercambio) {
     }
 }

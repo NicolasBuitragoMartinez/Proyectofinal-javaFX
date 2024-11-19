@@ -9,10 +9,10 @@ public class Publicacion {
     private int like;
     public List<Comentario> comentarios;
     public Producto producto;
-    public Publicacion(int like, Producto producto){
+    public Publicacion(int like, Producto producto, List<Comentario> comentarios){
         this.like = like;
         this.comentarios = new ArrayList<>();
-        this.producto = new Producto();
+        this.producto = producto;
     }
     public Publicacion(){}
     public static PublicacionBuilder builder(){return new PublicacionBuilder();}

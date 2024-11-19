@@ -16,9 +16,14 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.marketplace.marketplaceapp.viewcontroller.AdministradorViewController">
-   <children>
+
+<AnchorPane xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="co.edu.uniquindio.marketplace.marketplaceapp.viewcontroller.AdministradorViewController">
+
+<children>
       <TabPane>
+
          <tabs>
             <Tab text="Estadisticas">
                <content>
@@ -123,3 +128,4 @@
       </TabPane>
    </children>
 </AnchorPane>
+

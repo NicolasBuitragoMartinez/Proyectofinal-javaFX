@@ -30,12 +30,22 @@ public class Producto {
         this.estado = estado;
     }
     public Producto(){}
+
+    public Producto(String nombre, String categoria, int precio, EstadoProducto estado,
+                    Object idProducto) {
+    }
+
     public static ProductoBuilder builder(){return new ProductoBuilder();}
     public Publicacion getPublicacion(){return publicacion;}
     public String getNombre(){return nombre;}
     public String getIdentificador(){return identificador;}
     public Image getImagen(){return imagen;}
     public String getCategoria(){return categoria;}
+
+    public String getDetalles(){
+        return null;
+    }
+
     public int getPrecio(){return precio;}
     public EstadoProducto getEstado(){return estado;}
     public void setPublicacion(Publicacion publicacion){this.publicacion = publicacion;}
@@ -61,5 +71,13 @@ public class Producto {
                 ", estado=" + estado +
                 ", fecha publicacion='" + fechaPublicacion + '\'' +
                 '}';
+    }
+
+    public Object getIdProducto() {
+        return null;
+    }
+
+    public Object getDescripcion() {
+        return null;
     }
 }
