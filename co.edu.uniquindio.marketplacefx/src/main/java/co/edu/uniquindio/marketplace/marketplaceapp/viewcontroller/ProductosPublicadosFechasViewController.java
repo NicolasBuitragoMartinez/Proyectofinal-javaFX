@@ -35,46 +35,44 @@ public class ProductosPublicadosFechasViewController {
         this.marketplace=marketplace;
     }
 
-    @FXML
-    void onBuscarProductosEntreFechas(ActionEvent event) {
-        MarketplaceObjeto marketplace = DataUtil.inicializarDatos();
-        if (marketplace == null) {
-            System.out.println("El marketplace no se inicializó correctamente");
-            return;
-        }
 
-        // Obtener las fechas seleccionadas
+
+        @FXML
+        void onBuscarProductosEntreFechas(ActionEvent event) {
+
+        MarketplaceObjeto marketplace = DataUtil.inicializarDatos();
+
+        // Obtener las fechas seleccionadas en los DatePicker
         LocalDate fechaInicio = datePickerInicio.getValue();
         LocalDate fechaFin = datePickerFin.getValue();
 
+        // Validar que ambas fechas hayan sido seleccionadas
         if (fechaInicio == null || fechaFin == null) {
             textAreaProductos.setText("Por favor, selecciona ambas fechas.");
             return;
         }
 
-        // Buscar productos dentro del rango de fechas
+        System.out.println("Fecha inicio seleccionada: " + fechaInicio);
+        System.out.println("Fecha fin seleccionada: " + fechaFin);
 
-        List<Producto> productosFiltrados = marketplace.getListaVendedores().stream()
-                .flatMap(vendedor -> vendedor.getProductosAgregados().stream())
-                .filter(producto -> producto.getFechaPublicacion() != null &&
-                        !producto.getFechaPublicacion().isBefore(fechaInicio) &&
-                        !producto.getFechaPublicacion().isAfter(fechaFin))
-                .collect(Collectors.toList());
+            List<Producto> productosFiltrados = marketplace.getListaVendedores().stream()
+                    .flatMap(vendedor -> vendedor.getProductosAgregados().stream())
+                    .filter(producto -> producto.getFechaPublicacion() != null &&
+                            !producto.getFechaPublicacion().isBefore(fechaInicio) &&
+                            !producto.getFechaPublicacion().isAfter(fechaFin))
+                    .collect(Collectors.toList());
 
-
-        // Mostrar resultados
-        if (productosFiltrados.isEmpty()) {
-            textAreaProductos.setText("No se encontraron productos publicados entre las fechas seleccionadas.");
-        } else {
-            StringBuilder resultados = new StringBuilder();
-            for (Producto producto : productosFiltrados) {
-                resultados.append("Producto: ").append(producto.getNombre())
-                        .append(", Fecha: ").append(producto.getFechaPublicacion()).append("\n");
+            // Mostrar resultados o mensaje si no hay productos en el rango
+            if (productosFiltrados.isEmpty()) {
+                textAreaProductos.setText("No se encontraron productos publicados entre las fechas seleccionadas.");
+            } else {
+                StringBuilder resultados = new StringBuilder();
+                productosFiltrados.forEach(producto -> resultados.append("Producto: ")
+                        .append(producto.getNombre())
+                        .append(", Fecha: ")
+                        .append(producto.getFechaPublicacion())
+                        .append("\n"));
+                textAreaProductos.setText(resultados.toString());
             }
-            textAreaProductos.setText(resultados.toString());
-        }
 
-
-    }
-
-}
+    }}

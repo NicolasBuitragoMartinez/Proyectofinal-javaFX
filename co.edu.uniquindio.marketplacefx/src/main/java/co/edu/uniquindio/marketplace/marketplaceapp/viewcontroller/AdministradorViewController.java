@@ -30,6 +30,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.chart.*;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
@@ -128,11 +129,139 @@ public class AdministradorViewController {
 
     @FXML
     private ToggleGroup tgSolicitud;
+    @FXML
+    private VBox panelGrafico;
+    @FXML
+    private Button btnGenerarGrafico;
+    @FXML
+    private ComboBox<String> cbEstadisticas;
+    @FXML
+    void generarGrafico(ActionEvent event) {
+        panelGrafico.getChildren().clear();
+
+        // Obtener la estadística seleccionada del ComboBox
+        String estadisticaSeleccionada = (String) cbEstadisticas.getValue();
+
+        if (estadisticaSeleccionada != null) {
+            estadisticaSeleccionada = estadisticaSeleccionada.trim(); // Eliminar espacios adicionales
+            System.out.println("Estadística seleccionada: " + estadisticaSeleccionada);
+
+            // Dependiendo de la estadística seleccionada, creamos un gráfico diferente
+            switch (estadisticaSeleccionada) {
+                case "Mensajes por Vendedor":
+                    generarGraficoMensajes();
+                    break;
+                case "Productos por Vendedor":
+                    generarGraficoProductos();
+                    break;
+                case "Top Productos por Likes":
+                    generarGraficoLikes();
+                    break;
+                default:
+                    System.out.println("Estadística no soportada: " + estadisticaSeleccionada);
+            }
+        } else {
+            System.out.println("Por favor, selecciona una estadística.");
+        }
+
+
+    }
+
+    private void generarGraficoLikes() {
+        CategoryAxis xAxis = new CategoryAxis();
+        NumberAxis yAxis = new NumberAxis();
+        xAxis.setLabel("Producto");
+        yAxis.setLabel("Likes");
+
+        // Crear el gráfico
+        BarChart<String, Number> barChart = new BarChart<>(xAxis, yAxis);
+        barChart.setTitle("Top Productos por Likes");
+
+        // Crear los datos
+        XYChart.Series<String, Number> series = new XYChart.Series<>();
+        series.setName("Likes");
+
+        // Agregar datos a la serie (estos datos deberían provenir de tu modelo de datos)
+        // Aquí estamos usando datos de ejemplo: Producto y cantidad de likes
+        series.getData().add(new XYChart.Data<>("Producto 1", 120));  // Producto 1 con 120 likes
+        series.getData().add(new XYChart.Data<>("Producto 2", 200));  // Producto 2 con 200 likes
+        series.getData().add(new XYChart.Data<>("Producto 3", 150));  // Producto 3 con 150 likes
+        series.getData().add(new XYChart.Data<>("Producto 4", 80));   // Producto 4 con 80 likes
+
+        // Agregar la serie al gráfico
+        barChart.getData().add(series);
+
+        // Agregar el gráfico al Pane
+        panelGrafico.getChildren().add(barChart);
+    }
+
+    private void generarGraficoProductos() {
+        CategoryAxis xAxis = new CategoryAxis();
+        NumberAxis yAxis = new NumberAxis();
+        xAxis.setLabel("Vendedor");
+        yAxis.setLabel("Cantidad de Productos");
+
+        // Crear el gráfico
+        LineChart<String, Number> lineChart = new LineChart<>(xAxis, yAxis);
+        lineChart.setTitle("Productos por Vendedor");
+
+        // Crear los datos
+        XYChart.Series<String, Number> series = new XYChart.Series<>();
+        series.setName("Productos");
+
+        // Agregar datos a la serie (estos datos deberían provenir de tu modelo)
+        series.getData().add(new XYChart.Data<>("Vendedor 1", 15));
+        series.getData().add(new XYChart.Data<>("Vendedor 2", 25));
+        series.getData().add(new XYChart.Data<>("Vendedor 3", 30));
+
+        // Agregar la serie al gráfico
+        lineChart.getData().add(series);
+
+        // Agregar el gráfico al Pane
+        panelGrafico.getChildren().add(lineChart);
+    }
+
+    private void generarGraficoMensajes() {
+        CategoryAxis xAxis = new CategoryAxis();
+        NumberAxis yAxis = new NumberAxis();
+        xAxis.setLabel("Vendedor");
+        yAxis.setLabel("Cantidad de Mensajes");
+
+        // Crear el gráfico
+        BarChart<String, Number> barChart = new BarChart<>(xAxis, yAxis);
+        barChart.setTitle("Mensajes Enviados por Vendedor");
+
+        // Crear los datos
+        XYChart.Series<String, Number> series = new XYChart.Series<>();
+        series.setName("Mensajes");
+
+        // Agregar datos a la serie (estos datos deberían provenir de tu modelo)
+        // Ejemplo: agregar vendedores y la cantidad de mensajes enviados
+        series.getData().add(new XYChart.Data<>("Vendedor 1", 30));
+        series.getData().add(new XYChart.Data<>("Vendedor 2", 45));
+        series.getData().add(new XYChart.Data<>("Vendedor 3", 50));
+
+        // Agregar la serie al gráfico
+        barChart.getData().add(series);
+
+        // Agregar el gráfico al Pane
+        panelGrafico.getChildren().add(barChart);
+    }
+
 
     @FXML
     void initialize() {
         vendedorController = new VendedorController();
         initView();
+        cargarOpcionesEstadisticas();
+    }
+
+    private void cargarOpcionesEstadisticas() {
+        cbEstadisticas.getItems().addAll(
+                "Mensajes por Vendedor",
+                "Productos por Vendedor",
+                "Top Productos por Likes"
+        );
     }
 
     @FXML
@@ -165,6 +294,23 @@ public class AdministradorViewController {
     }
 
     private void manejarMensajesEntreVendedores() {
+        try {
+            // Cargar la nueva vista FXML
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/co/edu/uniquindio/marketplace/marketplaceapp/MensajesEntreVendedor.fxml"));
+            Parent root = loader.load();
+
+            // Obtener el controlador y pasarle el marketplace
+            mensajesEntreVendedorViewController controller = loader.getController();
+            controller.setMarketplace(DataUtil.inicializarDatos());
+
+            // Crear una nueva ventana para mostrar la vista
+            Stage stage = new Stage();
+            stage.setTitle("Mensajes Entre Vendedores");
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
     }
 

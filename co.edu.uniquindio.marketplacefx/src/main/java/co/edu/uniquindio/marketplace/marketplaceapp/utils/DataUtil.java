@@ -349,6 +349,7 @@ public class DataUtil {
                 .fechaPublicacion(LocalDate.of(2023, 4, 4))
                 .build();
 
+
         Publicacion publicacion1 = Publicacion.builder()
                 .like((int) 3)
                 .producto(producto1)

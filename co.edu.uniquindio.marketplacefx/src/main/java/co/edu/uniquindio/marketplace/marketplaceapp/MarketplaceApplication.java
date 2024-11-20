@@ -13,7 +13,7 @@ public class MarketplaceApplication extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(MarketplaceApplication.class.getResource("MarketplaceApp.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(MarketplaceApplication.class.getResource("productosPublicadosFechas.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         stage.setTitle("App Marketplace");
         stage.setScene(scene);
