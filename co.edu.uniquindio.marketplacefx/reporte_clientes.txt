@@ -1,0 +1,79 @@
+Reporte de Listado de Clientes
+Fecha: 21/11/2024
+Reporte realizado por: Nombre del Usuario
+
+Información del reporte:
+----------------------------------------------------
+Listado de Vendedores:
+- Nombre: Sofia Osorio
+  Cedula: 1090
+  Dirección: Medellín
+  Usuario: Sofia
+
+- Nombre: Nico Buitrago
+  Cedula: 1093
+  Dirección: Armenia
+  Usuario: Nico_B
+
+- Nombre: Alex Buitrago
+  Cedula: 972
+  Dirección: Armenia
+  Usuario: Alex_B
+
+- Nombre: Veronica Martinez
+  Cedula: 419
+  Dirección: Cali
+  Usuario: Vero_M
+
+- Nombre: Zeus Zeus
+  Cedula: 1234
+  Dirección: MiCasa
+  Usuario: ZeusZeus
+
+- Nombre: Kratos GOD-OF-WAR
+  Cedula: 7887656
+  Dirección: Esparta
+  Usuario: El_Mejor_Videojuego
+
+- Nombre: Play Station
+  Cedula: 5678
+  Dirección: Japon
+  Usuario: MEJOR_CONSOLA_DE_VIDEOJUEGOS
+
+- Nombre: Manuel Gallego
+  Cedula: 08766
+  Dirección: Armenia
+  Usuario: Juan_M_G
+
+Productos Publicados:
+Vendedor: Sofia
+  - Producto: PlayStation5 | Estado: PUBLICADO
+  - Producto: iPhone 15 Pro Max | Estado: PUBLICADO
+
+Vendedor: Nico
+  - Producto: Televisor Samsung | Estado: VENDIDO
+
+Vendedor: Alex
+  - Producto: EA FC24 | Estado: VENDIDO
+
+Vendedor: Veronica
+  - Producto: Tarjeta grafica AMD Radeon | Estado: PUBLICADO
+  - Producto: Kia Rio | Estado: PUBLICADO
+
+Vendedor: Zeus
+  - Producto: NMax | Estado: VENDIDO
+
+Vendedor: Kratos
+  - Producto: PC gamer | Estado: VENDIDO
+  - Producto: Casa | Estado: PUBLICADO
+
+Vendedor: Play
+  - Producto: Comedor | Estado: VENDIDO
+  - Producto: Hot Wheels | Estado: PUBLICADO
+  - Producto: Camiseta Real Madrid | Estado: NO_AGREGADO
+
+Vendedor: Manuel
+  - Producto: Camiseta Manchester United 2008 CR7 | Estado: NO_AGREGADO
+
+----------------------------------------------------
+Reporte generado con éxito.

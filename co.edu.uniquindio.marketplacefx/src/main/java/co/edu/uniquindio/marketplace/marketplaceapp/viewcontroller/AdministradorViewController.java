@@ -47,6 +47,7 @@ public class AdministradorViewController {
     VendedorDto vendedorSeleccionado;
     private MarketplaceAppController marketplaceAppController;
     private AdministradorController administradorController;
+    private MarketplaceObjeto marketplace;
 
     public void setMarketplaceAppController(MarketplaceAppController marketplaceAppController){
         this.marketplaceAppController = marketplaceAppController;
@@ -267,27 +268,56 @@ public class AdministradorViewController {
     @FXML
     void onExportarReporte(ActionEvent event) {
 
-        MarketplaceObjeto marketplace = DataUtil.inicializarDatos();
-        String rutaArchivo = "estadisticas.txt";
+        MarketplaceObjeto marketplace = DataUtil.inicializarDatos(); // Inicializar los datos
+        String rutaArchivo = "reporte_clientes.txt"; // Definir el nombre del archivo
+
+        // Obtener la fecha actual
+        String fechaActual = LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+
+        // Suponiendo que el nombre del usuario que realiza el reporte es parte del sistema, puede ser un campo de usuario logueado
+        String nombreUsuario = "Nombre del Usuario"; // Cambiarlo al nombre real si es necesario
 
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(rutaArchivo))) {
-            writer.write("Estadísticas del Marketplace\n");
-            writer.write("Número de Vendedores: " + marketplace.getListaVendedores().size() + "\n");
-            writer.write("Productos Publicados:\n");
+            // Escribir el título y la fecha
+            writer.write("Reporte de Listado de Clientes\n");
+            writer.write("Fecha: " + fechaActual + "\n");
+            writer.write("Reporte realizado por: " + nombreUsuario + "\n\n");
 
+            // Información del reporte
+            writer.write("Información del reporte:\n");
+            writer.write("----------------------------------------------------\n");
+
+            // Escribir información de los vendedores (clientes)
+            writer.write("Listado de Vendedores:\n");
             for (Vendedor vendedor : marketplace.getListaVendedores()) {
-                for (Producto producto : vendedor.getProductosAgregados()) {
-                    writer.write("- " + producto.getNombre() + " (" + producto.getEstado() + ")\n");
-                }
+                writer.write("- Nombre: " + vendedor.getNombre() + " " + vendedor.getApellido() + "\n");
+                writer.write("  Cedula: " + vendedor.getCedula() + "\n");
+                writer.write("  Dirección: " + vendedor.getDireccion() + "\n");
+                writer.write("  Usuario: " + vendedor.getUsuario().getUserName() + "\n\n");
             }
+
+            // Escribir productos asociados a cada vendedor
+            writer.write("Productos Publicados:\n");
+            for (Vendedor vendedor : marketplace.getListaVendedores()) {
+                writer.write("Vendedor: " + vendedor.getNombre() + "\n");
+                for (Producto producto : vendedor.getProductosAgregados()) {
+                    writer.write("  - Producto: " + producto.getNombre() + " | Estado: " + producto.getEstado() + "\n");
+                }
+                writer.write("\n");
+            }
+
+            // Mensaje final
+            writer.write("----------------------------------------------------\n");
+            writer.write("Reporte generado con éxito.\n");
 
             System.out.println("Archivo exportado en: " + rutaArchivo);
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-
     }
+
+
+
     @FXML
     void onActionMensajesEntreVendedores(ActionEvent event) {
         manejarMensajesEntreVendedores();
@@ -369,6 +399,21 @@ public class AdministradorViewController {
     }
 
     private void manejarContactosPorVendedor() {
+        MarketplaceObjeto marketplaceObjeto = DataUtil.inicializarDatos();
+        List<Vendedor> listaVendedores = marketplaceObjeto.getListaVendedores();
+
+        // Recorre la lista de vendedores
+        for (Vendedor vendedor : listaVendedores) {
+            // Obtiene la cantidad de vendedores aliados (contactos)
+            int cantidadContactos = vendedor.getVendedoresAliados().size();
+
+            // Muestra el nombre del vendedor y la cantidad de contactos en la consola
+            System.out.println("Vendedor: " + vendedor.getNombre() + " tiene " + cantidadContactos + " contactos.");
+        }
+
+
+
+
         
     }
 

@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Set;
 
 public class Vendedor extends Persona{
+
     private Muro muro;
     private List<Vendedor> vendedoresAliados;
     private Set<Vendedor> aliados = new HashSet<>();
